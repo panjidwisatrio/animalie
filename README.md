@@ -9,10 +9,12 @@
 
 ## Quick Start
 
--- composer install
--- npm install
--- npm run dev
--- php artisan serve
+Create .env file and copy the contents of the file from .env.example to .env file
+
+- composer install
+- npm install
+- npm run dev
+- php artisan serve
 
 ## About Laravel
 
