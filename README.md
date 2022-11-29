@@ -16,6 +16,8 @@ Create .env file and copy the contents of the file from .env.example to .env fil
 - npm run dev
 - php artisan serve
 
+after web running, open web, there is error because app key isn't generate yet, click generate key.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
