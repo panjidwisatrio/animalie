@@ -16,6 +16,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "feather-icons": "^4.29.0",
         "flowbite": "^1.5.4"
     }
 }
