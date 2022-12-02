@@ -5,10 +5,6 @@
         </h2>
     </x-slot>
 
-    @push('header')
-        <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
-    @endpush
-
     <div class="py-12">
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -60,10 +56,10 @@
                         </div>
 
                         <!-- Text Editor -->
+                        
                         <div class="mt-4">
                             <x-input-label for="body" :value="__('Body')" />
-                            <textarea name="body" id="body" class="w-full rounded-md border-gray-300 focus:border-green-400">
-                        </textarea>
+                            @include('components.text-editor')
                         </div>
 
                         <div class="mt-4 -mr-1 flex justify-end">
@@ -77,15 +73,4 @@
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        <script>
-            ClassicEditor
-                .create(document.querySelector('#body'))
-                .catch(error => {
-                    console.error(error);
-                });
-        </script>
-    @endpush
-
 </x-app-layout>
