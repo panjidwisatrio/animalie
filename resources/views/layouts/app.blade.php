@@ -49,6 +49,8 @@
     <script src="https://unpkg.com/feather-icons"></script>
 
     @stack('scripts')
+
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 </body>
 
 </html>
