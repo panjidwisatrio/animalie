@@ -1,153 +1,77 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
-    <div class="flex justify-center">
+    <!-- Back to top button -->
+    <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+        class="mx-7 fixed d-none inline-block p-6 bg-cyan-900 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-cyan-900 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-800 active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5"
+        id="btn-back-to-top">
+        <svg aria-hidden="true" focusable="false" data-prefix="fas" class="w-4 h-4" role="img"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path fill="currentColor"
+                d="M34.9 289.5l-22.2-22.2c-9.4-9.4-9.4-24.6 0-33.9L207 39c9.4-9.4 24.6-9.4 33.9 0l194.3 194.3c9.4 9.4 9.4 24.6 0 33.9L413 289.4c-9.5 9.5-25 9.3-34.3-.4L264 168.6V456c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V168.6L69.2 289.1c-9.3 9.8-24.8 10-34.3.4z">
+            </path>
+        </svg>
+    </button>
+
+    <div class="flex justify-center mt-4">
         {{-- Content --}}
         <div class="py-2">
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mb-4">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex justify-between px-4">
-                    <div class="text-gray-900">
-                        <h2 class="m-6">Create New Post</h2>
-                    </div>
-                    <div class="m-6">
-                        <button type="button"
-                            class="text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center mr-2 dark:bg-lime-600 dark:hover:bg-lime-700">
+                <div class="bg-white overflow-hidden shadow-md sm:rounded-lg p-4">
+                    <a href="create" class="flex justify-between items-center">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-2">
+                            {{ __('Create New Post') }}
+                        </h2>
+                        <button class="rounded-full bg-cyan-900 p-2 text-white">
                             <i data-feather="edit-3"></i>
-                            <span class="sr-only">Icon description</span>
                         </button>
-                    </div>
+                    </a>
                 </div>
             </div>
 
-            <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-t-xl">
-                    <div class="p-6 text-gray-900 flex">
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-4 sm:flex">
-                            {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"> --}}
-                            <x-nav-link>
-                                {{ __('Latest') }}
-                            </x-nav-link>
-                        </div>
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-4 sm:flex">
-                            {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"> --}}
-                            <x-nav-link>
-                                {{ __('Populer') }}
-                            </x-nav-link>
-                        </div>
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-4 sm:flex">
-                            {{-- <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')"> --}}
-                            <x-nav-link>
-                                {{ __('Unanswered') }}
-                            </x-nav-link>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('layouts.postsNavgation')
 
-            {{-- Post Discussion --}}
-            <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white overflow-hidden shadow-sm p-10">
-                    {{-- User --}}
-                    <div class="flex justify-between">
-                        <div class="">
-                            <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                                src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                                alt="avatar">
-                            <h2 class="text-lg font-semibold text-gray-9001">Brad Adams </h2>
-                            <small class="text-sm text-gray-700">@brad_dd</small>
-                        </div>
-                        <div class="">
-                            <small class="text-sm text-gray-700">22h ago</small>
-                        </div>
-                    </div>
+            @include('post.posts')
 
-                    {{-- Post Body  --}}
-                    <div class="">
-                        <p class="mt-3 text-gray-700 text-sm text-justify">
-                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam dolorum assumenda
-                            perferendis
-                            aliquid tenetur architecto at, fuga sed culpa repellat repudiandae eum voluptas maiores
-                            neque
-                            sint eaque enim nobis quisquam autem vero sunt nisi reprehenderit! Voluptas quia ab aliquid
-                            assumenda tempora delectus, laboriosam quibusdam, eos dolorem corrupti dolorum quidem
-                            laudantium
-                            obcaecati esse blanditiis ad. Libero ut voluptatibus ullam necessitatibus reiciendis fugit
-                            non
-                            minus possimus nam provident quaerat accusantium sit architecto dignissimos molestias
-                            laboriosam
-                            optio accusamus atque nulla quas laborum officiis, sunt expedita. Magnam tempora,
-                            repellendus
-                            provident quibusdam dolorum cumque distinctio aperiam ad ullam? Quo ducimus aspernatur
-                            dignissimos enim modi, iste, pariatur minus consequatur vel delectus, quod reiciendis nulla
-                            cupiditate exercitationem eius at? Mollitia ullam exercitationem necessitatibus, nostrum
-                            dolores
-                            officiis ipsam.
-                        </p>
-
-                        {{-- Images --}}
-                        <div class="flex justify-start">
-                            <img src="https://source.unsplash.com/1200x400/?livestock"
-                                class="max-w-xs h-1/3 rounded-md mr-2 aspect-square object-cover" alt="livestock">
-
-                        </div>
-
-                        {{-- Badges/Tags --}}
-                        <div class="mt-4">
-                            <span
-                                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Default</span>
-                            <span
-                                class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Green</span>
-                            <span
-                                class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">Yellow</span>
-
-                        </div>
-
-                        {{-- Interaction --}}
-                        <div class="mt-4 flex justify-between">
-                            <div class="flex mr-2 text-gray-700 text-sm mr-3">
-                                <i data-feather="bookmark"></i>
-                                <span>12</span>
-                            </div>
-                            <div class="inline">
-                                <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
-                                    <i data-feather="message-square"></i>
-                                    <span>12</span>
-                                </div>
-                                <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
-                                    <i data-feather="thumbs-up"></i>
-                                    <span>12</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         {{-- Tags --}}
         <div class="py-2">
-            <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mb-4 py-10">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 ">
-                    <div class="text-gray-900">
-                        <h3>Popular Tags</h3>
-                    </div>
-
-                    {{-- Tags --}}
-                    <div class="mt-2">
-                        <span
-                            class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Default</span>
-                        <span
-                            class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Dark</span>
-                        <span
-                            class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Red</span>
-
-                    </div>
-                </div>
-            </div>
+            @include('layouts.tags')
         </div>
     </div>
+
+    @push('scripts')
+        <script>
+            // Get the button
+            let mybutton = document.getElementById("btn-back-to-top");
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {
+                scrollFunction();
+            };
+
+            function scrollFunction() {
+                if (
+                    document.body.scrollTop > 20 ||
+                    document.documentElement.scrollTop > 20
+                ) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                }
+            }
+            // When the user clicks on the button, scroll to the top of the document
+            mybutton.addEventListener("click", backToTop);
+
+            function backToTop() {
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }
+        </script>
+    @endpush
 </x-app-layout>

@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create New Post') }}
-        </h2>
+        <div class="flex justify-start items-center">
+            <div class="rounded-full bg-cyan-900 p-2 text-white">
+                <i data-feather="edit-3"></i>
+            </div>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-2">
+                {{ __('Create New Post') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -36,7 +41,7 @@
                             <x-input-label for="category" :value="__('Categories')" />
                             <div class="flex-shrink w-full inline-block relative">
                                 <select
-                                    class="block font-medium text-sm text-green-900 w-full bg-white border-gray-300 focus:border-green-400 shadow-inner px-4 py-2 pr-8 rounded-md">
+                                    class="block font-medium text-sm text-green-900 w-full bg-emerald-100 border-gray-300 focus:border-green-400 shadow-inner px-4 py-2 pr-8 rounded-md">
                                     <option>choose ...</option>
                                     <option>English</option>
                                     <option>France</option>
@@ -50,7 +55,7 @@
                             <x-input-label for="images" :value="__('Images')" />
                             <div class="">
                                 <input
-                                    class="py-2 px-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-white dark:text-gray-400 focus:border-green-400 "
+                                    class="py-2 px-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-emerald-100 dark:text-gray-400 focus:border-green-400 "
                                     id="images" name="images" type="file" multiple>
                             </div>
                         </div>
@@ -63,10 +68,9 @@
                         </div>
 
                         <div class="mt-4 -mr-1 flex justify-end">
-                            <button type='submit'
-                                class="bg-lime-300 text-green-700 font-medium py-1 px-4 rounded-lg tracking-wide mr-1"
-                                value='Submit'>Submit
-                            </button>
+                            <x-primary-button class="ml-3">
+                                {{ __('Submit') }}
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>
