@@ -14,26 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 //Test Route
-Route::get('test', function () {
-    return view('test');
-})->name('test');
+Route::get('interestGroup', function () {
+    return view('interestGroup');
+})->name('interestGroup');
 
 Route::get('create', function () {
     return view('post.create');
-})->name('create');
+})->middleware(['auth', 'verified'])->name('create');
 
 Route::get('detailPost', function () {
     return view('post.detailPost');
 })->name('detailPost');
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('dashboard');
+// ->middleware(['auth', 'verified'])
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

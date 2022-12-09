@@ -22,12 +22,12 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen bg-slate-200">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-white shadow">
+            <header class="bg-teal-50 shadow text-cyan-900">
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -41,16 +41,17 @@
 
     </div>
 
+
+    <!-- feather -->
     <script>
         feather.replace()
     </script>
-
-    <!-- choose one -->
     <script src="https://unpkg.com/feather-icons"></script>
+    <!-- ckEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 
     @stack('scripts')
 
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 </body>
 
 </html>

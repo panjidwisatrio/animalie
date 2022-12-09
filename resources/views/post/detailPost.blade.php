@@ -10,21 +10,26 @@
         <div class="bg-white overflow-hidden shadow-sm rounded-md p-10">
             {{-- User --}}
             <div class="flex justify-between">
-                <div class="">
-                    <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                        src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                        alt="avatar">
-                    <h2 class="text-lg font-semibold text-gray-9001">Brad Adams </h2>
-                    <small class="text-sm text-gray-700">@brad_dd</small>
+                <div class="flex">
+                    <div>
+                        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                            src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                            alt="avatar">
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-cyan-900">Brad Adams </h2>
+                        <small class="text-sm text-cyan-900">@brad_dd</small>
+                    </div>
                 </div>
                 <div class="">
-                    <small class="text-sm text-gray-700">22h ago</small>
+                    <small class="text-sm text-cyan-900">22h ago</small>
                 </div>
             </div>
 
             {{-- Post Body  --}}
-            <div class="">
-                <p class="mt-3 text-gray-700 text-sm text-justify">
+            <div class="mt-4 text-cyan-900 text-sm text-justify">
+                <h1 class="text-2xl font-weight-bolder my-2">Libero ut voluptatibus</h1>
+                <p class="p-4 bg-emerald-50 rounded-md text-md">
                     Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam dolorum assumenda
                     perferendis
                     aliquid tenetur architecto at, fuga sed culpa repellat repudiandae eum voluptas maiores
@@ -46,7 +51,7 @@
                 </p>
 
                 {{-- Images --}}
-                <div class="flex justify-start">
+                <div class="flex justify-start mt-4">
                     <img src="https://source.unsplash.com/1200x400/?livestock"
                         class="max-w-xs h-1/3 rounded-md mr-2 aspect-square object-cover" alt="livestock">
 
@@ -94,7 +99,7 @@
 
     <!-- comment form -->
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 rounded-md">
-        <form class="bg-white rounded-lg px-4 pt-2">
+        <form method="POST" action="" class="bg-white rounded-lg px-4 pt-2">
             <div class="flex flex-wrap -mx-3 mb-6">
                 <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
                 <div class="w-full md:w-full px-3 mb-2 mt-2">
@@ -111,15 +116,13 @@
                         </svg>
                         <p class="text-xs md:text-sm pt-px">Some HTML is okay.</p>
                     </div>
-                    <div class="mt-4 -mr-1">
-                        <input type='submit'
-                            class="bg-lime-300 text-green-700 font-medium py-1 px-4 rounded-lg tracking-wide mr-1"
-                            value='Post Comment'>
+
+                    <div class="mt-4 -mr-1 flex justify-end">
+                        <x-primary-button class="ml-3">
+                            {{ __('Send') }}
+                        </x-primary-button>
                     </div>
                 </div>
         </form>
     </div>
-    </div>
-
-
 </x-app-layout>
