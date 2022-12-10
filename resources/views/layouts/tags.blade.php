@@ -6,9 +6,15 @@
     {{--  need corrections --}}
     {{-- Tags --}}
     <div class="mt-2 flex">
-        <a href="#">
+        @foreach ($tags as $tag)
+            <a href="{{ route('tag', $tag->slug) }}">
+                <span
+                    class="bg-{{ $tag->color }}-100 text-{{ $tag->color }}-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-{{ $tag->color }}-200 dark:text-{{ $tag->color }}-800">{{ $tag->name }}</span>
+            </a>
+        @endforeach
+        {{-- <a href="#">
             <span
-                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Default</span>
+                class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Defaulsdvsdvsvsdvdt</span>
         </a>
 
         <a href="#">
@@ -19,7 +25,6 @@
         <a href="#">
             <span
                 class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">Yellow</span>
-        </a>
-
+        </a> --}}
     </div>
 </div>
