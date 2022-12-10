@@ -29,7 +29,8 @@ Route::get('tagsPage', function () {
 })->name('tagsPage');
 
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
-Route::get('/post/{id}', [PostController::class, 'show'])->name('show');
+Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->name('interestGroup');
+// Route::get('/post/{id}', [PostController::class, 'show'])->name('show');
 
 Route::middleware('auth')->group(function () {
     // Profile
@@ -39,9 +40,9 @@ Route::middleware('auth')->group(function () {
 
     // Post
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
-    Route::post('/post', [PostController::class, 'store'])->name('store');
-    Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('edit');
-    Route::patch('/post/{id}', [PostController::class, 'update'])->name('update');
+    Route::post('/post', [PostController::class, 'store'])->name('post.store');
+    Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
+    Route::patch('/post/{id}', [PostController::class, 'update'])->name('post.update');
 
     // Tag
     Route::get('/tag/{slug}', [TagController::class, 'index'])->name('tag');
