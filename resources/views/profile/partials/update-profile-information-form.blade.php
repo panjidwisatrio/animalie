@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Update your account's profile information.") }}
         </p>
     </header>
 
@@ -16,6 +16,23 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
+
+        <div class="relativ flex justify-start">
+            <div class="relative shrink-0">
+                <img class="min-w-sm max-w-lg object-cover rounded-full" src="img/profile.png"
+                    alt="Current profile photo" />
+                <button type="file"
+                    class="absolute bottom-0 right-0 rounded-full bg-white p-2 text-cyan-900 shadow-md">
+                    <i data-feather="edit-3"></i>
+                </button>
+            </div>
+
+            {{-- <x-file-button>
+                {{ __('choose file') }}
+            </x-file-button> --}}
+
+            </label>
+        </div>
 
         {{-- Name --}}
         <div>
