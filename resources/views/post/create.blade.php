@@ -36,7 +36,7 @@
                             <x-input-error :messages="$errors->get('slug')" class="mt-2" />
                         </div>
 
-                        <!-- Slug -->
+                        <!-- Categories -->
                         <div class="mt-4">
                             <x-input-label for="category" :value="__('Categories')" />
                             <div class="flex-shrink w-full inline-block relative">
