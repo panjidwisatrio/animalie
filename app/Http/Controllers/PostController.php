@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index() {
-        $post = Post::all();
-        return view('post.posts', compact('post'));
+        // $post = Post::all();
+        return view('dashboard');
     }
 
     public function show($id) {
