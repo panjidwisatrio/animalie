@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index() {
         // $post = Post::all();
-        return view('dashboard');
+        $tags = Tag::all();
+        return view('dashboard', compact('tags'));
     }
 
     public function show($id) {

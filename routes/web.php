@@ -38,6 +38,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/post', [PostController::class, 'store'])->name('store');
     Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('edit');
     Route::patch('/post/{id}', [PostController::class, 'update'])->name('update');
+
+    // Tag
+    Route::get('/tag/{slug}', [TagController::class, 'index'])->name('tag');
+    Route::get('/tag/{slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
+
+    // Category
 });
 
 require __DIR__ . '/auth.php';
