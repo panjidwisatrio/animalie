@@ -19,6 +19,11 @@ class PostController extends Controller
         return view('post.detailpost', compact('post'));
     }
 
+    public function interestgroup_show() {
+        $tags = Tag::all();
+        return view('interestGroup', compact('tags'));
+    }
+
     public function create() {
         return view('post.create');
     }

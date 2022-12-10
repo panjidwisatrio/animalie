@@ -45,11 +45,11 @@
 
         </a>
         {{-- Images --}}
-        <div class="flex justify-start mt-4">
+        {{-- <div class="flex justify-start mt-4">
             <img src="https://source.unsplash.com/1200x400/?livestock"
                 class="max-w-xs h-1/4 rounded-md mr-2 aspect-square object-cover" alt="livestock">
 
-        </div>
+        </div> --}}
 
         {{-- Badges/Tags --}}
         <div class="mt-4">

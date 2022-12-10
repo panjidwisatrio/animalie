@@ -22,7 +22,7 @@
         <div class="py-2">
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mb-4">
                 <div class="bg-white overflow-hidden shadow-md sm:rounded-lg p-4">
-                    <a href="create" class="flex justify-between items-center">
+                    <a href="{{ route('post.create') }}" class="flex justify-between items-center">
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-2">
                             {{ __('Create New Post') }}
                         </h2>
@@ -41,19 +41,7 @@
 
         {{-- Tags --}}
         <div class="py-2">
-            <div class="max-w-4xl sm:px-6 lg:px-8 mb-4 py-2 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                <div class="text-gray-900">
-                    <h3>Popular Tags</h3>
-                </div>
-                <div class="mt-2 flex">
-                    @foreach ($tags as $tag)
-                        <a href="{{ route('tag', $tag->slug) }}">
-                            <span
-                                class="bg-{{ $tag->color }}-100 text-{{ $tag->color }}-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-{{ $tag->color }}-200 dark:text-{{ $tag->color }}-800">{{ $tag->name_tag }}</span>
-                        </a>
-                    @endforeach
-                </div>
-            </div>
+            @include('layouts.tags', ['tags' => $tags])
         </div>
     </div>
 

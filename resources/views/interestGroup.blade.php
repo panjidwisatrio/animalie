@@ -62,7 +62,7 @@
 
         {{-- Tags --}}
         <div class="py-2">
-            @include('layouts.tags')
+            @include('layouts.tags', ['tags' => $tags])
         </div>
 
     </div>
