@@ -35,15 +35,15 @@
                                 <div>{{ Auth::user()->username }}</div>
 
                                 <div class="ml-1">
-                                    <img class="w-10 h-10 rounded-full shadow-md ml-2" src="img/{{ Auth::user()->avatar }}"
-                                        alt="userAvatar">
+                                    <img class="profile_pict rounded-full shadow-md ml-2"
+                                        src="img/{{ Auth::user()->username }}" alt="userAvatar">
                                 </div>
                             </button>
 
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')">
+                            <x-dropdown-link :href="route('myProfile')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 

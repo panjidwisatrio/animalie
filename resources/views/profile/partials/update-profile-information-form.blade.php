@@ -19,11 +19,11 @@
 
         <div class="relativ flex justify-start">
             <div class="relative shrink-0">
-                <img class="min-w-sm max-w-lg object-cover rounded-full" src="img/profile.png"
+                <img class="myProfile_pict object-cover rounded-full" src="img/profile.png"
                     alt="Current profile photo" />
                 <button type="file"
                     class="absolute bottom-0 right-0 rounded-full bg-white p-2 text-cyan-900 shadow-md">
-                    <i data-feather="edit-3"></i>
+                    <i data-feather="edit"></i>
                 </button>
             </div>
 

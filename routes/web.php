@@ -28,6 +28,10 @@ Route::get('tagsPage', function () {
     return view('tagsPage');
 })->name('tagsPage');
 
+Route::get('myProfile', function () {
+    return view('myProfile');
+})->name('myProfile');
+
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->name('interestGroup');
 // Route::get('/post/{id}', [PostController::class, 'show'])->name('show');

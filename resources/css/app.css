@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.profile_pict {
+    width: 48px;
+  }
+
+  .content_pict {
+    width: 98px;
+    height: 98px;
+  }
+  
