@@ -8,13 +8,17 @@
                 <img src="img/0profile.png" alt="" class="rounded-full content_pict">
                 <div class="mx-4">
                     <h1 class="font-semibold text-xl text-cyan-800 leading-tight">
-                        Full Name
+                        {{ $user->name }}
                     </h1>
                     <h3 class="text-md text-cyan-800 leading-tight ">
-                        @fullName
+                        {{ $user->username }}
                     </h3>
                     <h3 class="text-md text-cyan-800 leading-tight ">
-                        Supervisor at Kandang Mulia Jaya
+                        @if ($user->job_position == null && $user->work_place == null)
+                            {{ 'No Job' }}
+                        @else
+                            {{ $user->job_position }} at {{ $user->work_place }}
+                        @endif
                     </h3>
                 </div>
             </div>

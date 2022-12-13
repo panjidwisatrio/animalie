@@ -21,8 +21,10 @@
             <div class="w-full flex justify-start items-center shrink-0">
                 <img class="myProfile_pict object-cover rounded-full" src="img/profile.png"
                     alt="Current profile photo" />
-                <input type="file"
-                    class="flex ml-4 p-3 bottom-0 right-0 rounded-md w-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
+                <button type="file"
+                    class="absolute bottom-0 right-0 rounded-full bg-white p-2 text-cyan-900 shadow-md">
+                    <i data-feather="edit"></i>
+                </button>
             </div>
         </div>
         {{-- <div>
@@ -43,7 +45,7 @@
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
-                required autofocus autocomplete="name" />
+                autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
@@ -51,24 +53,24 @@
         <div>
             <x-input-label for="username" :value="__('Username')" />
             <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)"
-                required autocomplete="username" />
+                autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
         {{-- Workplace --}}
         <div>
-            <x-input-label for="workplace" :value="__('Workplace')" />
-            <x-text-input id="workplace" name="workplace" type="text" class="mt-1 block w-full" :value="old('workplace', $user->workplace)"
-                required autocomplete="workplace" />
+            <x-input-label for="work_place" :value="__('Workplace')" />
+            <x-text-input id="work_place" name="work_place" type="text" class="mt-1 block w-full" :value="old('work_place', $user->workplace)"
+                autocomplete="work_place" />
             <x-input-error class="mt-2" :messages="$errors->get('workplace')" />
         </div>
 
         {{-- Job Posisition --}}
         <div>
-            <x-input-label for="jobPosisition" :value="__('Job Posisition')" />
-            <x-text-input id="jobPosisition" name="jobPosisition" type="text" class="mt-1 block w-full"
-                :value="old('jobPosisition', $user->jobPosisition)" required autocomplete="jobPosisition" />
-            <x-input-error class="mt-2" :messages="$errors->get('jobPosisition')" />
+            <x-input-label for="job_position" :value="__('Job Posisition')" />
+            <x-text-input id="job_position" name="job_position" type="text" class="mt-1 block w-full"
+                :value="old('job_position', $user->jobPosisition)" autocomplete="job_position" />
+            <x-input-error class="mt-2" :messages="$errors->get('job_position')" />
         </div>
 
         <div>

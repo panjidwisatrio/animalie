@@ -28,10 +28,6 @@ Route::get('tagsPage', function () {
     return view('tagsPage');
 })->name('tagsPage');
 
-Route::get('myProfile', function () {
-    return view('myProfile');
-})->name('myProfile');
-
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->name('interestGroup');
 // Route::get('/post/{id}', [PostController::class, 'show'])->name('show');
@@ -39,6 +35,7 @@ Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->nam
 Route::middleware('auth')->group(function () {
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/myProfile', [ProfileController::class, 'show'])->name('profile.show');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
