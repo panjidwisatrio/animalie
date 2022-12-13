@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('content');
             $table->string('slug')->unique();
+            $table->text('content');
             $table->string('image')->nullable();
             $table->integer('views')->default(0);
             $table->integer('likes')->default(0);
