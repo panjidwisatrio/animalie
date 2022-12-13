@@ -17,22 +17,27 @@
         @csrf
         @method('patch')
 
-        <div class="relativ flex justify-start">
-            <div class="relative shrink-0">
+        <div class="flex w-full">
+            <div class="w-full flex justify-start items-center shrink-0">
                 <img class="myProfile_pict object-cover rounded-full" src="img/profile.png"
                     alt="Current profile photo" />
-                <button type="file"
-                    class="absolute bottom-0 right-0 rounded-full bg-white p-2 text-cyan-900 shadow-md">
-                    <i data-feather="edit"></i>
-                </button>
+                <input type="file"
+                    class="flex ml-4 p-3 bottom-0 right-0 rounded-md w-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
             </div>
-
-            {{-- <x-file-button>
-                {{ __('choose file') }}
-            </x-file-button> --}}
-
-            </label>
         </div>
+        {{-- <div>
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload
+                file</label>
+            <input
+                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                aria-describedby="file_input_help" id="file_input" type="file">
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
+                800x400px).</p>
+        </div> --}}
+
+        {{-- <x-file-button>
+            {{ __('choose file') }}
+        </x-file-button> --}}
 
         {{-- Name --}}
         <div>

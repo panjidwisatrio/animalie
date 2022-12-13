@@ -45,11 +45,18 @@
 
         </a>
         {{-- Images --}}
-        {{-- <div class="flex justify-start mt-4">
+        <div class="flex justify-between mt-4">
             <img src="https://source.unsplash.com/1200x400/?livestock"
-                class="max-w-xs h-1/4 rounded-md mr-2 aspect-square object-cover" alt="livestock">
+                class="rounded-md aspect-square object-cover content_pict_post border-2 border-gray-200"
+                alt="livestock">
+            <img src="https://source.unsplash.com/1200x400/?livestock"
+                class="rounded-md aspect-square object-cover content_pict_post border-2 border-gray-200"
+                alt="livestock">
+            <img src="https://source.unsplash.com/1200x400/?livestock"
+                class="rounded-md aspect-square object-cover content_pict_post border-2 border-gray-200"
+                alt="livestock">
 
-        </div> --}}
+        </div>
 
         {{-- Badges/Tags --}}
         <div class="mt-4">

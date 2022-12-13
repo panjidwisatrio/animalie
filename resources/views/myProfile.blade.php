@@ -37,14 +37,19 @@
 
         {{-- Certificate --}}
 
-        <div class="py-2">
-            <div class=" sm:px-6 lg:px-8 mb-4 py-2 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
-                <div class="text-gray-900">
-                    <h3>My Certificate</h3>
-                    <img class="content_pict object-cover mr-4 shadow"
-                        src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                        alt="avatar">
+        <div class="py-2 w-3/12">
+            <div class=" lg:px-8 py-4 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
+                <h3 class="text-gray-900">My Certificate</h3>
+                <div class="flex justify-between">
+                    <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                        src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
+                    <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                        src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
+                    <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                        src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
                 </div>
+                <input type="file"
+                    class="flex p-3 bottom-0 right-0 rounded-md w-full h-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
             </div>
         </div>
 

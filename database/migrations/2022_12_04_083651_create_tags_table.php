@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name_tag');
-            $table->string('slug')->unique()->nullable();
+            $table->string('slug')->unique();
+            $table->string('color')->nullable();
             $table->integer('tag_counter')->default(0);
             $table->timestamps();
         });
