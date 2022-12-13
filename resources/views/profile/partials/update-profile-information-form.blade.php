@@ -13,39 +13,34 @@
         @csrf
     </form>
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
         @csrf
         @method('patch')
 
         <div class="flex w-full">
             <div class="w-full flex justify-start items-center shrink-0">
-                <img class="myProfile_pict object-cover rounded-full" src="img/profile.png"
+                <img class="myProfile_pict object-cover rounded-full" src="{{ asset('/storage/' . Auth::user()->avatar) }}"
                     alt="Current profile photo" />
-                <button type="file"
-                    class="absolute bottom-0 right-0 rounded-full bg-white p-2 text-cyan-900 shadow-md">
-                    <i data-feather="edit"></i>
-                </button>
+
+                {{-- TODO : Tidak Sejajar Inputnya, Tolong Perbaiki --}}
+                <div class="ml-3 w-full block">
+                    <input
+                        class="ml-3 block w-full text-sm text-green-900 border border-green-300 rounded-lg cursor-pointer bg-emerald-100 dark:text-green-400 focus:outline-none dark:bg-green-700 dark:border-green-600 dark:placeholder-green-400"
+                        aria-describedby="file_input_help" id="avatar" name="avatar" type="file"
+                        @error('avatar') is-invalid @enderror aria-describedby="standard_error_help">
+                    @error('avatar')
+                        <p id="standard_error_help" class="ml-3 mt-2 text-xs text-red-600 dark:text-red-400"><span
+                                class="font-medium">Oh, snapp!</span> {{ $message }} </p>
+                    @enderror
+                </div>
             </div>
         </div>
-        {{-- <div>
-            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload
-                file</label>
-            <input
-                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                aria-describedby="file_input_help" id="file_input" type="file">
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
-                800x400px).</p>
-        </div> --}}
-
-        {{-- <x-file-button>
-            {{ __('choose file') }}
-        </x-file-button> --}}
 
         {{-- Name --}}
         <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
-                autofocus autocomplete="name" />
+                required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
@@ -53,14 +48,14 @@
         <div>
             <x-input-label for="username" :value="__('Username')" />
             <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)"
-                autocomplete="username" />
+                required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('username')" />
         </div>
 
         {{-- Workplace --}}
         <div>
             <x-input-label for="work_place" :value="__('Workplace')" />
-            <x-text-input id="work_place" name="work_place" type="text" class="mt-1 block w-full" :value="old('work_place', $user->workplace)"
+            <x-text-input id="work_place" name="work_place" type="text" class="mt-1 block w-full" :value="old('work_place', $user->work_place)"
                 autocomplete="work_place" />
             <x-input-error class="mt-2" :messages="$errors->get('workplace')" />
         </div>
@@ -69,10 +64,11 @@
         <div>
             <x-input-label for="job_position" :value="__('Job Posisition')" />
             <x-text-input id="job_position" name="job_position" type="text" class="mt-1 block w-full"
-                :value="old('job_position', $user->jobPosisition)" autocomplete="job_position" />
+                :value="old('job_position', $user->job_position)" autocomplete="job_position" />
             <x-input-error class="mt-2" :messages="$errors->get('job_position')" />
         </div>
 
+        {{-- Email --}}
         <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)"

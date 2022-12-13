@@ -5,7 +5,8 @@
         <div class="flex justify-between items-center">
 
             <div class="flex justify-start items-center">
-                <img src="img/0profile.png" alt="" class="rounded-full content_pict">
+                {{-- TODO : Perbaiki agar gambar mengikuti img rounded full dan tidak gepeng --}}
+                <img src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="" class="rounded-full object-cover content_pict">
                 <div class="mx-4">
                     <h1 class="font-semibold text-xl text-cyan-800 leading-tight">
                         {{ $user->name }}
@@ -53,7 +54,7 @@
                         src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
                 </div>
                 <input type="file"
-                    class="flex p-3 bottom-0 right-0 rounded-md w-full h-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
+                    class="bottom-0 right-0 rounded-md w-full h-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
             </div>
         </div>
 

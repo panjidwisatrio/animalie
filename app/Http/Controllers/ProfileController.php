@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
-use App\Models\Profile;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -31,7 +31,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'name' => ['string', 'max:255'],
             'username' => ['string', 'max:255'],
@@ -41,17 +40,17 @@ class ProfileController extends Controller
             'avatar' => ['image', 'file', 'max:2048'],
         ]);
 
-        if($request->file('image')){
+        if($request->file('image') != null){
             $request->file('avatar')->store('post-image');
         }
 
-        Profile::where('id', $request->user()->id)->update([
+        User::where('id', $request->user()->id)->update([
             'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
         ]);
 
-        Profile::where('id', $request->user()->id)->insert([
+        User::where('id', $request->user()->id)->insert([
             'work_place' => $request->work_place,
             'job_position' => $request->job_position,
             'avatar' => $request->avatar,

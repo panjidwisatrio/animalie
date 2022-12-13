@@ -16,6 +16,7 @@
 
     {{-- Feather Icons --}}
     <script src="https://unpkg.com/feather-icons"></script>
+    <script src="../path/to/flowbite/dist/flowbite.js"></script>
 
     @stack('header')
 
