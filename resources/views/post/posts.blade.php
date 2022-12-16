@@ -16,7 +16,8 @@
                         </div>
                     </div>
                     <div class="">
-                        <small class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+                        <small
+                            class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                     </div>
                 </div>
 
@@ -63,16 +64,16 @@
 
                 {{-- Interaction --}}
                 <div class="mt-4 flex justify-between">
-                    <div class="flex mr-2 text-gray-700 text-sm mr-3">
+                    <div class="flex text-gray-700 text-sm mr-3">
                         <i data-feather="bookmark"></i>
                         <span>12</span>
                     </div>
                     <div class="inline">
-                        <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
+                        <div class="inline-flex text-gray-700 text-sm mr-3">
                             <i data-feather="message-square"></i>
                             <span>12</span>
                         </div>
-                        <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
+                        <div class="inline-flex text-gray-700 text-sm mr-3">
                             <i data-feather="thumbs-up"></i>
                             <span>12</span>
                         </div>
@@ -83,5 +84,5 @@
         </div>
     @endforeach
 @else
-{{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
+    {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
 @endif
