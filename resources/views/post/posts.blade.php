@@ -1,4 +1,5 @@
 {{-- Post Discussion --}}
+{{-- TODO : Add Escape Blade --}}
 @if ($posts->count())
     @foreach ($posts as $post)
         <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8">

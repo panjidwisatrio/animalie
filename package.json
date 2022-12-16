@@ -16,6 +16,7 @@
         "vite": "^3.0.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-upload": "^35.4.0",
         "feather-icons": "^4.29.0",
         "flowbite": "^1.5.4"
     }
