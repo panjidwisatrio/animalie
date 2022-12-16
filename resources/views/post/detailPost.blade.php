@@ -13,41 +13,23 @@
                 <div class="flex">
                     <div>
                         <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                            src="https://images.unsplash.com/photo-1542156822-6924d1a71ace?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                            alt="avatar">
+                            src="{{ asset('/storage/' . $post->avatar) }}" alt="avatar">
                     </div>
                     <div>
-                        <h2 class="text-lg font-semibold text-cyan-900">Brad Adams </h2>
-                        <small class="text-sm text-cyan-900">@brad_dd</small>
+                        <h2 class="text-lg font-semibold text-cyan-900">{{ $post->name }}</h2>
+                        <small class="text-sm text-cyan-900">{{ $post->username }}</small>
                     </div>
                 </div>
                 <div class="">
-                    <small class="text-sm text-cyan-900">22h ago</small>
+                    <small class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                 </div>
             </div>
 
             {{-- Post Body  --}}
             <div class="mt-4 text-cyan-900 text-sm text-justify">
-                <h1 class="text-2xl font-weight-bolder my-2">Libero ut voluptatibus</h1>
+                <h1 class="text-2xl font-weight-bolder my-2">{{ $post->title }}</h1>
                 <p class="p-4 bg-emerald-50 rounded-md text-md">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam dolorum assumenda
-                    perferendis
-                    aliquid tenetur architecto at, fuga sed culpa repellat repudiandae eum voluptas maiores
-                    neque
-                    sint eaque enim nobis quisquam autem vero sunt nisi reprehenderit! Voluptas quia ab aliquid
-                    assumenda tempora delectus, laboriosam quibusdam, eos dolorem corrupti dolorum quidem
-                    laudantium
-                    obcaecati esse blanditiis ad. Libero ut voluptatibus ullam necessitatibus reiciendis fugit
-                    non
-                    minus possimus nam provident quaerat accusantium sit architecto dignissimos molestias
-                    laboriosam
-                    optio accusamus atque nulla quas laborum officiis, sunt expedita. Magnam tempora,
-                    repellendus
-                    provident quibusdam dolorum cumque distinctio aperiam ad ullam? Quo ducimus aspernatur
-                    dignissimos enim modi, iste, pariatur minus consequatur vel delectus, quod reiciendis nulla
-                    cupiditate exercitationem eius at? Mollitia ullam exercitationem necessitatibus, nostrum
-                    dolores
-                    officiis ipsam.
+                    {{ $post->content }}
                 </p>
 
                 {{-- Images --}}

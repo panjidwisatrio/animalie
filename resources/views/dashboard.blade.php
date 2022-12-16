@@ -35,7 +35,7 @@
 
             @include('layouts.postsNavgation')
 
-            @include('post.posts')
+            @include('post.posts', ['posts' => $posts])
 
         </div>
 

@@ -62,7 +62,7 @@
         <div class="py-2">
             @include('layouts.postsNavgation')
 
-            @include('post.posts')
+            @include('post.posts', ['posts' => $posts])
 
         </div>
 

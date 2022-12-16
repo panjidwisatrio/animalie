@@ -16,22 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-//Test Route
-Route::get('interestGroup', function () {
-    return view('interestGroup');
-})->name('interestGroup');
-
-Route::get('tagsPage', function () {
-    return view('tagsPage');
-})->name('tagsPage');
-
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->name('interestGroup');
-// Route::get('/post/{id}', [PostController::class, 'show'])->name('show');
+Route::get('/post-detail/{slug}', [PostController::class, 'show'])->name('post.show');
+
+// Tag
+Route::get('/tag/{slug}', [TagController::class, 'index'])->name('tag');
 
 Route::middleware('auth')->group(function () {
     // Profile
@@ -47,8 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{id}', [PostController::class, 'update'])->name('post.update');
 
-    // Tag
-    Route::get('/tag/{slug}', [TagController::class, 'index'])->name('tag');
     Route::get('/tag/{slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
 
     // Category

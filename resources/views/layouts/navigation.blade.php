@@ -35,7 +35,6 @@
                                 <div>{{ Auth::user()->username }}</div>
 
                                 <div class="ml-1">
-                                    {{-- TODO : Perbaiki agar gambar mengikuti img rounded full --}}
                                     <img class="profile_pict object-cover rounded-full shadow-md ml-2"
                                         src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="userAvatar">
                                 </div>
