@@ -78,12 +78,14 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('post.create');
+        $categories = Category::all();
+        return view('post.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
+        dd($request->all());
+        $posts = $request->validate([
             'title' => 'required',
             'slug' => 'required',
             'categories' => 'required',
@@ -95,5 +97,24 @@ class PostController extends Controller
         Post::create($posts);
 
         return redirect()->route('dashboard');
+    }
+
+    public function upload(Request $request)
+    {
+        // TODO: validate file and return error if not valid
+
+        $request->validate([
+            'upload' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $fileName = $request->file('upload')->store('post-images');
+
+        $url = asset('storage/' . $fileName);
+
+        return response()->json([
+            'uploaded' => 1,
+            'fileName' => $fileName,
+            'url' => $url,
+        ]);
     }
 }
