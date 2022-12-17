@@ -62,9 +62,33 @@
 
                 </div>
 
-                {{-- Interaction --}}
-                <div class="mt-4 flex justify-between">
-                    <div class="flex text-gray-700 text-sm mr-3">
+                {{-- Reaction --}}
+                <div class="mt-4  text-cyan-900">
+                    {{-- Like  --}}
+                    <div class="flex justify-end items-center">
+                        <form method="POST" action="{{ route('like.post', $post->id) }}">
+                            @csrf
+                            <button class="flex items-center">
+                                <i data-feather="thumbs-up" class="mr-2"></i>
+                                <small>
+                                    {{-- {{ $post->likeCount }} --}}
+                                    12
+                                </small>
+                            </button>
+                        </form>
+                    </div>
+
+                    {{-- Unlike --}}
+                    {{-- <div>
+                        <form method="POST" action="{{ route('unlike.post', $post->id) }}">
+                            @csrf
+                            <button class="{{ $post->liked() ? 'bg-white' : '' }} p-2 text-green-900">
+                                <i data-feather="bookmark"></i>
+                            </button>
+                        </form>
+                    </div> --}}
+
+                    {{-- <div class="flex text-gray-700 text-sm mr-3">
                         <i data-feather="bookmark"></i>
                         <span>12</span>
                     </div>
@@ -77,7 +101,7 @@
                             <i data-feather="thumbs-up"></i>
                             <span>12</span>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 

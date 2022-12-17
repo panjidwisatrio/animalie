@@ -10,16 +10,17 @@ use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         // $post = Post::all();
         $tags = Tag::all();
         $posts = DB::table('posts as p')
             ->select(
-                'p.*', 
+                'p.*',
                 'u.name as name',
                 'u.username as username',
                 'u.avatar as avatar',
-                't.name_tag as tagname', 
+                't.name_tag as tagname',
                 'c.category as categoryname'
             )
             ->join('users as u', 'p.user_id', '=', 'u.id')
@@ -27,19 +28,20 @@ class PostController extends Controller
             ->join('categories as c', 'p.category_id', '=', 'c.id')
             ->orderBy('p.created_at', 'desc')
             ->get();
-        
+
         return view('dashboard', compact('posts', 'tags'));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
         $tags = Tag::all();
         $post = DB::table('posts as p')
             ->select(
-                'p.*', 
+                'p.*',
                 'u.name as name',
                 'u.username as username',
                 'u.avatar as avatar',
-                't.name_tag as tagname', 
+                't.name_tag as tagname',
                 'c.category as categoryname'
             )
             ->join('users as u', 'p.user_id', '=', 'u.id')
@@ -52,30 +54,33 @@ class PostController extends Controller
         return view('post.detailpost', compact('post', 'tags'));
     }
 
-    public function interestgroup_show() {
+    public function interestgroup_show()
+    {
         $tags = Tag::all();
         $posts = DB::table('posts as p')
-        ->select(
-            'p.*', 
-            'u.name as name',
-            'u.username as username',
-            'u.avatar as avatar',
-            't.name_tag as tagname', 
-            'c.category as categoryname'
-        )
-        ->join('users as u', 'p.user_id', '=', 'u.id')
-        ->join('tags as t', 'p.tag_id', '=', 't.id')
-        ->join('categories as c', 'p.category_id', '=', 'c.id')
-        ->orderBy('p.created_at', 'desc')
-        ->get();
+            ->select(
+                'p.*',
+                'u.name as name',
+                'u.username as username',
+                'u.avatar as avatar',
+                't.name_tag as tagname',
+                'c.category as categoryname'
+            )
+            ->join('users as u', 'p.user_id', '=', 'u.id')
+            ->join('tags as t', 'p.tag_id', '=', 't.id')
+            ->join('categories as c', 'p.category_id', '=', 'c.id')
+            ->orderBy('p.created_at', 'desc')
+            ->get();
         return view('interestGroup', compact('tags', 'posts'));
     }
 
-    public function create() {
+    public function create()
+    {
         return view('post.create');
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'title' => 'required',
             'slug' => 'required',
@@ -95,5 +100,23 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->save();
         return redirect()->route('dashboard');
+    }
+
+    public function likePost($id)
+    {
+        $post = Post::find($id);
+        $post->like();
+        $post->save();
+
+        return redirect()->route('dashboard')->with('message', 'Post Like successfully!');
+    }
+
+    public function unlikePost($id)
+    {
+        $post = Post::find($id);
+        $post->unlike();
+        $post->save();
+
+        return redirect()->route('dashboard')->with('message', 'Post Like undo successfully!');
     }
 }

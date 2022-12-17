@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{id}', [PostController::class, 'update'])->name('post.update');
 
+    Route::post('/like-post/{id}', [PostController::class, 'likePost'])->name('like.post');
+    Route::post('/unlike-post/{id}', [PostController::class, 'unlikePost'])->name('unlike.post');
+
     Route::get('/tag/{slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
 
     // Category
