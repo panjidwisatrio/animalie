@@ -18,6 +18,9 @@
     <script src="https://unpkg.com/feather-icons"></script>
     <script src="../path/to/flowbite/dist/flowbite.js"></script>
 
+    {{-- CKEditor --}}
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+
     @stack('header')
 
 </head>
@@ -100,7 +103,7 @@
         }
     </script>
 
-    @stack('scripts')
+    @yield('scripts')
 
 </body>
 

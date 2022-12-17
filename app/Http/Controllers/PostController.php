@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -86,37 +88,12 @@ class PostController extends Controller
             'slug' => 'required',
             'categories' => 'required',
             'tags' => 'required',
-            'image' => 'required',
+            // 'image' => 'required',
             'body' => 'required',
         ]);
 
-        $post = new Post();
-        $post->user_id = auth()->user()->id;
-        $post->title = $request->title;
-        $post->slug = $request->slug;
-        $post->categories = $request->categories;
-        $post->tags = $request->tags;
-        $post->image = $request->image;
-        $post->body = $request->body;
-        $post->save();
+        Post::create($posts);
+
         return redirect()->route('dashboard');
-    }
-
-    public function likePost($id)
-    {
-        $post = Post::find($id);
-        $post->like();
-        $post->save();
-
-        return redirect()->route('dashboard')->with('message', 'Post Like successfully!');
-    }
-
-    public function unlikePost($id)
-    {
-        $post = Post::find($id);
-        $post->unlike();
-        $post->save();
-
-        return redirect()->route('dashboard')->with('message', 'Post Like undo successfully!');
     }
 }
