@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Conner\Likeable\Likeable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
@@ -17,12 +16,11 @@ class Post extends Model
     use HasFactory, Sluggable, Likeable;
 
     protected $fillable = [
-        'user_id',
         'title',
-        'slug',
-        'categories',
-        // 'tags',
         'content',
+        'slug',
+        'user_id',
+        'category_id',
     ];
 
     public function sluggable(): array
@@ -33,8 +31,6 @@ class Post extends Model
             ]
         ];
     }
-
-    protected $guarded = ['id'];
 
     public function category()
     {

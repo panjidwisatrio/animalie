@@ -41,10 +41,10 @@
 
                         <!-- Categories -->
                         <div class="mt-4">
-                            <x-input-label for="category" :value="__('Categories')" />
-                            <div class="flex-shrink w-full inline-block relative">
+                            <x-input-label for="category_id" :value="__('Categories')" />
+                            <div class="flex-shrink w-full inline-block relative" id="category_id">
                                 <select
-                                    class="block font-medium text-sm text-green-900 w-full bg-emerald-100 border-gray-300 focus:border-green-400 shadow-inner px-4 py-2 pr-8 rounded-md">
+                                    class="block font-medium text-sm text-green-900 w-full bg-emerald-100 border-gray-300 focus:border-green-400 shadow-inner px-4 py-2 pr-8 rounded-md" id="category_id" name="category_id">
                                     <option value="-1">choose ...</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category }}</option>

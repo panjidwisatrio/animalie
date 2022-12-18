@@ -29,15 +29,8 @@
             {{-- Post Body  --}}
             <div class="mt-4 text-cyan-900 text-sm text-justify">
                 <h1 class="text-2xl font-weight-bolder my-2">{{ $post->title }}</h1>
-                <p class="p-4 bg-emerald-50 rounded-md text-md">
-                    {{ $post->content }}
-                </p>
-
-                {{-- Images --}}
-                <div class="flex justify-start mt-4">
-                    <img src="https://source.unsplash.com/1200x400/?livestock"
-                        class="max-w-xs h-1/3 rounded-md mr-2 aspect-square object-cover" alt="livestock">
-
+                <div class="p-4 bg-emerald-50 rounded-md text-md">
+                    {!! $post->content !!}
                 </div>
 
                 {{-- Badges/Tags --}}

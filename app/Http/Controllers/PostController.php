@@ -14,22 +14,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['user', 'category'])->latest()->get();
-        $likes = DB::table('likeable_like_counters')
-            ->select(
-                'likeable_like_counters.count',
-            )
-            ->join('posts', 'likeable_like_counters.post_id', '=', 'posts.id')
-            ->first();
         $tags = Tag::all();
 
-        // $like = DB::table('posts as p')
-        //     ->select(
-        //         'llc.count as count'
-        //     )
-        //     ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
-        //     ->first();
-
-        return view('dashboard', compact('posts', 'tags', 'likes'));
+        return view('dashboard', compact('posts', 'tags'));
     }
 
     public function show(Post $post)
@@ -68,25 +55,25 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required',
             'slug' => 'required',
-            'categories' => 'required',
-            // 'tags' => 'required',
+            'category_id' => 'required',
             'content' => 'required',
         ]);
 
-        $posts = new Post();
-        $posts->title = $request->title;
-        $posts->slug = $request->slug;
-        $posts->content = $request->content;
-        $posts->user_id = auth()->user()->id;
-        $posts->category_id = $request->categories;
+        $post = Post::create([
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'category_id' => $request->category_id,
+            'user_id' => auth()->user()->id,
+            'content' => $request->content,
+        ]);
 
-        return redirect()->view('dashboard');
+        $post->save();
+
+        return redirect()->route('dashboard');
     }
 
     public function upload(Request $request)
     {
-        // TODO: validate file and return error if not valid
-
         $request->validate([
             'upload' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
