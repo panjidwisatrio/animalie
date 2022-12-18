@@ -14,9 +14,15 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['user', 'category'])->latest()->get();
+        $likes = DB::table('likeable_like_counters')
+            ->select(
+                'likeable_like_counters.count',
+            )
+            ->join('posts', 'likeable_like_counters.post_id', '=', 'posts.id')
+            ->first();
         $tags = Tag::all();
 
-        return view('dashboard', compact('posts', 'tags'));
+        return view('dashboard', compact('posts', 'tags', 'likes'));
     }
 
     public function show(Post $post)
@@ -94,5 +100,23 @@ class PostController extends Controller
     public function checkSlug(Request $request) {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title, ['unique' => true]);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function likePost($id)
+    {
+        $post = Post::find($id);
+        $post->like();
+        $post->save();
+
+        return redirect()->route('dashboard')->with('message', 'Post Like successfully!');
+    }
+
+    public function unlikePost($id)
+    {
+        $post = Post::find($id);
+        $post->unlike();
+        $post->save();
+
+        return redirect()->route('dashboard')->with('message', 'Post Like undo successfully!');
     }
 }

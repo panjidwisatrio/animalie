@@ -8,10 +8,10 @@ use App\Models\Category;
 use App\Models\DetailTag;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Sluggable;
-
+use Conner\Likeable\Likeable;
 class Post extends Model
 {
-    use HasFactory, Sluggable;
+    use HasFactory, Sluggable, Likeable;
 
     protected $fillable = [
         'user_id',
@@ -43,5 +43,10 @@ class Post extends Model
 
     public function detail_tag() {
         return $this->hasMany(DetailTag::class);
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

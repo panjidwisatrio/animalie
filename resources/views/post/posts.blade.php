@@ -17,18 +17,20 @@
                         </div>
                     </div>
                     <div class="">
-                        <small class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+                        <small
+                            class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                     </div>
                 </div>
 
                 {{-- Post Body  --}}
-                <a href="{{ route('post.show', $post->id) }}" class="mt-4 text-cyan-900 text-sm text-justify">
+                <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
                     <h1 class="text-xl font-weight-bold my-2">{{ $post->title }}</h1>
                     <p class="p-4 bg-emerald-50 rounded-md">
                         {{ $post->content }}
                     </p>
 
                 </a>
+                
                 {{-- Images --}}
                 <div class="flex justify-between mt-4">
                     <img src="https://source.unsplash.com/1200x400/?livestock"
@@ -62,26 +64,45 @@
 
                 </div>
 
-                {{-- Interaction --}}
-                <div class="mt-4 flex justify-between">
-                    <div class="flex mr-2 text-gray-700 text-sm mr-3">
-                        <i data-feather="bookmark"></i>
-                        <span>12</span>
+                {{-- Reaction --}}
+                <div class="mt-4 text-cyan-900 flex justify-end space-x-2">
+                    {{-- Like  --}}
+                    <div class="flex items-center">
+                        <form method="POST" action="{{ route('like.post', $post->id) }}">
+                            @csrf
+                            <button class="flex items-center space-x-1">
+                                <i data-feather="thumbs-up"></i>
+                                <small class="font-semibold">
+                                    {{ $likes->count }}
+                                </small>
+                            </button>
+                        </form>
                     </div>
-                    <div class="inline">
-                        <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
+
+                    {{-- Unlike  --}}
+                    <div class="flex items-center">
+                        <form method="POST" action="{{ route('unlike.post', $post->id) }}">
+                            @csrf
+                            <button class="flex items-center space-x-1">
+                                <i data-feather="thumbs-down"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    {{-- Comment  --}}
+                    <div class="flex items-center">
+                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
                             <i data-feather="message-square"></i>
-                            <span>12</span>
-                        </div>
-                        <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
-                            <i data-feather="thumbs-up"></i>
-                            <span>12</span>
-                        </div>
+                            {{-- <small class="font-semibold">
+                                12
+                            </small> --}}
+                        </a>
                     </div>
+                    
                 </div>
             </div>
         </div>
     @endforeach
 @else
-{{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
+    {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
 @endif
