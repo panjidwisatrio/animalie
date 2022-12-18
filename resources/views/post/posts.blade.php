@@ -72,9 +72,18 @@
                             <button class="flex items-center space-x-1">
                                 <i data-feather="thumbs-up"></i>
                                 <small class="font-semibold">
-                                    {{-- {{ $post->likeCount }} --}}
-                                    12
+                                    {{ $post->likecount }}
                                 </small>
+                            </button>
+                        </form>
+                    </div>
+
+                    {{-- Unlike  --}}
+                    <div class="flex items-center">
+                        <form method="POST" action="{{ route('unlike.post', $post->id) }}">
+                            @csrf
+                            <button class="flex items-center space-x-1">
+                                <i data-feather="thumbs-down"></i>
                             </button>
                         </form>
                     </div>
@@ -83,21 +92,11 @@
                     <div class="flex items-center">
                         <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
                             <i data-feather="message-square"></i>
-                            <small class="font-semibold">
+                            {{-- <small class="font-semibold">
                                 12
-                            </small>
+                            </small> --}}
                         </a>
                     </div>
-
-                    {{-- Unlike --}}
-                    {{-- <div>
-                        <form method="POST" action="{{ route('unlike.post', $post->id) }}">
-                            @csrf
-                            <button class="{{ $post->liked() ? 'bg-white' : '' }} p-2 text-green-900">
-                                <i data-feather="bookmark"></i>
-                            </button>
-                        </form>
-                    </div> --}}
                 </div>
             </div>
 

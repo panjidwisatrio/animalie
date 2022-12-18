@@ -23,11 +23,13 @@ class PostController extends Controller
                 'u.username as username',
                 'u.avatar as avatar',
                 't.name_tag as tagname',
-                'c.category as categoryname'
+                'c.category as categoryname',
+                'llc.count as likecount'
             )
             ->join('users as u', 'p.user_id', '=', 'u.id')
             ->join('tags as t', 'p.tag_id', '=', 't.id')
             ->join('categories as c', 'p.category_id', '=', 'c.id')
+            ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
             ->orderBy('p.created_at', 'desc')
             ->get();
 
@@ -44,7 +46,7 @@ class PostController extends Controller
                 'u.username as username',
                 'u.avatar as avatar',
                 't.name_tag as tagname',
-                'c.category as categoryname'
+                'c.category as categoryname',
             )
             ->join('users as u', 'p.user_id', '=', 'u.id')
             ->join('tags as t', 'p.tag_id', '=', 't.id')
@@ -116,5 +118,23 @@ class PostController extends Controller
             'fileName' => $fileName,
             'url' => $url,
         ]);
+    }
+
+    public function likePost($id)
+    {
+        $post = Post::find($id);
+        $post->like();
+        $post->save();
+
+        return redirect()->route('dashboard')->with('message', 'Post Like successfully!');
+    }
+
+    public function unlikePost($id)
+    {
+        $post = Post::find($id);
+        $post->unlike();
+        $post->save();
+
+        return redirect()->route('dashboard')->with('message', 'Post Like undo successfully!');
     }
 }
