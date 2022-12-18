@@ -5,8 +5,9 @@
         <div class="flex justify-between items-center">
 
             <div class="flex justify-start items-center">
-                {{-- TODO : Perbaiki agar gambar mengikuti img rounded full dan tidak gepeng --}}
-                <img src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="" class="rounded-full object-cover content_pict">
+                {{-- DONE : Perbaiki agar gambar mengikuti img rounded full dan tidak gepeng --}}
+                <img src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt=""
+                    class=" object-cover rounded-full content_pict">
                 <div class="mx-4">
                     <h1 class="font-semibold text-xl text-cyan-800 leading-tight">
                         {{ $user->name }}
@@ -33,7 +34,7 @@
     </x-slot>
 
     <div class="flex justify-center mt-4">
-        <div class="py-2">
+        <div class="">
             @include('layouts.myPostsNavgation')
 
             {{-- inclede mypost --}}
@@ -41,8 +42,44 @@
         </div>
 
         {{-- Certificate --}}
+        <div class="flex-col space-y-4 items-center mx-4 sm:mx-0">
+            <div
+                class="py-6 px-8 items-center rounded-lg shadow-lg overflow-hidden w-full sm:w-11/12 md:max-w-md hover:shadow-xl bg-white dark:bg-cyan-900">
+                <div class="flex flex-row justify-start items-center">
+                    <h1 class="text-md sm:text-xl font-bold text-gray-800 mr-2 dark:text-gray-100">
+                        My Certificate</h1>
+                </div>
 
-        <div class="py-2 w-3/12">
+                <div class='my-3 flex flex-wrap -m-1'>
+                    {{-- @foreach ($users as $user) --}}
+                    <span class="m-1 flex flex-wrap justify-between items-center text-xs  leading-loose cursor-pointer">
+                        <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                            src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
+                    </span>
+                    <span class="m-1 flex flex-wrap justify-between items-center text-xs  leading-loose cursor-pointer">
+                        <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                            src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
+                    </span>
+                    <span class="m-1 flex flex-wrap justify-between items-center text-xs  leading-loose cursor-pointer">
+                        <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                            src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
+                    </span>
+                    <span class="m-1 flex flex-wrap justify-between items-center text-xs  leading-loose cursor-pointer">
+                        <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                            src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
+                    </span>
+                    <span class="m-1 flex flex-wrap justify-between items-center text-xs  leading-loose cursor-pointer">
+                        <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
+                            src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
+                    </span>
+                    {{-- @endforeach --}}
+                    <input type="file"
+                        class="bottom-0 right-0 rounded-md w-full h-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="py-2 w-3/12">
             <div class=" lg:px-8 py-4 bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
                 <h3 class="text-gray-900">My Certificate</h3>
                 <div class="flex justify-between">
@@ -56,6 +93,6 @@
                 <input type="file"
                     class="bottom-0 right-0 rounded-md w-full h-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
             </div>
-        </div>
+        </div> --}}
 
 </x-app-layout>

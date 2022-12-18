@@ -21,6 +21,22 @@ class PostController extends Controller
             ->join('posts', 'likeable_like_counters.post_id', '=', 'posts.id')
             ->first();
         $tags = Tag::all();
+        $posts = DB::table('posts as p')
+            ->select(
+                'p.*',
+                'u.name as name',
+                'u.username as username',
+                'u.avatar as avatar',
+                't.name_tag as tagname',
+                'c.category as categoryname',
+                'llc.count as likecount'
+            )
+            ->join('users as u', 'p.user_id', '=', 'u.id')
+            ->join('tags as t', 'p.tag_id', '=', 't.id')
+            ->join('categories as c', 'p.category_id', '=', 'c.id')
+            ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
+            ->orderBy('p.created_at', 'desc')
+            ->get();
 
         return view('dashboard', compact('posts', 'tags', 'likes'));
     }
@@ -88,7 +104,7 @@ class PostController extends Controller
 
         $fileName = $request->file('upload')->store('post-images');
 
-        $url = asset('storage/'. $fileName);
+        $url = asset('storage/' . $fileName);
 
         return response()->json([
             'uploaded' => 1,
@@ -97,7 +113,8 @@ class PostController extends Controller
         ]);
     }
 
-    public function checkSlug(Request $request) {
+    public function checkSlug(Request $request)
+    {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title, ['unique' => true]);
         return response()->json(['slug' => $slug]);
     }

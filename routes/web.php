@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{id}', [PostController::class, 'update'])->name('post.update');
 
+    Route::post('/like-post/{id}', [PostController::class, 'likePost'])->name('like.post');
+    Route::post('/unlike-post/{id}', [PostController::class, 'unlikePost'])->name('unlike.post');
+
     // Slug
     Route::get('/post/create/checkSlug', [PostController::class, 'checkSlug'])->name('post.checkSLug');
 

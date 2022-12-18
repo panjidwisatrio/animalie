@@ -43,16 +43,65 @@
             {{ $slot }}
         </main>
 
-    </div>
+        <div class="">
+            <!-- Create button -->
+            <button type="button" onclick="window.location.href='/post/create';" data-mdb-ripple="true"
+                data-mdb-ripple-color="light"
+                class="fixed d-none inline-block my-20 first-letter:mx-7 p-5 bg-cyan-900 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-cyan-900 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-800 active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5"
+                id="btn-create">
+                <i data-feather="edit-3"></i>
+            </button>
 
+            <!-- Back to top button -->
+            <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+                class="fixed d-none inline-blockmx-7 p-5 bg-cyan-900 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-cyan-900 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-800 active:shadow-lg transition duration-150 ease-in-out bottom-5 right-5"
+                id="btn-back-to-top">
+                <i data-feather="arrow-up"></i>
+            </button>
+        </div>
+    </div>
 
     <!-- feather -->
     <script>
         feather.replace()
     </script>
-    <script src="https://unpkg.com/feather-icons"></script>
+    {{-- <script src="https://unpkg.com/feather-icons"></script> --}}
+    <script src="js/feather.min.js"></script>
+
     <!-- ckEditor -->
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
+
+    <script>
+        // Get the button
+        let backToTopBtn = document.getElementById("btn-back-to-top");
+        let createButton = document.getElementById("btn-create");
+
+        // When the user scrolls down 20px from the top of the document, show the button
+        window.onscroll = function() {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (
+                document.body.scrollTop > 20 ||
+                document.documentElement.scrollTop > 20
+            ) {
+                backToTopBtn.style.display = "block";
+                createButton.style.display = "block";
+            } else {
+                backToTopBtn.style.display = "none";
+                createButton.style.display = "none";
+            }
+        }
+        // When the user clicks on the button, scroll to the top of the document
+        backToTopBtn.addEventListener("click", backToTop);
+        createButton.addEventListener("click", backToTop);
+
+        function backToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+    </script>
 
     @yield('scripts')
 

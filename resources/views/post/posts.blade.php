@@ -2,10 +2,10 @@
 {{-- TODO : Add Escape Blade --}}
 @if ($posts->count())
     @foreach ($posts as $post)
-        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-2 border-b-2">
                 {{-- User --}}
-                <div class="flex justify-between">
+                <a href="#" class="flex justify-between">
                     <div class="flex">
                         <div>
                             <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
@@ -18,9 +18,10 @@
                     </div>
                     <div class="">
                         <small
+                           
                             class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                     </div>
-                </div>
+                </a>
 
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
@@ -92,7 +93,15 @@
                     {{-- Comment  --}}
                     <div class="flex items-center">
                         <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
+
+                    {{-- Comment  --}}
+                    <div class="flex items-center">
+                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
                             <i data-feather="message-square"></i>
+                            {{-- <small class="font-semibold">
+                                12
+                            </small> --}}
+                        </a>
                             {{-- <small class="font-semibold">
                                 12
                             </small> --}}
