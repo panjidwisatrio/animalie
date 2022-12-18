@@ -2,10 +2,10 @@
 {{-- TODO : Add Escape Blade --}}
 @if ($posts->count())
     @foreach ($posts as $post)
-        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-2 border-b-2">
                 {{-- User --}}
-                <div class="flex justify-between">
+                <a href="#" class="flex justify-between">
                     <div class="flex">
                         <div>
                             <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
@@ -20,7 +20,7 @@
                         <small
                             class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                     </div>
-                </div>
+                </a>
 
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->id) }}" class="mt-4 text-cyan-900 text-sm text-justify">
@@ -64,19 +64,29 @@
                 </div>
 
                 {{-- Reaction --}}
-                <div class="mt-4  text-cyan-900">
+                <div class="mt-4 text-cyan-900 flex justify-end space-x-2">
                     {{-- Like  --}}
-                    <div class="flex justify-end items-center">
+                    <div class="flex items-center">
                         <form method="POST" action="{{ route('like.post', $post->id) }}">
                             @csrf
-                            <button class="flex items-center">
-                                <i data-feather="thumbs-up" class="mr-2"></i>
-                                <small>
+                            <button class="flex items-center space-x-1">
+                                <i data-feather="thumbs-up"></i>
+                                <small class="font-semibold">
                                     {{-- {{ $post->likeCount }} --}}
                                     12
                                 </small>
                             </button>
                         </form>
+                    </div>
+
+                    {{-- Comment  --}}
+                    <div class="flex items-center">
+                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
+                            <i data-feather="message-square"></i>
+                            <small class="font-semibold">
+                                12
+                            </small>
+                        </a>
                     </div>
 
                     {{-- Unlike --}}
@@ -87,21 +97,6 @@
                                 <i data-feather="bookmark"></i>
                             </button>
                         </form>
-                    </div> --}}
-
-                    {{-- <div class="flex text-gray-700 text-sm mr-3">
-                        <i data-feather="bookmark"></i>
-                        <span>12</span>
-                    </div>
-                    <div class="inline">
-                        <div class="inline-flex text-gray-700 text-sm mr-3">
-                            <i data-feather="message-square"></i>
-                            <span>12</span>
-                        </div>
-                        <div class="inline-flex text-gray-700 text-sm mr-3">
-                            <i data-feather="thumbs-up"></i>
-                            <span>12</span>
-                        </div>
                     </div> --}}
                 </div>
             </div>
