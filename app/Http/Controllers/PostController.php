@@ -14,31 +14,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['user', 'category'])->latest()->get();
-        $likes = DB::table('likeable_like_counters')
-            ->select(
-                'likeable_like_counters.count',
-            )
-            ->join('posts', 'likeable_like_counters.post_id', '=', 'posts.id')
-            ->first();
         $tags = Tag::all();
-        $posts = DB::table('posts as p')
-            ->select(
-                'p.*',
-                'u.name as name',
-                'u.username as username',
-                'u.avatar as avatar',
-                't.name_tag as tagname',
-                'c.category as categoryname',
-                'llc.count as likecount'
-            )
-            ->join('users as u', 'p.user_id', '=', 'u.id')
-            ->join('tags as t', 'p.tag_id', '=', 't.id')
-            ->join('categories as c', 'p.category_id', '=', 'c.id')
-            ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
-            ->orderBy('p.created_at', 'desc')
-            ->get();
 
-        return view('dashboard', compact('posts', 'tags', 'likes'));
+        return view('dashboard', compact('posts', 'tags'));
     }
 
     public function show(Post $post)
@@ -79,25 +57,25 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required',
             'slug' => 'required',
-            'categories' => 'required',
-            // 'tags' => 'required',
+            'category_id' => 'required',
             'content' => 'required',
         ]);
 
-        $posts = new Post();
-        $posts->title = $request->title;
-        $posts->slug = $request->slug;
-        $posts->content = $request->content;
-        $posts->user_id = auth()->user()->id;
-        $posts->category_id = $request->categories;
+        $post = Post::create([
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'category_id' => $request->category_id,
+            'user_id' => auth()->user()->id,
+            'content' => $request->content,
+        ]);
 
-        return redirect()->view('dashboard');
+        $post->save();
+
+        return redirect()->route('dashboard');
     }
 
     public function upload(Request $request)
     {
-        // TODO: validate file and return error if not valid
-
         $request->validate([
             'upload' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
