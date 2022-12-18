@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->name('interestGroup');
-Route::get('/post-detail/{slug}', [PostController::class, 'show'])->name('post.show');
+Route::get('/post-detail/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
 // Tag
 Route::get('/tag/{slug}', [TagController::class, 'index'])->name('tag');
@@ -33,11 +33,15 @@ Route::middleware('auth')->group(function () {
 
     // Post
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
-    Route::post('/post', [PostController::class, 'store'])->name('post.store');
+    Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
     Route::post('/upload', [PostController::class, 'upload'])->name('post.upload');
     Route::get('/post/{id}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{id}', [PostController::class, 'update'])->name('post.update');
 
+    // Slug
+    Route::get('/post/create/checkSlug', [PostController::class, 'checkSlug'])->name('post.checkSLug');
+
+    // Tag
     Route::get('/tag/{slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
 
     // Category

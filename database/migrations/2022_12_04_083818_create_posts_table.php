@@ -23,7 +23,6 @@ return new class extends Migration
             $table->integer('likes')->default(0);
             $table->foreignId('user_id')->constrained();
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('tag_id')->constrained();
             $table->timestamps();
         });
     }
