@@ -2,10 +2,10 @@
 {{-- TODO : Add Escape Blade --}}
 @if ($posts->count())
     @foreach ($posts as $post)
-        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-2 border-b-2">
                 {{-- User --}}
-                <div class="flex justify-between">
+                <a href="#" class="flex justify-between">
                     <div class="flex">
                         <div>
                             <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
@@ -17,9 +17,10 @@
                         </div>
                     </div>
                     <div class="">
-                        <small class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+                        <small
+                            class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                     </div>
-                </div>
+                </a>
 
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->id) }}" class="mt-4 text-cyan-900 text-sm text-justify">
@@ -62,26 +63,44 @@
 
                 </div>
 
-                {{-- Interaction --}}
-                <div class="mt-4 flex justify-between">
-                    <div class="flex mr-2 text-gray-700 text-sm mr-3">
-                        <i data-feather="bookmark"></i>
-                        <span>12</span>
+                {{-- Reaction --}}
+                <div class="mt-4 text-cyan-900 flex justify-end space-x-2">
+                    {{-- Like  --}}
+                    <div class="flex items-center">
+                        <form method="POST" action="{{ route('like.post', $post->id) }}">
+                            @csrf
+                            <button class="flex items-center space-x-1">
+                                <i data-feather="thumbs-up"></i>
+                                <small class="font-semibold">
+                                    {{ $post->likecount }}
+                                </small>
+                            </button>
+                        </form>
                     </div>
-                    <div class="inline">
-                        <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
+
+                    {{-- Unlike  --}}
+                    <div class="flex items-center">
+                        <form method="POST" action="{{ route('unlike.post', $post->id) }}">
+                            @csrf
+                            <button class="flex items-center space-x-1">
+                                <i data-feather="thumbs-down"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    {{-- Comment  --}}
+                    <div class="flex items-center">
+                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
                             <i data-feather="message-square"></i>
-                            <span>12</span>
-                        </div>
-                        <div class="inline-flex mr-2 text-gray-700 text-sm mr-3">
-                            <i data-feather="thumbs-up"></i>
-                            <span>12</span>
-                        </div>
+                            {{-- <small class="font-semibold">
+                                12
+                            </small> --}}
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
 @else
-{{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
+    {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
 @endif

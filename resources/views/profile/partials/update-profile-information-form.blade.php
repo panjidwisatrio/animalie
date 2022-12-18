@@ -17,22 +17,21 @@
         @csrf
         @method('patch')
 
-        <div class="flex w-full">
-            <div class="w-full flex justify-start items-center shrink-0">
-                <img class="myProfile_pict object-cover rounded-full" src="{{ asset('/storage/' . Auth::user()->avatar) }}"
-                    alt="Current profile photo" />
-
-                {{-- TODO : Tidak Sejajar Inputnya, Tolong Perbaiki --}}
-                <div class="ml-3 w-full block">
-                    <input
-                        class="ml-3 block w-full text-sm text-green-900 border border-green-300 rounded-lg cursor-pointer bg-emerald-100 dark:text-green-400 focus:outline-none dark:bg-green-700 dark:border-green-600 dark:placeholder-green-400"
-                        aria-describedby="file_input_help" id="avatar" name="avatar" type="file"
-                        @error('avatar') is-invalid @enderror aria-describedby="standard_error_help">
-                    @error('avatar')
-                        <p id="standard_error_help" class="ml-3 mt-2 text-xs text-red-600 dark:text-red-400"><span
-                                class="font-medium">Oh, snapp!</span> {{ $message }} </p>
-                    @enderror
-                </div>
+        {{-- DONE : Tidak Sejajar Inputnya, Tolong Perbaiki --}}
+        <div class="flex justify-start items-center w-full">
+            <div>
+                <img class="aspect-square content_pict object-cover rounded-full"
+                    src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="Current profile photo" />
+            </div>
+            <div class="w-full">
+                <input
+                    class=" w-full text-sm text-green-900 border border-green-300 rounded-lg cursor-pointer bg-emerald-100 dark:text-green-400 focus:outline-none dark:bg-green-700 dark:border-green-600 dark:placeholder-green-400"
+                    aria-describedby="file_input_help" id="avatar" name="avatar" type="file"
+                    @error('avatar') is-invalid @enderror aria-describedby="standard_error_help">
+                @error('avatar')
+                    <p id="standard_error_help" class="ml-3 mt-2 text-xs text-red-600 dark:text-red-400"><span
+                            class="font-medium">Oh, snapp!</span> {{ $message }} </p>
+                @enderror
             </div>
         </div>
 
