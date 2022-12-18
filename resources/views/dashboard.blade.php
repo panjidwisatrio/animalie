@@ -22,7 +22,8 @@
         </div>
 
         {{-- Tags --}}
-        @include('layouts.tags', ['tags' => $tags])
-
+        <div class="py-2">
+            @include('layouts.tags')
+        </div>
     </div>
 </x-app-layout>

@@ -25,7 +25,6 @@ class PostFactory extends Factory
             'likes' => fake()->numberBetween(1, 100),
             'user_id' => mt_rand(1, 5),
             'category_id' => mt_rand(1, 3),
-            'tag_id' => mt_rand(1, 3),
         ];
     }
 }

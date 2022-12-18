@@ -31,10 +31,13 @@
                             <x-input-label for="slug" :value="__('Slug')" />
 
                             <x-text-input id="slug" class="block mt-1 w-full" type="text" name="slug"
-                                :value="old('slug')" required autofocus />
+                                :value="old('slug')" readonly />
 
                             <x-input-error :messages="$errors->get('slug')" class="mt-2" />
                         </div>
+
+                        <!-- Tag -->
+                        {{-- TODO : Fix Post has many Tag --}}
 
                         <!-- Categories -->
                         <div class="mt-4">
@@ -62,9 +65,9 @@
 
                         <!-- Text Editor -->
                         <div class="mt-4">
-                            <x-input-label for="body" :value="__('Body')" />
+                            <x-input-label for="content" :value="__('Body')" />
                             <div class="mt-1">
-                                <textarea id="editor" name="body" rows="10" cols="80" placeholder="Write your first post here!"></textarea>
+                                <textarea id="content" name="content" rows="10" cols="80" placeholder="Write your first post here!"></textarea>
                             </div>
 
                             <div class="mt-4 -mr-1 flex justify-end">
@@ -80,14 +83,20 @@
     </div>
     @section('scripts')
         <script>
+            const title = document.querySelector('#title');
+            const slug = document.querySelector('#slug');
+
+            title.addEventListener('change', function() {
+                fetch('/post/create/checkSlug?title=' + title.value, {})
+                    .then(response => response.json())
+                    .then(data => slug.value = data.slug)
+            })
+
             ClassicEditor
-                .create(document.querySelector('#editor'), {
+                .create(document.querySelector('#content'), {
                     ckfinder: {
                         uploadUrl: '{{ route('post.upload', ['_token' => csrf_token()]) }}',
                     }
-                })
-                .then(editor => {
-                    console.log(editor);
                 })
                 .catch(error => {
                     console.error(error);

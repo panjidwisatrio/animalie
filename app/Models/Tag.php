@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\DetailTag;
 
 class Tag extends Model
 {
@@ -14,4 +15,8 @@ class Tag extends Model
         'slug',
         'color'
     ];
+
+    public function detail_tag() {
+        return $this->belongsTo(DetailTag::class);
+    }
 }
