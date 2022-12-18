@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // USER 
+        // USER
         User::create([
             'name' => 'Irsal Lazuard',
             'username' => 'irsal_laz',
@@ -29,6 +29,17 @@ class DatabaseSeeder extends Seeder
             'job_position' => 'CEO',
             'password' => bcrypt('password'),
         ]);
+
+        User::create([
+            'name' => 'Aaliya Stenya',
+            'username' => 'stenya_',
+            'email' => 'aaa@gmail.com',
+            'avatar' => 'post-images\vztk2WIUC5M9gt59JcDG3i5P0Y6fn4ff0VsFnjVx.png',
+            'work_place' => 'Chevalier Lab SAS',
+            'job_position' => 'Content Creator',
+            'password' => bcrypt('password123'),
+        ]);
+
         User::factory(5)->create();
 
         // TAG 

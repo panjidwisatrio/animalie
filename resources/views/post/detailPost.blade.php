@@ -14,11 +14,11 @@
                 <div class="flex">
                     <div>
                         <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                            src="{{ asset('/storage/' . $post->author->avatar) }}" alt="avatar">
+                            src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
                     </div>
                     <div>
-                        <h2 class="text-lg font-semibold text-cyan-900">{{ $post->author->name }}</h2>
-                        <small class="text-sm text-cyan-900">{{ $post->author->username }}</small>
+                        <h2 class="text-lg font-semibold text-cyan-900">{{ $post->user->name }}</h2>
+                        <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
                     </div>
                 </div>
                 <div class="">

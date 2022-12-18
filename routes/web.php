@@ -48,6 +48,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/tag/{slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
 
     // Category
+
+    // Comment
+
+    // Like
+    Route::post('/like-post/{slug}', [PostController::class, 'likePost'])->name('like.post');
+    Route::post('/unlike-post/{slug}', [PostController::class, 'unlikePost'])->name('unlike.post');
 });
 
 require __DIR__ . '/auth.php';

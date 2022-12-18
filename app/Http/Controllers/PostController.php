@@ -14,16 +14,22 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::with(['user', 'category'])->latest()->get();
+        $likes = DB::table('likeable_like_counters')
+            ->select(
+                'likeable_like_counters.count',
+            )
+            ->join('posts', 'likeable_like_counters.post_id', '=', 'posts.id')
+            ->first();
         $tags = Tag::all();
 
-        $like = DB::table('posts as p')
-            ->select(
-                'llc.count as count'
-            )
-            ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
-            ->first();
+        // $like = DB::table('posts as p')
+        //     ->select(
+        //         'llc.count as count'
+        //     )
+        //     ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
+        //     ->first();
 
-        return view('dashboard', compact('posts', 'tags', 'like'));
+        return view('dashboard', compact('posts', 'tags', 'likes'));
     }
 
     public function show(Post $post)

@@ -23,13 +23,14 @@
                 </a>
 
                 {{-- Post Body  --}}
-                <a href="{{ route('post.show', $post->id) }}" class="mt-4 text-cyan-900 text-sm text-justify">
+                <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
                     <h1 class="text-xl font-weight-bold my-2">{{ $post->title }}</h1>
                     <p class="p-4 bg-emerald-50 rounded-md">
                         {{ $post->content }}
                     </p>
 
                 </a>
+
                 {{-- Images --}}
                 {{-- <div class="flex justify-between mt-4">
                     <img src="https://source.unsplash.com/1200x400/?livestock"
@@ -71,8 +72,7 @@
                             <button class="flex items-center space-x-1">
                                 <i data-feather="thumbs-up"></i>
                                 <small class="font-semibold">
-                                    {{ $post->count }}
-                                    {{-- {{ $post->likeable->count }} --}}
+                                    {{ $likes->count }}
                                 </small>
                             </button>
                         </form>
@@ -91,8 +91,16 @@
                     {{-- Comment  --}}
                     <div class="flex items-center">
                         <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
-                            <i data-feather="message-square"></i>
-                            {{-- <small class="font-semibold">
+
+                            {{-- Comment  --}}
+                            <div class="flex items-center">
+                                <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
+                                    <i data-feather="message-square"></i>
+                                    {{-- <small class="font-semibold">
+                                12
+                            </small> --}}
+                                </a>
+                                {{-- <small class="font-semibold">
                                 12
                             </small> --}}
                         </a>

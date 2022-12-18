@@ -10,6 +10,7 @@ use App\Models\DetailTag;
 use App\Models\User;
 use Conner\Likeable\LikeCounter;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Conner\Likeable\Likeable;
 
 class Post extends Model
 {
@@ -50,8 +51,13 @@ class Post extends Model
         return $this->hasMany(DetailTag::class);
     }
 
-    // public function likeCounter()
-    // {
-    //     return $this->hasMany(LikeCounter::class);
-    // }
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function likeCounter()
+    {
+        return $this->hasMany(LikeCounter::class);
+    }
 }
