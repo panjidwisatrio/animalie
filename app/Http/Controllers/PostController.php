@@ -15,24 +15,15 @@ class PostController extends Controller
     {
         $posts = Post::with(['user', 'category'])->latest()->get();
         $tags = Tag::all();
-        $posts = DB::table('posts as p')
-            ->select(
-                'p.*',
-                'u.name as name',
-                'u.username as username',
-                'u.avatar as avatar',
-                't.name_tag as tagname',
-                'c.category as categoryname',
-                'llc.count as likecount'
-            )
-            ->join('users as u', 'p.user_id', '=', 'u.id')
-            ->join('tags as t', 'p.tag_id', '=', 't.id')
-            ->join('categories as c', 'p.category_id', '=', 'c.id')
-            ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
-            ->orderBy('p.created_at', 'desc')
-            ->get();
 
-        return view('dashboard', compact('posts', 'tags'));
+        $like = DB::table('posts as p')
+            ->select(
+                'llc.count as count'
+            )
+            ->join('likeable_like_counters as llc', 'p.id', '=', 'llc.likeable_id')
+            ->first();
+
+        return view('dashboard', compact('posts', 'tags', 'like'));
     }
 
     public function show(Post $post)
@@ -51,11 +42,9 @@ class PostController extends Controller
                 'u.name as name',
                 'u.username as username',
                 'u.avatar as avatar',
-                't.name_tag as tagname',
                 'c.category as categoryname'
             )
             ->join('users as u', 'p.user_id', '=', 'u.id')
-            ->join('tags as t', 'p.tag_id', '=', 't.id')
             ->join('categories as c', 'p.category_id', '=', 'c.id')
             ->orderBy('p.created_at', 'desc')
             ->get();

@@ -31,7 +31,7 @@
 
                 </a>
                 {{-- Images --}}
-                <div class="flex justify-between mt-4">
+                {{-- <div class="flex justify-between mt-4">
                     <img src="https://source.unsplash.com/1200x400/?livestock"
                         class="rounded-md aspect-square object-cover content_pict_post border-2 border-gray-200"
                         alt="livestock">
@@ -41,8 +41,7 @@
                     <img src="https://source.unsplash.com/1200x400/?livestock"
                         class="rounded-md aspect-square object-cover content_pict_post border-2 border-gray-200"
                         alt="livestock">
-
-                </div>
+                </div> --}}
 
                 {{-- Badges/Tags --}}
                 <div class="mt-4">
@@ -72,7 +71,8 @@
                             <button class="flex items-center space-x-1">
                                 <i data-feather="thumbs-up"></i>
                                 <small class="font-semibold">
-                                    {{ $post->likecount }}
+                                    {{ $post->count }}
+                                    {{-- {{ $post->likeable->count }} --}}
                                 </small>
                             </button>
                         </form>

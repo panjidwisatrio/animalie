@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\DetailTag;
 use App\Models\User;
+use Conner\Likeable\LikeCounter;
 use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
@@ -48,4 +49,9 @@ class Post extends Model
     {
         return $this->hasMany(DetailTag::class);
     }
+
+    // public function likeCounter()
+    // {
+    //     return $this->hasMany(LikeCounter::class);
+    // }
 }
