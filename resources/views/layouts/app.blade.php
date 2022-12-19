@@ -16,6 +16,12 @@
 
     {{-- Feather Icons --}}
     <script src="https://unpkg.com/feather-icons"></script>
+
+    {{-- Iconify --}}
+    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+    <script src="https://code.iconify.design/3/3.0.1/iconify.min.js"></script>
+
+    {{-- Flowbite --}}
     <script src="../path/to/flowbite/dist/flowbite.js"></script>
 
     {{-- CKEditor --}}

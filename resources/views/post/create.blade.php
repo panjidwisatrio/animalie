@@ -53,16 +53,6 @@
                             </div>
                         </div>
 
-                        <!-- Image input -->
-                        {{-- <div class="mt-4">
-                            <x-input-label for="images" :value="__('Images')" />
-                            <div class="">
-                                <input
-                                    class="px-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md cursor-pointer bg-emerald-100 dark:text-gray-400 focus:border-green-400 "
-                                    id="images" name="images" type="file" multiple>
-                            </div>
-                        </div> --}}
-
                         <!-- Text Editor -->
                         <div class="mt-4">
                             <x-input-label for="content" :value="__('Body')" />

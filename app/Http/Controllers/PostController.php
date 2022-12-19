@@ -100,18 +100,20 @@ class PostController extends Controller
     public function likePost($id)
     {
         $post = Post::find($id);
-        $post->like();
-        $post->save();
 
-        return redirect()->route('dashboard')->with('message', 'Post Like successfully!');
-    }
+        if($post->liked(auth()->user()->id)) {
+            $post->unlike();
+            $post->save();
+        } else {
+            $post->like();
+            $post->save();
+        }
+        
+        $liked = $post->liked(auth()->user()->id);
 
-    public function unlikePost($id)
-    {
-        $post = Post::find($id);
-        $post->unlike();
-        $post->save();
-
-        return redirect()->route('dashboard')->with('message', 'Post Like undo successfully!');
+        return response()->json([
+            'likeCount' => $post->likeCount, 
+            'liked' => $liked
+        ]);
     }
 }

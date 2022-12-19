@@ -42,7 +42,6 @@
                     <img src="https://source.unsplash.com/1200x400/?livestock"
                         class="rounded-md aspect-square object-cover content_pict_post border-2 border-gray-200"
                         alt="livestock">
-
                 </div>
 
                 {{-- Badges/Tags --}}
@@ -68,25 +67,13 @@
                 <div class="mt-4 text-cyan-900 flex justify-end space-x-2">
                     {{-- Like  --}}
                     <div class="flex items-center">
-                        <form method="POST" action="{{ route('like.post', $post->id) }}">
-                            @csrf
-                            <button class="flex items-center space-x-1">
-                                <i data-feather="thumbs-up"></i>
-                                <small class="font-semibold">
-                                    {{ $post->likeCount }}
-                                </small>
-                            </button>
-                        </form>
-                    </div>
-
-                    {{-- Unlike  --}}
-                    <div class="flex items-center">
-                        <form method="POST" action="{{ route('unlike.post', $post->id) }}">
-                            @csrf
-                            <button class="flex items-center space-x-1">
-                                <i data-feather="thumbs-down"></i>
-                            </button>
-                        </form>
+                        <button class="like-button flex items-center space-x-1" data-id="{{ $post->id }}" data-liked="{{ $post->liked(auth()->user()->id) ? 'true' : 'false' }}">
+                            <i id="icon-{{ $post->id }}" class="iconify" data-icon="{{ $post->liked(auth()->user()->id) ? 'ant-design:like-twotone' : 'ant-design:like-outlined' }}"
+                                style="color: #164e63;" data-width="24" data-height="24"></i>
+                            <small id="like-count-{{ $post->id }}" class="font-semibold">
+                                {{ $post->likeCount }}
+                            </small>
+                        </button>
                     </div>
 
                     {{-- Comment  --}}
@@ -99,10 +86,36 @@
                         </a>
                     </div>
                 </div>
-
             </div>
         </div>
     @endforeach
+
+    {{-- Like Script --}}
+    <script type="text/javascript">
+        const button = document.querySelectorAll('.like-button');
+
+        button.forEach( function (button) {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const likeCount = document.getElementById('like-count-' + id);
+
+                axios.post('/like-post/' + id).then(function(response) {
+                    if (response.data.liked == true) {
+                        document.getElementById("icon-" + id).dataset.icon = "ant-design:like-twotone";
+                        button.setAttribute('data-liked', 'true');
+                    } else {
+                        document.getElementById("icon-" + id).dataset.icon = "ant-design:like-outlined";
+                    }
+
+                    button.setAttribute('data-liked', response.data.liked);
+
+                    likeCount.innerHTML = response.data.likeCount;
+                }).catch(function(error) {
+                    console.log(error.response.data);
+                });
+            });
+        })
+    </script>
 @else
     {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
 @endif
