@@ -125,7 +125,7 @@
                         <div class="mt-4">
                             <x-input-label for="content" :value="__('Body')" />
                             <div class="mt-1">
-                                <textarea id="content" name="content" rows="10" cols="80" placeholder="Write your first post here!"></textarea>
+                                <textarea id="content" name="content" rows="10" cols="80" placeholder="Write your first post here!" data-editor="ClassicEditor"></textarea>
                             </div>
 
                             <div class="mt-4 -mr-1 flex justify-end">

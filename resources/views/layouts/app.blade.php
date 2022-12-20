@@ -12,19 +12,18 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/ckeditor.js', 'resources/js/feather.min.js', 'resources/js/feather.js', 'resources/js/flowbite.js', 'resources/js/iconify.min.js', 'resources/js/iconify-icon.min.js'])
 
-    {{-- Feather Icons --}}
-    <script src="https://unpkg.com/feather-icons"></script>
 
-    <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+    {{-- <script src="https://unpkg.com/feather-icons"></script> --}}
+    {{-- <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script> --}}
 
     {{-- Iconify --}}
-    <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
-    <script src="https://code.iconify.design/3/3.0.1/iconify.min.js"></script>
+    {{-- <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
+    <script src="https://code.iconify.design/3/3.0.1/iconify.min.js"></script> --}}
 
     {{-- CKEditor --}}
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+    {{-- <script src="resources\js\ckeditor.js"></script> --}}
 
     @stack('header')
 
@@ -66,13 +65,6 @@
         </div>
     </div>
 
-    <!-- feather -->
-    <script>
-        feather.replace()
-    </script>
-    {{-- <script src="https://unpkg.com/feather-icons"></script> --}}
-    <script src="js/feather.min.js"></script>
-
     <!-- ckEditor -->
     <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 
@@ -109,9 +101,6 @@
     </script>
 
     @yield('scripts')
-
-    {{-- Flowbite --}}
-    <script src="../path/to/flowbite/dist/flowbite.js"></script>
 </body>
 
 </html>
