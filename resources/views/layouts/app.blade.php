@@ -17,12 +17,11 @@
     {{-- Feather Icons --}}
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script>
+
     {{-- Iconify --}}
     <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
     <script src="https://code.iconify.design/3/3.0.1/iconify.min.js"></script>
-
-    {{-- Flowbite --}}
-    <script src="../path/to/flowbite/dist/flowbite.js"></script>
 
     {{-- CKEditor --}}
     <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
@@ -111,6 +110,8 @@
 
     @yield('scripts')
 
+    {{-- Flowbite --}}
+    <script src="../path/to/flowbite/dist/flowbite.js"></script>
 </body>
 
 </html>

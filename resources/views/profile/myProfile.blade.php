@@ -5,9 +5,13 @@
         <div class="flex justify-between items-center">
 
             <div class="flex justify-start items-center">
-                {{-- DONE : Perbaiki agar gambar mengikuti img rounded full dan tidak gepeng --}}
-                <img src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt=""
-                    class=" object-cover rounded-full content_pict">
+                @if(Auth::user()->avatar == null)
+                    <img src="{{ asset('img/0profile.png') }}" alt="" class=" object-cover rounded-full content_pict">
+                @else
+                    <img src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt=""
+                        class=" object-cover rounded-full content_pict">
+                @endif
+                
                 <div class="mx-4">
                     <h1 class="font-semibold text-xl text-cyan-800 leading-tight">
                         {{ $user->name }}
@@ -37,7 +41,8 @@
         <div class="">
             @include('layouts.myPostsNavgation')
 
-            {{-- inclede mypost --}}
+            {{-- include mypost --}}
+            @include('profile.myPost', ['posts' => $posts])
 
         </div>
 

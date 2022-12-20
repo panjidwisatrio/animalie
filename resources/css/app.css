@@ -49,3 +49,7 @@
   height: 100%;
   overflow: hidden;
 }
+
+.select-tag {
+  justify-content: space-between;
+}

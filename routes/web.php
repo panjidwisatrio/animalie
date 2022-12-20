@@ -21,7 +21,7 @@ Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->nam
 Route::get('/post-detail/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
 // Tag
-Route::get('/tag/{slug}', [TagController::class, 'index'])->name('tag');
+Route::get('/tag/{tag:slug}', [TagController::class, 'show'])->name('post.tag');
 
 Route::middleware('auth')->group(function () {
     // Profile
@@ -40,7 +40,6 @@ Route::middleware('auth')->group(function () {
 
     // Like
     Route::post('/like-post/{id}', [PostController::class, 'likePost'])->name('like.post');
-    Route::post('/unlike-post/{id}', [PostController::class, 'unlikePost'])->name('unlike.post');
 
     // Slug
     Route::get('/post/create/checkSlug', [PostController::class, 'checkSlug'])->name('post.checkSLug');

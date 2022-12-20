@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class DetailTagController extends Controller
 {
-    public function store() {
-        $data = request()->validate([
+    public function store(Request $request) {
+        $data = $request->validate([
             'post_id' => 'required',
             'tag_id' => 'required',
         ]);

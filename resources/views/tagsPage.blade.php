@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h3 class="rounded-md bg-white p-2 font-semibold text-cyan-800 leading-tight ml-2 flex justify-start">
-                # Pakan Ternak
+                # {{ $tag->name_tag }}
             </h3>
         </div>
     </x-slot>
@@ -11,8 +11,7 @@
         <div class="py-2">
             @include('layouts.postsNavgation')
 
-            @include('post.posts')
-
+            @include('post.posts', ['posts' => $posts])
         </div>
 
         {{-- Tags --}}

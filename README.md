@@ -18,6 +18,21 @@ Create .env file and copy the contents of the file from .env.example to .env fil
 
 after web running, open web, there is error because app key isn't generate yet, click generate key.
 
+## Supporting System
+
+This Website using several libraries / packages to support how the website works.
+
+- CKEditor (<https://ckeditor.com/docs/index.html>).
+- Feather Icon (<https://feathericons.com/>).
+- Flowbite (<https://flowbite.com/>).
+- Axios (<https://axios-http.com/docs/intro>).
+- Laravel Likeable - rtconner (<https://github.com/rtconner/laravel-likeable>).
+- Clockwork - itsgoingd (<https://github.com/itsgoingd/clockwork>).
+- Eloquent Sluggable - cviebrock (<https://github.com/cviebrock/eloquent-sluggable>).
+- Iconify (<https://icon-sets.iconify.design/>).
+
+Install libraries / packages above so that the website runs properly.
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
