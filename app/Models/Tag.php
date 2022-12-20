@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\DetailTag;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Tag extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     protected $fillable = [
         'name_tag',
@@ -16,7 +16,16 @@ class Tag extends Model
         'color'
     ];
 
-    public function detail_tag() {
-        return $this->belongsTo(DetailTag::class);
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+    public function post() {
+        return $this->belongsToMany(Post::class);
     }
 }

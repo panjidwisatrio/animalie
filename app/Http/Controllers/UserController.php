@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -17,8 +19,11 @@ class UserController extends Controller
 
     public function show()
     {
+        $posts = Post::with(['user', 'category'])->where('user_id', auth()->user()->id)->latest()->get();
+        
         return view('profile.myProfile', [
             'user' => Auth::user(),
+            'posts' => $posts,
         ]);
     }
 
@@ -41,6 +46,7 @@ class UserController extends Controller
         ]);
 
         if ($request->file('avatar')) {
+            Storage::delete($request->user()->avatar);
             $validated['avatar'] = $request->file('avatar')->store('post-images');
         }
 

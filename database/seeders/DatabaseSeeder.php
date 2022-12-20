@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
             'name' => 'Irsal Lazuard',
             'username' => 'irsal_laz',
             'email' => 'laxz@gmail.com',
-            'avatar' => '0profile.png',
             'work_place' => 'PT Bina Jaya',
             'job_position' => 'CEO',
             'password' => bcrypt('password'),

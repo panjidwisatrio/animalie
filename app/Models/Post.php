@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
-use App\Models\DetailTag;
 use App\Models\User;
 use Conner\Likeable\LikeCounter;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -42,9 +41,8 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function detail_tag()
-    {
-        return $this->hasMany(DetailTag::class);
+    public function tag() {
+        return $this->belongsToMany(Tag::class)->as('tags')->withTimestamps();
     }
 
     public function getRouteKeyName()

@@ -35,8 +35,13 @@
                                 <div>{{ Auth::user()->username }}</div>
 
                                 <div class="ml-1">
-                                    <img class="profile_pict object-cover rounded-full shadow-md ml-2"
-                                        src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="userAvatar">
+                                    @if(Auth::user()->avatar == null)
+                                        <img class="profile_pict object-cover rounded-full shadow-md ml-2"
+                                            src="{{ asset('/img/0profile.png') }}" alt="userAvatar">
+                                    @else
+                                        <img class="profile_pict object-cover rounded-full shadow-md ml-2"
+                                            src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="userAvatar">
+                                    @endif
                                 </div>
                             </button>
 

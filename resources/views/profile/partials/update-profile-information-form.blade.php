@@ -17,12 +17,16 @@
         @csrf
         @method('patch')
 
-        {{-- DONE : Tidak Sejajar Inputnya, Tolong Perbaiki --}}
         <div class="flex justify-start items-center w-full">
-            <div>
+            {{-- TODO : Perbaiki gambar scretch vertical --}}
+            @if (Auth::user()->avatar)
                 <img class="aspect-square content_pict object-cover rounded-full"
                     src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="Current profile photo" />
-            </div>
+            @else
+                <img class="aspect-square content_pict object-cover rounded-full" src="{{ asset('/img/0profile.png') }}"
+                    alt="Current profile photo" />
+            @endif
+
             <div class="w-full">
                 <input
                     class=" w-full text-sm text-green-900 border border-green-300 rounded-lg cursor-pointer bg-emerald-100 dark:text-green-400 focus:outline-none dark:bg-green-700 dark:border-green-600 dark:placeholder-green-400"
