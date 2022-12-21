@@ -29,8 +29,10 @@
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
                     <h1 class="text-xl font-weight-bold my-2">{{ $post->title }}</h1>
-                    <div class="p-4 bg-emerald-50 rounded-md">
-                        {!! $post->content !!}
+                    <div class="px-4 bg-emerald-50 rounded-md py-2 text-limit">
+                        <span class="text-limit-concat text-cyan-900">
+                            {!! $post->content !!}
+                        </span>
                     </div>
 
                 </a>
@@ -93,7 +95,7 @@
 
                     {{-- Comment  --}}
                     <div class="flex items-center">
-                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
+                        <a href="{{ route('post.show', $post->slug) }}" class="flex items-center space-x-1">
                             <i data-feather="message-square"></i>
                             {{-- <small class="font-semibold">
                                 12
@@ -135,4 +137,7 @@
     </script>
 @else
     {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
+    <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
+
+    </div>
 @endif

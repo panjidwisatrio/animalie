@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\User;
+use Conner\Likeable\LikeCounter;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Conner\Likeable\Likeable;
+
 class Post extends Model
 {
     use HasFactory, Sluggable, Likeable;
@@ -46,5 +48,10 @@ class Post extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function likeCounter()
+    {
+        return $this->hasMany(LikeCounter::class);
     }
 }
