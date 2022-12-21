@@ -29,10 +29,11 @@
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
                     <h1 class="text-xl font-weight-bold my-2">{{ $post->title }}</h1>
-                    <div class="p-4 bg-emerald-50 rounded-md">
-                        {!! $post->content !!}
+                    <div class="px-4 bg-emerald-50 rounded-md py-2 text-limit">
+                        <span class="text-limit-concat text-cyan-900">
+                            {!! $post->content !!}
+                        </span>
                     </div>
-
                 </a>
 
                 {{-- Images --}}
