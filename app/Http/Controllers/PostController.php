@@ -106,4 +106,41 @@ class PostController extends Controller
             'liked' => $liked
         ]);
     }
+
+    public function edit(Post $post)
+    {
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view('post.edit', compact('post', 'categories', 'tags'));
+    }
+
+    public function update(Request $request, Post $post)
+    {
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'category_id' => 'required',
+            'content' => 'required',
+        ]);
+
+        $post->update([
+            'title' => $request->title,
+            'slug' => $request->slug,
+            'category_id' => $request->category_id,
+            'user_id' => auth()->user()->id,
+            'content' => $request->content,
+        ]);
+
+        if ($request->has('tags')) {
+            $post->tag()->sync($request->tags);
+        }
+
+        return redirect()->route('dashboard');
+    }
+
+    public function destroy(Post $post)
+    {
+        $post->delete();
+        return redirect()->route('dashboard');
+    }
 }

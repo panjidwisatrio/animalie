@@ -4,7 +4,7 @@
         <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-2 border-b-2">
                 {{-- User --}}
-                <a href="#" class="flex justify-between">
+                <a href="{{ route('user.showSpecific', $post->user->username) }}" class="flex justify-between">
                     <div class="flex">
                         <div>
                             @if ($post->user->avatar == null)
@@ -94,7 +94,7 @@
 
                     {{-- Comment  --}}
                     <div class="flex items-center">
-                        <a href="{{ route('post.show', $post->slug) }}" class="flex items-center space-x-1">
+                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
                             <i data-feather="message-square"></i>
                             {{-- <small class="font-semibold">
                                 12
@@ -136,7 +136,4 @@
     </script>
 @else
     {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
-    <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
-
-    </div>
 @endif

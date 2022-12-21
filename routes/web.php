@@ -20,6 +20,9 @@ Route::get('/', [PostController::class, 'index'])->name('dashboard');
 Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->name('interestGroup');
 Route::get('/post-detail/{post:slug}', [PostController::class, 'show'])->name('post.show');
 
+// Profile
+Route::get('/profile/{user:username}', [UserController::class, 'showSpecific'])->name('user.showSpecific');
+
 // Tag
 Route::get('/tag/{tag:slug}', [TagController::class, 'show'])->name('post.tag');
 
@@ -48,12 +51,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/tag/{slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
 
     // Category
+    // TODO #12 : Create Category
 
     // Comment
-
-    // Like
-    Route::post('/like-post/{slug}', [PostController::class, 'likePost'])->name('like.post');
-    Route::post('/unlike-post/{slug}', [PostController::class, 'unlikePost'])->name('unlike.post');
+    // TODO #13 : Create Comment
 });
 
 require __DIR__ . '/auth.php';

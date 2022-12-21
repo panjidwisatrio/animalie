@@ -27,6 +27,16 @@ class UserController extends Controller
         ]);
     }
 
+    public function showSpecific(User $user)
+    {
+        $posts = Post::with(['user', 'category'])->where('user_id', $user->id)->latest()->get();
+        
+        return view('profile.profile', [
+            'user' => $user,
+            'posts' => $posts,
+        ]);
+    }
+
     public function edit()
     {
         return view('profile.edit', [

@@ -5,10 +5,10 @@
         <div class="flex justify-between items-center">
 
             <div class="flex justify-start items-center">
-                @if(Auth::user()->avatar == null)
+                @if($user->avatar == null)
                     <img src="{{ asset('img/0profile.png') }}" alt="" class=" object-cover rounded-full content_pict">
                 @else
-                    <img src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt=""
+                    <img src="{{ asset('/storage/' . $user->avatar) }}" alt=""
                         class=" object-cover rounded-full content_pict">
                 @endif
                 
@@ -28,11 +28,11 @@
                     </h3>
                 </div>
             </div>
-            <a href="{{ route('profile.edit') }}">
+            {{-- <a href="{{ route('profile.edit') }}">
                 <div class="rounded-full shadow-md bg-white p-4 text-cyan-900">
                     <i data-feather="edit"></i>
                 </div>
-            </a>
+            </a> --}}
         </div>
 
     </x-slot>
