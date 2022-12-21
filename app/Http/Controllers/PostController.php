@@ -55,7 +55,7 @@ class PostController extends Controller
             'content' => $request->content,
         ]);
 
-        if($request->has('tags')) {
+        if ($request->has('tags')) {
             $post->tag()->attach($request->tags);
         }
 
@@ -89,18 +89,18 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-        if($post->liked(auth()->user()->id)) {
+        if ($post->liked(auth()->user()->id)) {
             $post->unlike();
             $post->save();
         } else {
             $post->like();
             $post->save();
         }
-        
+
         $liked = $post->liked(auth()->user()->id);
 
         return response()->json([
-            'likeCount' => $post->likeCount, 
+            'likeCount' => $post->likeCount,
             'liked' => $liked
         ]);
     }

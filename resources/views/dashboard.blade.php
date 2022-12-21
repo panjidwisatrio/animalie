@@ -5,7 +5,7 @@
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mb-4">
                 <div class="bg-white overflow-hidden shadow-md sm:rounded-lg p-4">
                     <a href="{{ route('post.create') }}" class="flex justify-between items-center">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-2">
+                        <h2 class="font-semibold text-xl text-cyan-900 leading-tight ml-2">
                             {{ __('Create New Post') }}
                         </h2>
                         <button class="rounded-full bg-cyan-900 p-2 text-white">
