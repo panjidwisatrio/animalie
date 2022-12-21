@@ -34,7 +34,6 @@
                             {!! $post->content !!}
                         </span>
                     </div>
-
                 </a>
 
                 {{-- Images --}}

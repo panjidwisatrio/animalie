@@ -41,17 +41,13 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function tag() {
+    public function tag()
+    {
         return $this->belongsToMany(Tag::class)->as('tags')->withTimestamps();
     }
 
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    public function likeCounter()
-    {
-        return $this->hasMany(LikeCounter::class);
     }
 }
