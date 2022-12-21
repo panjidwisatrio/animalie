@@ -49,9 +49,4 @@ class Post extends Model
     {
         return 'slug';
     }
-
-    public function likeCounter()
-    {
-        return $this->hasMany(LikeCounter::class);
-    }
 }
