@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex justify-center mt-6">
         {{-- Content --}}
-        <div class="">
+        <div class="py-2">
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mb-4">
                 <div class="bg-white overflow-hidden shadow-md sm:rounded-lg p-4">
                     <a href="{{ route('post.create') }}" class="flex justify-between items-center">

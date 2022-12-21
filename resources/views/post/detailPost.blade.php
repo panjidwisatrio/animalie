@@ -13,8 +13,13 @@
             <div class="flex justify-between">
                 <div class="flex">
                     <div>
-                        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                            src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
+                        @if ($post->user->avatar == null)
+                            <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                src="{{ asset('/img/0profile.png') }}" alt="avatar">
+                        @else
+                            <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
+                        @endif
                     </div>
                     <div>
                         <h2 class="text-lg font-semibold text-cyan-900">{{ $post->user->name }}</h2>
@@ -22,7 +27,8 @@
                     </div>
                 </div>
                 <div class="">
-                    <small class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+                    <small
+                        class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                 </div>
             </div>
 
