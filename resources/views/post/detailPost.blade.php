@@ -108,6 +108,7 @@
                         </x-primary-button>
                     </div>
                 </div>
+            </div>
         </form>
     </div>
 
