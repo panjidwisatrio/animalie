@@ -58,7 +58,7 @@
                             <button class="flex items-center space-x-1">
                                 <i data-feather="thumbs-up"></i>
                                 <small class="font-semibold">
-                                    {{-- {{ $post->likeCount }} --}}
+                                    {{ $post->likeCount }}
                                 </small>
                             </button>
                         </form>
