@@ -23,11 +23,11 @@ jobs:
  
     - name: Install composer dependencies
       run: |
-        composer self-update --rollback
+        composer self-update --stable
  
     - name: Prepare Laravel Application
       run: |
-        cp .env.ci .env
+        cp .env.main .env
         php artisan key:generate
  
     - name: Run Testsuite
