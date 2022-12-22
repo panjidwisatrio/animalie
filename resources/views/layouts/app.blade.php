@@ -12,18 +12,16 @@
     <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
 
     <!-- Scripts -->
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/ckeditor.js', 'resources/js/feather.min.js', 'resources/js/feather.js', 'resources/js/flowbite.js', 'resources/js/iconify.min.js', 'resources/js/iconify-icon.min.js'])
-
-
-    {{-- <script src="https://unpkg.com/feather-icons"></script> --}}
-    {{-- <script src="https://unpkg.com/flowbite@1.5.5/dist/flowbite.js"></script> --}}
-
-    {{-- Iconify --}}
-    {{-- <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
-    <script src="https://code.iconify.design/3/3.0.1/iconify.min.js"></script> --}}
-
-    {{-- CKEditor --}}
-    {{-- <script src="resources\js\ckeditor.js"></script> --}}
+    @vite([
+        'resources/css/app.css', 
+        'resources/js/app.js', 
+        // 'resources/js/ckeditor.js', 
+        'resources/js/feather.min.js', 
+        'resources/js/feather.js', 
+        'resources/js/flowbite.js', 
+        'resources/js/iconify.min.js', 
+        'resources/js/iconify-icon.min.js'
+    ])
 
     @stack('header')
 

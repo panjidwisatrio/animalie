@@ -6,6 +6,7 @@
         </h2>
     </x-slot>
 
+    {{-- TODO : Terdapat bug pada bagian bawah setelah section comment --}}
     {{-- Post Discussion --}}
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 ">
         <div class="bg-white overflow-hidden shadow-sm rounded-md p-10">
@@ -53,15 +54,29 @@
                 {{-- Like  --}}
                 <div class="flex justify-end">
                     <div class="flex items-center">
-                        <form method="POST" action="{{ route('like.post', $post->id) }}">
-                            @csrf
-                            <button class="flex items-center space-x-1">
-                                <i data-feather="thumbs-up"></i>
-                                <small class="font-semibold">
+                        @if (Auth::check())
+                            <button class="like-button flex items-center space-x-1" data-id="{{ $post->id }}"
+                                data-liked="{{ $post->liked(auth()->user()->id) ? 'true' : 'false' }}">
+                                <i id="icon-{{ $post->id }}" class="iconify"
+                                    data-icon="{{ $post->liked(auth()->user()->id) ? 'ant-design:like-twotone' : 'ant-design:like-outlined' }}"
+                                    style="color: #164e63;" data-width="24" data-height="24"></i>
+                                <small id="like-count-{{ $post->id }}" class="font-semibold">
                                     {{ $post->likeCount }}
                                 </small>
                             </button>
-                        </form>
+                        @else
+                            <form method="POST" action="{{ route('like.post', $post->id) }}">
+                                @csrf
+                                <button class="like-button flex items-center space-x-1">
+                                    <i id="icon-{{ $post->id }}" class="iconify"
+                                        data-icon="ant-design:like-outlined" style="color: #164e63;" data-width="24"
+                                        data-height="24"></i>
+                                    <small id="like-count-{{ $post->id }}" class="font-semibold">
+                                        {{ $post->likeCount }}
+                                    </small>
+                                </button>
+                            </form>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -95,4 +110,35 @@
                 </div>
         </form>
     </div>
+
+    @push('script')
+        {{-- Like Script --}}
+        <script type="text/javascript">
+            const button = document.querySelectorAll('.like-button');
+
+            button.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const likeCount = document.getElementById('like-count-' + id);
+
+                    axios.post('/like-post/' + id).then(function(response) {
+                        if (response.data.liked == true) {
+                            document.getElementById("icon-" + id).dataset.icon =
+                                "ant-design:like-twotone";
+                            button.setAttribute('data-liked', 'true');
+                        } else {
+                            document.getElementById("icon-" + id).dataset.icon =
+                                "ant-design:like-outlined";
+                        }
+
+                        button.setAttribute('data-liked', response.data.liked);
+
+                        likeCount.innerHTML = response.data.likeCount;
+                    }).catch(function(error) {
+                        console.log(error.response.data);
+                    });
+                });
+            })
+        </script>
+    @endpush
 </x-app-layout>
