@@ -5,7 +5,7 @@
                 <i data-feather="edit-3"></i>
             </div>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight ml-2">
-                {{ __('Create New Post') }}
+                {{ __('Edit Post') }}
             </h2>
         </div>
     </x-slot>
@@ -45,9 +45,13 @@
                                 <select
                                     class="block font-medium text-sm text-green-900 w-full bg-emerald-100 border-gray-300 focus:border-green-400 shadow-inner px-4 py-2 pr-8 rounded-md"
                                     id="category_id" name="category_id">
-                                    <option selected>Choose category post</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                        @if (old('category_id', $post->id) == $category->id)
+                                            <option value="{{ $category->id }}" selected>{{ $category->category }}
+                                            </option>
+                                        @else
+                                            <option value="{{ $category->id }}">{{ $category->category }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -132,15 +136,16 @@
                         <div class="mt-4">
                             <x-input-label for="content" :value="__('Body')" />
                             <div class="mt-1">
-                                <textarea id="content" name="content" rows="10" cols="80" placeholder="Write your first post here!"
-                                    data-editor="ClassicEditor"></textarea>
+                                {{-- <input type="content" name="content" value="{{ old('content', $post->content) }}"> --}}
+                                <textarea id="content" name="content" rows="10" cols="80" data-editor="ClassicEditor">
+                                    {{ old('content', $post->content) }}"</textarea>
                             </div>
 
-                            <div class="mt-4 -mr-1 flex justify-end">
-                                <x-primary-button class="ml-3">
-                                    {{ __('Submit') }}
-                                </x-primary-button>
-                            </div>
+                        </div>
+                        <div class="mt-4 -mr-1 flex justify-end">
+                            <x-primary-button class="ml-3">
+                                {{ __('Submit') }}
+                            </x-primary-button>
                         </div>
                     </form>
                 </div>
