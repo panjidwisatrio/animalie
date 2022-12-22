@@ -23,7 +23,7 @@ jobs:
  
     - name: Install composer dependencies
       run: |
-        composer self-update --1
+        composer self-update --rollback
  
     - name: Prepare Laravel Application
       run: |
