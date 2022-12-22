@@ -30,6 +30,7 @@ This Website using several libraries / packages to support how the website works
 - Clockwork - itsgoingd (<https://github.com/itsgoingd/clockwork>).
 - Eloquent Sluggable - cviebrock (<https://github.com/cviebrock/eloquent-sluggable>).
 - Iconify (<https://icon-sets.iconify.design/>).
+- Laravel Thumbnail -rolandstarke (<https://github.com/rolandstarke/laravel-thumbnail>)
 
 Install libraries / packages above so that the website runs properly.
 

@@ -40,6 +40,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
+        dd($request->all());
         $request->validate([
             'title' => 'required',
             'slug' => 'required',
@@ -64,10 +65,11 @@ class PostController extends Controller
 
     public function upload(Request $request)
     {
+        // TODO : Image excess issue
         $request->validate([
             'upload' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
+        
         $fileName = $request->file('upload')->store('post-images');
 
         $url = asset('storage/' . $fileName);
