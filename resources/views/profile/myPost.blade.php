@@ -22,11 +22,25 @@
                             </div>
                         </div>
                     </a>
+
                     <div class="flex justify-end">
                         {{-- TODO : Tambahkan tombol delete post & edit post beserta routenya --}}
                         <small
                             class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
-                        <i data-feather="more-vertical" class="text-cyan-900"></i>
+
+                        <x-dropdown align="right" width="48" class="">
+                            <x-slot name="trigger">
+                                <button>
+                                    <i data-feather="more-vertical" class="text-cyan-900"></i>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('post.edit', $post->slug)">
+                                    {{ __('Edit') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+
                     </div>
                 </div>
 
