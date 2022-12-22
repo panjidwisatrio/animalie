@@ -4,28 +4,45 @@
         <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-2 border-b-2">
                 {{-- User --}}
-                <a href="#" class="flex justify-between">
-                    <div class="flex">
-                        <div>
-                            @if ($post->user->avatar == null)
-                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                                    src="{{ asset('/img/0profile.png') }}" alt="avatar">
-                            @else
-                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                                    src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
-                            @endif
+                <div class="flex justify-between">
+                    <a href="#" class="flex justify-between">
+                        <div class="flex">
+                            <div>
+                                @if ($post->user->avatar == null)
+                                    <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                        src="{{ asset('/img/0profile.png') }}" alt="avatar">
+                                @else
+                                    <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                        src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
+                                @endif
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-semibold text-cyan-900">{{ $post->user->name }} </h2>
+                                <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
+                            </div>
                         </div>
-                        <div>
-                            <h2 class="text-lg font-semibold text-cyan-900">{{ $post->user->name }} </h2>
-                            <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
-                        </div>
-                    </div>
-                    <div class="">
+                    </a>
+
+                    <div class="flex justify-end">
                         {{-- TODO : Tambahkan tombol delete post & edit post beserta routenya --}}
                         <small
                             class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+
+                        <x-dropdown align="right" width="48" class="">
+                            <x-slot name="trigger">
+                                <button>
+                                    <i data-feather="more-vertical" class="text-cyan-900"></i>
+                                </button>
+                            </x-slot>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('post.edit', $post->slug)">
+                                    {{ __('Edit') }}
+                                </x-dropdown-link>
+                            </x-slot>
+                        </x-dropdown>
+
                     </div>
-                </a>
+                </div>
 
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
@@ -79,7 +96,7 @@
                                     data-icon="{{ $post->liked(auth()->user()->id) ? 'ant-design:like-twotone' : 'ant-design:like-outlined' }}"
                                     style="color: #164e63;" data-width="24" data-height="24"></i>
                                 <small id="like-count-{{ $post->id }}" class="font-semibold">
-                                    {{ $post->likeCount }}
+                                    {{-- {{ $post->likeCount }} --}}
                                 </small>
                             </button>
                         @else
@@ -90,7 +107,7 @@
                                         data-icon="ant-design:like-outlined" style="color: #164e63;" data-width="24"
                                         data-height="24"></i>
                                     <small id="like-count-{{ $post->id }}" class="font-semibold">
-                                        {{ $post->likeCount }}
+                                        {{-- {{ $post->likeCount }} --}}
                                     </small>
                                 </button>
                             </form>
