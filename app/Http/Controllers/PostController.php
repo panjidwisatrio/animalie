@@ -40,7 +40,6 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
         $request->validate([
             'title' => 'required',
             'slug' => 'required',
@@ -71,7 +70,7 @@ class PostController extends Controller
         $request->validate([
             'upload' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-        
+
         $fileName = $request->file('upload')->store('post-images');
 
         $url = asset('storage/' . $fileName);
@@ -113,6 +112,7 @@ class PostController extends Controller
     {
         $categories = Category::all();
         $tags = Tag::all();
+        $post = Post::with(['tag'])->where('id', $post->id)->first();
         return view('post.edit', compact('post', 'categories', 'tags'));
     }
 
@@ -137,12 +137,12 @@ class PostController extends Controller
             $post->tag()->sync($request->tags);
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('profile.myProfile');
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('dashboard');
+        return redirect()->route('profile.myProfile');
     }
 }

@@ -2,7 +2,7 @@
 @if ($posts->count())
     @foreach ($posts as $post)
         <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
-            <div class="bg-white overflow-hidden shadow-lg px-10 py-2 border-b-2">
+            <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2">
                 {{-- User --}}
                 <div class="flex justify-between">
                     <a href="#" class="flex justify-between">
@@ -24,7 +24,6 @@
                     </a>
 
                     <div class="flex justify-end">
-                        {{-- TODO : Tambahkan tombol delete post & edit post beserta routenya --}}
                         <small
                             class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
 
@@ -38,19 +37,22 @@
                                 <x-dropdown-link :href="route('post.edit', $post->slug)">
                                     {{ __('Edit') }}
                                 </x-dropdown-link>
+                                <x-dropdown-link :href="route('post.destroy', $post->slug)">
+                                    {{ __('Delete') }}
+                                </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
-
                     </div>
                 </div>
 
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
                     <h1 class="text-xl font-weight-bold my-2">{{ $post->title }}</h1>
-                    <div class="p-4 bg-emerald-50 rounded-md">
-                        {!! $post->content !!}
+                    <div class="px-4 bg-emerald-50 rounded-md py-2 text-limit">
+                        <span class="text-limit-concat text-cyan-900">
+                            {!! $post->content !!}
+                        </span>
                     </div>
-
                 </a>
 
                 {{-- Images --}}
@@ -68,21 +70,14 @@
 
                 {{-- Badges/Tags --}}
                 <div class="mt-4">
-                    <a href="#">
-                        <span
-                            class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">Default</span>
-                    </a>
-
-                    <a href="#">
-                        <span
-                            class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Green</span>
-                    </a>
-
-                    <a href="#">
-                        <span
-                            class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-200 dark:text-yellow-900">Yellow</span>
-                    </a>
-
+                    @if ($post->tag()->get() != null)
+                        @foreach ($post->tag()->get() as $tag)
+                            <a href="{{ route('post.tag', $tag->slug) }}">
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">{{ $tag->name_tag }}</span>
+                            </a>
+                        @endforeach
+                    @endif
                 </div>
 
                 {{-- Reaction --}}
@@ -96,7 +91,7 @@
                                     data-icon="{{ $post->liked(auth()->user()->id) ? 'ant-design:like-twotone' : 'ant-design:like-outlined' }}"
                                     style="color: #164e63;" data-width="24" data-height="24"></i>
                                 <small id="like-count-{{ $post->id }}" class="font-semibold">
-                                    {{-- {{ $post->likeCount }} --}}
+                                    {{ $post->likeCount }}
                                 </small>
                             </button>
                         @else
@@ -107,7 +102,7 @@
                                         data-icon="ant-design:like-outlined" style="color: #164e63;" data-width="24"
                                         data-height="24"></i>
                                     <small id="like-count-{{ $post->id }}" class="font-semibold">
-                                        {{-- {{ $post->likeCount }} --}}
+                                        {{ $post->likeCount }}
                                     </small>
                                 </button>
                             </form>

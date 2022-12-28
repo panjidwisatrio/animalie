@@ -14,8 +14,9 @@
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form method="POST" action="/post/{{ $post->id }}/update">
+                    <form method="post" action="{{ route('post.update', $post->slug) }}">
                         @csrf
+                        @method('patch')
                         <!-- Title -->
                         <div class=" mt-4 grid-cols-2">
                             <x-input-label for="title" :value="__('Title')" />
@@ -102,10 +103,10 @@
                                             <div
                                                 class="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                                 <input id="checkbox-item-11" name="tags[]" type="checkbox"
-                                                    value="{{ $tag->id }}"
-                                                    class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
+                                                       value="{{ $tag->id }}" {{ in_array($tag->id, $post->tag->pluck('id')->toArray()) ? 'checked' : '' }}
+                                                       class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                 <label for="checkbox-item-11"
-                                                    class="py-2 ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $tag->name_tag }}</label>
+                                                       class="py-2 ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $tag->name_tag }}</label>
                                             </div>
                                         </li>
                                     @endforeach
@@ -138,7 +139,7 @@
                             <div class="mt-1">
                                 {{-- <input type="content" name="content" value="{{ old('content', $post->content) }}"> --}}
                                 <textarea id="content" name="content" rows="10" cols="80" data-editor="ClassicEditor">
-                                    {{ old('content', $post->content) }}"</textarea>
+                                    {{ old('content', $post->content) }}</textarea>
                             </div>
 
                         </div>

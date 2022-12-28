@@ -43,7 +43,7 @@ class Post extends Model
 
     public function tag()
     {
-        return $this->belongsToMany(Tag::class)->as('tags')->withTimestamps();
+        return $this->belongsToMany(Tag::class)->withTimestamps();
     }
 
     public function getRouteKeyName()

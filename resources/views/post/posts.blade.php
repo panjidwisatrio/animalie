@@ -2,7 +2,7 @@
 @if ($posts->count())
     @foreach ($posts as $post)
         <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
-            <div class="bg-white overflow-hidden shadow-lg px-10 py-2 border-b-2">
+            <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2">
                 {{-- User --}}
                 <a href="{{ route('user.showSpecific', $post->user->username) }}" class="flex justify-between">
                     <div class="flex">
@@ -59,7 +59,6 @@
                             </a>
                         @endforeach
                     @endif
-
                 </div>
 
                 {{-- Reaction --}}

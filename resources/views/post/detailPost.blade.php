@@ -8,7 +8,7 @@
 
     {{-- TODO : Terdapat bug pada bagian bawah setelah section comment --}}
     {{-- Post Discussion --}}
-    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 ">
+    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 py-2">
         <div class="bg-white overflow-hidden shadow-sm rounded-md p-10">
             {{-- User --}}
             <div class="flex justify-between">
@@ -42,15 +42,16 @@
 
                 {{-- Badges/Tags --}}
                 <div class="mt-4">
-                    <span id="badge-dismiss-default"
-                        class="inline-flex items-center py-1 px-2 mr-2 text-sm font-medium text-blue-900 bg-blue-100 rounded dark:bg-blue-200 dark:text-blue-900">
-                        Default
-                        <button type="button"
-                            class="inline-flex items-center p-0.5 ml-2 text-sm text-blue-400 bg-transparent rounded-sm hover:bg-blue-200 hover:text-blue-900 dark:hover:bg-blue-300 dark:hover:text-blue-900"
-                            data-dismiss-target="#badge-dismiss-default" aria-label="Remove">
-                        </button>
-                    </span>
+                    @if ($post->tag()->get() != null)
+                        @foreach ($post->tag()->get() as $tag)
+                            <a href="{{ route('post.tag', $tag->slug) }}">
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">{{ $tag->name_tag }}</span>
+                            </a>
+                        @endforeach
+                    @endif
                 </div>
+
                 {{-- Like  --}}
                 <div class="flex justify-end">
                     <div class="flex items-center">
@@ -84,7 +85,7 @@
     </div>
 
     <!-- comment form -->
-    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 rounded-md">
+    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 rounded-md py-2">
         <form method="POST" action="" class="bg-white rounded-lg px-4 pt-2">
             <div class="flex flex-wrap -mx-3 mb-6">
                 <h2 class="px-4 pt-3 pb-2 text-cyan-900 text-lg">Add a new comment</h2>
@@ -102,7 +103,7 @@
                         </svg>
                     </div>
 
-                    <div class="mt-4 -mr-1 flex justify-end">
+                    <div class="mt-4 -mr-1 flex justify-end mb-2">
                         <x-primary-button class="ml-3">
                             {{ __('Send') }}
                         </x-primary-button>
