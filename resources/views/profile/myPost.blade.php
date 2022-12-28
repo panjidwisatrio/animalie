@@ -37,7 +37,8 @@
                                 <x-dropdown-link :href="route('post.edit', $post->slug)">
                                     {{ __('Edit') }}
                                 </x-dropdown-link>
-                                <x-dropdown-link :href="route('post.destroy', $post->slug)">
+                                <x-dropdown-link x-data=""
+                                    x-on:click.prevent="$dispatch('open-modal', 'confirm-post-deletion')">
                                     {{ __('Delete') }}
                                 </x-dropdown-link>
                             </x-slot>
@@ -124,6 +125,30 @@
         </div>
     @endforeach
 
+    <x-modal name="confirm-post-deletion" :show="$errors->postDeletion->isNotEmpty()" focusable>
+        <form method="post" action="{{ route('post.destroy', $post->slug) }}" class="p-6">
+            @csrf
+            @method('delete')
+
+            <h2 class="text-lg font-medium text-gray-900">Are you sure your want to delete this post?</h2>
+
+            <p class="mt-1 text-sm text-gray-600">
+                {{ __('Once your post is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your post.') }}
+            </p>
+
+            <div class="mt-6 flex justify-end">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    {{ __('Cancel') }}
+                </x-secondary-button>
+
+                <x-danger-button class="ml-3">
+                    {{ __('Delete Post') }}
+                </x-danger-button>
+            </div>
+        </form>
+    </x-modal>
+
+
     {{-- Like Script --}}
     <script type="text/javascript">
         const button = document.querySelectorAll('.like-button');
@@ -154,4 +179,14 @@
     </script>
 @else
     {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
+    <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
+        <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2">
+            <div class="flex justify-between">
+                <h1>
+                    test
+                </h1>
+            </div>
+        </div>
+    </div>
+
 @endif

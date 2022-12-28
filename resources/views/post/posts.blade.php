@@ -134,5 +134,18 @@
         })
     </script>
 @else
-    {{-- TODO : Buat Halaman untuk jika tidak ada postingan --}}
+    <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
+        <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2">
+            <div class="py-6 w-full text-center text-cyan-900 mt-4">
+                <img class="mx-auto" src="img/empty.svg" alt="empty">
+                <h1 class="text-xl font-bold">
+                    No Post yet
+                </h1>
+                <br>
+                <h1 class="text xl font-medium">
+                    No message in this page yet, create one by click that pencil icon
+                </h1>
+            </div>
+        </div>
+    </div>
 @endif
