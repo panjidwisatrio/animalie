@@ -14,14 +14,16 @@
     <!-- Scripts -->
     @vite([
         'resources/css/app.css', 
-        'resources/js/app.js', 
-        // 'resources/js/ckeditor.js', 
+        'resources/js/app.js',
         'resources/js/feather.min.js', 
         'resources/js/feather.js', 
         'resources/js/flowbite.js', 
         'resources/js/iconify.min.js', 
         'resources/js/iconify-icon.min.js'
     ])
+
+    <!-- ckEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
 
     @stack('header')
 
@@ -62,9 +64,6 @@
             </button>
         </div>
     </div>
-
-    <!-- ckEditor -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.2/classic/ckeditor.js"></script>
 
     <script>
         // Get the button

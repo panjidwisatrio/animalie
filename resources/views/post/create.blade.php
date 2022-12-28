@@ -70,7 +70,8 @@
                             </button>
 
                             <!-- Dropdown menu -->
-                            <div id="dropdownSearch" class="hidden z-10 w-60 bg-white rounded shadow-lg dark:bg-gray-700">
+                            <div id="dropdownSearch"
+                                class="hidden z-10 w-60 bg-white rounded shadow-lg dark:bg-gray-700">
                                 <div class="p-3">
                                     <label for="input-group-search" class="sr-only">Search</label>
                                     <div class="relative">
@@ -92,11 +93,12 @@
 
                                 <ul class="overflow-y-auto px-3 pb-3 h-48 text-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownSearchButton">
-                                    @forEach($tags as $tag)
+                                    @foreach ($tags as $tag)
                                         <li>
                                             <div
                                                 class="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
-                                                <input id="checkbox-item-11" name="tags[]" type="checkbox" value="{{ $tag->id }}"
+                                                <input id="checkbox-item-11" name="tags[]" type="checkbox"
+                                                    value="{{ $tag->id }}"
                                                     class="w-4 h-4 text-blue-600 bg-gray-100 rounded border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                                 <label for="checkbox-item-11"
                                                     class="py-2 ml-2 w-full text-sm font-medium text-gray-900 rounded dark:text-gray-300">{{ $tag->name_tag }}</label>
@@ -105,12 +107,17 @@
                                     @endforeach
                                 </ul>
 
-                                <div class="p-3 flex items-center p-3 text-sm font-medium text-blue-600 bg-gray-50 border-t border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600">
+                                <div
+                                    class="p-3 flex items-center p-3 text-sm font-medium text-blue-600 bg-gray-50 border-t border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600">
                                     <label for="input-group-search" class="sr-only">Add</label>
                                     <div class="relative">
                                         <div
                                             class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="m6 20l1-4H3.5l.5-2h3.5l1-4h-4L5 8h4l1-4h2l-1 4h4l1-4h2l-1 4h3.5l-.5 2h-3.5l-1 4h4l-.5 2h-4l-1 4h-2l1-4H9l-1 4Zm3.5-6h4l1-4h-4Z"/></svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                                <path fill="currentColor"
+                                                    d="m6 20l1-4H3.5l.5-2h3.5l1-4h-4L5 8h4l1-4h2l-1 4h4l1-4h2l-1 4h3.5l-.5 2h-3.5l-1 4h4l-.5 2h-4l-1 4h-2l1-4H9l-1 4Zm3.5-6h4l1-4h-4Z" />
+                                            </svg>
                                         </div>
                                         <input type="text" id="input-group-search"
                                             class="add_tag block p-2 pl-10 w-full text-sm text-blue-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -125,7 +132,8 @@
                         <div class="mt-4">
                             <x-input-label for="content" :value="__('Body')" />
                             <div class="mt-1">
-                                <textarea id="content" name="content" rows="10" cols="80" placeholder="Write your first post here!" data-editor="ClassicEditor"></textarea>
+                                <textarea id="content" name="content" rows="10" cols="80" placeholder="Write your first post here!"
+                                    data-editor="ClassicEditor"></textarea>
                             </div>
 
                             <div class="mt-4 -mr-1 flex justify-end">
