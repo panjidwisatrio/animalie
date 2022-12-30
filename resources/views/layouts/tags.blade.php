@@ -15,7 +15,7 @@
                         </span>
                 @endforeach
             @else
-                <div class="text-center px-12 text-cyan-900">
+                <div class="text-center px-14 text-cyan-900">
                     <h1 class="text-md font-bold">
                         Oops no tag here!!
                     </h1>
