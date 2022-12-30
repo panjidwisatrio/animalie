@@ -20,7 +20,7 @@ class UserController extends Controller
     public function show()
     {
         $posts = Post::with(['user', 'category'])->where('user_id', auth()->user()->id)->latest()->get();
-        
+
         return view('profile.myProfile', [
             'user' => Auth::user(),
             'posts' => $posts,
@@ -30,7 +30,7 @@ class UserController extends Controller
     public function showSpecific(User $user)
     {
         $posts = Post::with(['user', 'category'])->where('user_id', $user->id)->latest()->get();
-        
+
         return view('profile.profile', [
             'user' => $user,
             'posts' => $posts,
@@ -46,13 +46,14 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
+        // TODO: fix avatar
         $validated = $request->validate([
             'name' => ['string', 'max:255', 'required'],
             'username' => ['string', 'max:255', 'required'],
             'work_place' => ['string', 'max:255'],
             'job_position' => ['string', 'max:255'],
             'email' => ['email', 'max:255', 'required'],
-            'avatar' => ['image', 'file', 'max:2048'],  
+            'avatar' => ['image', 'file', 'max:2048'],
         ]);
 
         if ($request->file('avatar')) {

@@ -17,14 +17,21 @@
         @csrf
         @method('patch')
 
-        <div class="flex justify-start items-center w-full">
+        <div class="flex justify-start items-center w-full space-x-4">
             {{-- TODO : Perbaiki gambar scretch vertical --}}
             @if (Auth::user()->avatar)
-                <img class="aspect-square content_pict object-cover rounded-full"
-                    src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="Current profile photo" />
+                <div class="relative w-24 h-24">
+                    <img class="rounded-full -400 shadow-sm" src="{{ asset('/storage/' . Auth::user()->avatar) }}"
+                        alt="Current profile photo" />
+                </div>
+
+                {{-- <img class="aspect-square content_pict object-cover rounded-full"
+                    src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="Current profile photo" /> --}}
             @else
-                <img class="aspect-square content_pict object-cover rounded-full" src="{{ asset('/img/0profile.png') }}"
-                    alt="Current profile photo" />
+                <div class="relative w-32 hw-32">
+                    <img class="rounded-full -400 shadow-sm" src="{{ asset('/img/0profile.png') }}"
+                        alt="Current profile photo" />
+                </div>
             @endif
 
             <div class="w-full">
