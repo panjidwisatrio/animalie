@@ -52,4 +52,7 @@
         </div>
 
     </div>
+
+    @include('layouts.floatingButton')
+
 </x-app-layout>

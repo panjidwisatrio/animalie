@@ -19,6 +19,8 @@
 
             @include('post.posts', ['posts' => $posts])
 
+            @include('layouts.floatingButton')
+
         </div>
 
         {{-- Tags --}}

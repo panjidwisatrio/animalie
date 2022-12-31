@@ -12,11 +12,14 @@
             @include('layouts.postsNavgation')
 
             @include('post.posts', ['posts' => $posts])
-        </div>
 
-        {{-- Tags --}}
-        {{-- <div class="py-2">
-            @include('layouts.tags', ['tags' => $tags])
-        </div> --}}
+            {{-- Tags --}}
+            {{-- <div class="py-2">
+                @include('layouts.tags', ['tags' => $tags])
+            </div> --}}
+        </div>
+    </div>
+
+    @include('layouts.floatingButton')
 
 </x-app-layout>
