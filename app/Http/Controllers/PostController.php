@@ -85,7 +85,6 @@ class PostController extends Controller
     public function checkSlug(Request $request)
     {
         $slug = SlugService::createSlug(Post::class, 'slug', $request->title, ['unique' => true]);
-        Response::cookie('slug', $slug, 60);
         return response()->json(['slug' => $slug]);
     }
 
