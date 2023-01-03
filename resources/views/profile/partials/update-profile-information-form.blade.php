@@ -18,22 +18,18 @@
         @method('patch')
 
         <div class="flex justify-start items-center w-full space-x-4">
-            {{-- TODO : Perbaiki gambar scretch vertical --}}
+            <input type="hidden" name="oldAvatar" value="{{ Auth::user()->avatar }}">
             @if (Auth::user()->avatar)
-                <div class="relative w-24 h-24">
-                    <img class="rounded-full -400 shadow-sm" src="{{ asset('/storage/' . Auth::user()->avatar) }}"
-                        alt="Current profile photo" />
+                <div class="w-6/12 sm:w-4/12">
+                    <img class="object-cover shadow-sm border-2 border-gray-200 rounded-full h-32 w-32 align-middle"
+                        src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="Current profile photo" />
                 </div>
-
-                {{-- <img class="aspect-square content_pict object-cover rounded-full"
-                    src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt="Current profile photo" /> --}}
             @else
-                <div class="relative w-32 hw-32">
-                    <img class="rounded-full -400 shadow-sm" src="{{ asset('/img/0profile.png') }}"
-                        alt="Current profile photo" />
+                <div class="w-6/12 sm:w-4/12">
+                    <img class="object-cover shadow-sm border-2 border-gray-200 rounded-full h-32 w-32 align-middle"
+                        src="/img/profile.png" alt="Current profile photo" />
                 </div>
             @endif
-
             <div class="w-full">
                 <input
                     class=" w-full text-sm text-green-900 border border-green-300 rounded-lg cursor-pointer bg-emerald-100 dark:text-green-400 focus:outline-none dark:bg-green-700 dark:border-green-600 dark:placeholder-green-400"

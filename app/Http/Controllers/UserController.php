@@ -46,7 +46,7 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        // TODO: fix avatar
+        // DONE: fix avatar
         $validated = $request->validate([
             'name' => ['string', 'max:255', 'required'],
             'username' => ['string', 'max:255', 'required'],
@@ -57,7 +57,9 @@ class UserController extends Controller
         ]);
 
         if ($request->file('avatar')) {
-            Storage::delete($request->user()->avatar);
+            if ($request->oldAvatar) {
+                Storage::delete($request->oldAvatar);
+            }
             $validated['avatar'] = $request->file('avatar')->store('post-images');
         }
 
