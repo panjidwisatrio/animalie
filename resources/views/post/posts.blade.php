@@ -93,11 +93,11 @@
 
                     {{-- Comment  --}}
                     <div class="flex items-center">
-                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
-                            <i data-feather="message-square"></i>
-                            {{-- <small class="font-semibold">
+                        <a href="{{ route('post.show', $post->slug) }}" class="flex items-center space-x-1">
+                            <i data-icon="mdi:message-reply-outline" class="iconify" data-height="24" data-width="24"></i>
+                            <small class="font-semibold">
                                 12
-                            </small> --}}
+                            </small>
                         </a>
                     </div>
                 </div>
@@ -106,33 +106,35 @@
     @endforeach
 
     {{-- Like Script --}}
-    <script type="text/javascript">
-        const button = document.querySelectorAll('.like-button');
+    @push('script')
+        <script type="text/javascript">
+            const button = document.querySelectorAll('.like-button');
 
-        button.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const id = this.dataset.id;
-                const likeCount = document.getElementById('like-count-' + id);
+            button.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const id = this.dataset.id;
+                    const likeCount = document.getElementById('like-count-' + id);
 
-                axios.post('/like-post/' + id).then(function(response) {
-                    if (response.data.liked == true) {
-                        document.getElementById("icon-" + id).dataset.icon =
-                            "ant-design:like-twotone";
-                        button.setAttribute('data-liked', 'true');
-                    } else {
-                        document.getElementById("icon-" + id).dataset.icon =
-                            "ant-design:like-outlined";
-                    }
+                    axios.post('/like-post/' + id).then(function(response) {
+                        if (response.data.liked == true) {
+                            document.getElementById("icon-" + id).dataset.icon =
+                                "ant-design:like-twotone";
+                            button.setAttribute('data-liked', 'true');
+                        } else {
+                            document.getElementById("icon-" + id).dataset.icon =
+                                "ant-design:like-outlined";
+                        }
 
-                    button.setAttribute('data-liked', response.data.liked);
+                        button.setAttribute('data-liked', response.data.liked);
 
-                    likeCount.innerHTML = response.data.likeCount;
-                }).catch(function(error) {
-                    console.log(error.response.data);
+                        likeCount.innerHTML = response.data.likeCount;
+                    }).catch(function(error) {
+                        console.log(error.response.data);
+                    });
                 });
-            });
-        })
-    </script>
+            })
+        </script>
+    @endpush
 @else
     <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
         <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2 rounded-b-xl">

@@ -11,13 +11,13 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ml-4 sm:flex">
                     {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
                     <x-nav-link>
-                        {{ __('Populer') }}
+                        {{ __('Popular') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-4 sm:flex">
                     {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
                     <x-nav-link>
-                        {{ __('Unanswered') }}
+                        {{ __('Unanswerd') }}
                     </x-nav-link>
                 </div>
             </div>

@@ -158,6 +158,7 @@
                     .then(data => slug.value = data.slug)
             })
 
+            // tambah route baru untuk ke method baru untuk updload image
             ClassicEditor
                 .create(document.querySelector('#content'), {
                     ckfinder: {

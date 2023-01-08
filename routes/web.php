@@ -3,6 +3,7 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,13 +38,16 @@ Route::middleware('auth')->group(function () {
     // Post
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
     Route::post('/post/store', [PostController::class, 'store'])->name('post.store');
-    Route::post('/upload', [PostController::class, 'upload'])->name('post.upload');
     Route::get('/post/{post:slug}/edit', [PostController::class, 'edit'])->name('post.edit');
     Route::patch('/post/{post:slug}/update', [PostController::class, 'update'])->name('post.update');
     Route::delete('/post/{post:slug}/delete', [PostController::class, 'destroy'])->name('post.destroy');
 
+    // Upload Image
+    Route::post('/upload', [PostController::class, 'upload'])->name('post.upload');
+
     // Like
     Route::post('/like-post/{id}', [PostController::class, 'likePost'])->name('like.post');
+    Route::post('/like-comment/{id}', [CommentController::class, 'likeComment'])->name('like.comment');
 
     // Slug
     Route::get('/post/create/checkSlug', [PostController::class, 'checkSlug'])->name('post.checkSLug');
@@ -55,7 +59,10 @@ Route::middleware('auth')->group(function () {
     // TODO #12 : Create Category
 
     // Comment
-    // TODO #13 : Create Comment
+    Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::get('/comment/reload', [CommentController::class, 'reload'])->name('comment.reload');
+    Route::get('/comments', [CommentController::class, 'getMore'])->name('comment.more');
+    Route::delete('/comment/delete', [CommentController::class, 'destroy'])->name('comment.destroy');
 });
 
 require __DIR__ . '/auth.php';
