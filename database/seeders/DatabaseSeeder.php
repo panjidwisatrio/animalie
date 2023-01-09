@@ -30,12 +30,12 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Aaliya Stenya',
-            'username' => 'stenya_',
-            'email' => 'aaa@gmail.com',
-            'avatar' => 'post-images\vztk2WIUC5M9gt59JcDG3i5P0Y6fn4ff0VsFnjVx.png',
+            'name' => 'Panji Dwi Satrio',
+            'username' => 'panjidwisatrio',
+            'email' => 'panjisatrio888@gmail.com',
+            'avatar' => 'post-images\IbCEnf6AtzW5gcp4QkzLNUrLSqxqs2m5iBTMRetp.png',
             'work_place' => 'Chevalier Lab SAS',
-            'job_position' => 'Content Creator',
+            'job_position' => 'Coordinator',
             'password' => bcrypt('password123'),
         ]);
 
@@ -45,13 +45,13 @@ class DatabaseSeeder extends Seeder
         Tag::create([
             'name_tag' => 'Pakan Ternak',
             'slug' => 'pakan-ternak',
-            'color' => 'green',
+            'color' => 'blue',
             'tag_counter' => fake()->numberBetween(1, 100),
         ]);
         Tag::create([
             'name_tag' => 'Kesehatan',
             'slug' => 'kesehatan',
-            'color' => 'yellow',
+            'color' => 'blue',
             'tag_counter' => fake()->numberBetween(1, 100),
         ]);
         Tag::create([

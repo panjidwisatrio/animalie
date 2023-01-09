@@ -4,27 +4,30 @@
         <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2">
                 {{-- User --}}
-                <a href="{{ route('user.showSpecific', $post->user->username) }}" class="flex justify-between">
-                    <div class="flex">
-                        <div>
-                            @if ($post->user->avatar == null)
-                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                                    src="{{ asset('/img/0profile.png') }}" alt="avatar">
-                            @else
-                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                                    src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
-                            @endif
+                <div class="flex justify-between">
+                    <a href="#" class="flex justify-between">
+                        <div class="flex">
+                            <div>
+                                @if ($post->user->avatar == null)
+                                    <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                        src="{{ asset('/img/0profile.png') }}" alt="avatar">
+                                @else
+                                    <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                        src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
+                                @endif
+                            </div>
+                            <div>
+                                <h2 class="text-lg font-semibold text-cyan-900">{{ $post->user->name }} </h2>
+                                <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
+                            </div>
                         </div>
-                        <div>
-                            <h2 class="text-lg font-semibold text-cyan-900">{{ $post->user->name }} </h2>
-                            <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
-                        </div>
-                    </div>
-                    <div class="">
+                    </a>
+
+                    <div class="flex justify-end">
                         <small
                             class="text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                     </div>
-                </a>
+                </div>
 
                 {{-- Post Body  --}}
                 <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-sm text-justify">
@@ -93,11 +96,11 @@
 
                     {{-- Comment  --}}
                     <div class="flex items-center">
-                        <a href="{{ route('post.show', $post->slug) }}" class="flex items-center space-x-1">
-                            <i data-icon="mdi:message-reply-outline" class="iconify" data-height="24" data-width="24"></i>
-                            <small class="font-semibold">
-                                {{ $post->comment->count() }}
-                            </small>
+                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
+                            <i data-feather="message-square"></i>
+                            {{-- <small class="font-semibold">
+                                12
+                            </small> --}}
                         </a>
                     </div>
                 </div>
@@ -106,35 +109,42 @@
     @endforeach
 
     {{-- Like Script --}}
-    @push('script')
-        <script type="text/javascript">
-            const button = document.querySelectorAll('.like-button');
+    <script type="text/javascript">
+        const button = document.querySelectorAll('.like-button');
+        const buttonDelete = document.querySelectorAll('.delete-button');
 
-            button.forEach(function(button) {
-                button.addEventListener('click', function() {
-                    const id = this.dataset.id;
-                    const likeCount = document.getElementById('like-count-' + id);
-
-                    axios.post('/like-post/' + id).then(function(response) {
-                        if (response.data.liked == true) {
-                            document.getElementById("icon-" + id).dataset.icon =
-                                "ant-design:like-twotone";
-                            button.setAttribute('data-liked', 'true');
-                        } else {
-                            document.getElementById("icon-" + id).dataset.icon =
-                                "ant-design:like-outlined";
-                        }
-
-                        button.setAttribute('data-liked', response.data.liked);
-
-                        likeCount.innerHTML = response.data.likeCount;
-                    }).catch(function(error) {
-                        console.log(error.response.data);
-                    });
-                });
+        buttonDelete.forEach(function(buttonDelete) {
+            buttonDelete.addEventListener('click', function() {
+                $slug = event.target.dataset.slug;
+                $form = document.getElementById('delete-post');
+                $form.action = '/post/' + $slug + '/delete';
             })
-        </script>
-    @endpush
+        })
+
+        button.forEach(function(button) {
+            button.addEventListener('click', function() {
+                const id = this.dataset.id;
+                const likeCount = document.getElementById('like-count-' + id);
+
+                axios.post('/like-post/' + id).then(function(response) {
+                    if (response.data.liked == true) {
+                        document.getElementById("icon-" + id).dataset.icon =
+                            "ant-design:like-twotone";
+                        button.setAttribute('data-liked', 'true');
+                    } else {
+                        document.getElementById("icon-" + id).dataset.icon =
+                            "ant-design:like-outlined";
+                    }
+
+                    button.setAttribute('data-liked', response.data.liked);
+
+                    likeCount.innerHTML = response.data.likeCount;
+                }).catch(function(error) {
+                    console.log(error.response.data);
+                });
+            });
+        })
+    </script>
 @else
     <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
         <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2 rounded-b-xl">
