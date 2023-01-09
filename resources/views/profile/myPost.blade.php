@@ -114,7 +114,7 @@
 
                     {{-- Comment  --}}
                     <div class="flex items-center">
-                        <a href="{{ route('post.show', $post->id) }}" class="flex items-center space-x-1">
+                        <a href="{{ route('post.show', $post->slug) }}" class="flex items-center space-x-1">
                             <i data-feather="message-square"></i>
                             {{-- <small class="font-semibold">
                                 12
