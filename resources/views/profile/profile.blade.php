@@ -42,7 +42,7 @@
             @include('layouts.myPostsNavgation')
 
             {{-- include mypost --}}
-            @include('profile.myPost', ['posts' => $posts])
+            @include('profile.otherPost', ['posts' => $posts])
 
         </div>
 

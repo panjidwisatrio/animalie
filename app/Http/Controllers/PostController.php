@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['user', 'category'])->latest()->get();
+        $posts = Post::with(['user', 'category', 'comment'])->latest()->get();
         $tags = Tag::all();
 
         return view('dashboard', compact('posts', 'tags'));
