@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -20,8 +21,10 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $tags = Tag::all();
-        return view('post.detailpost', compact('post', 'tags'));
+        $post = Post::with(['user', 'category', 'tag'])->where('id', $post->id)->first();
+        $comments = Comment::with(['user'])->where('post_id', $post->id)->latest()->limit(4)->get();
+
+        return view('post.detailpost', compact('post', 'comments'));
     }
 
     public function interestgroup_show()

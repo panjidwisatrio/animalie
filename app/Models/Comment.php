@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Post;
+use Conner\Likeable\Likeable;
 
 class Comment extends Model
 {
-    use HasFactory;
+    use HasFactory, Likeable;
 
     protected $fillable = [
         'user_id',
