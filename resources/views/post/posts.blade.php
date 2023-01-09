@@ -9,7 +9,7 @@
                         <div>
                             @if ($post->user->avatar == null)
                                 <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
-                                    src="{{ asset('/img/0profile.png') }}" alt="avatar">
+                                    src="{{ asset('/img/profile.png') }}" alt="avatar">
                             @else
                                 <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
                                     src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
@@ -94,7 +94,8 @@
                     {{-- Comment  --}}
                     <div class="flex items-center">
                         <a href="{{ route('post.show', $post->slug) }}" class="flex items-center space-x-1">
-                            <i data-icon="mdi:message-reply-outline" class="iconify" data-height="24" data-width="24"></i>
+                            <i data-icon="mdi:message-reply-outline" class="iconify" data-height="24"
+                                data-width="24"></i>
                             <small class="font-semibold">
                                 12
                             </small>

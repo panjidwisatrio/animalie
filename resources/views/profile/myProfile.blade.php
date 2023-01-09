@@ -6,7 +6,7 @@
 
             <div class="flex justify-start items-center">
                 @if (Auth::user()->avatar == null)
-                    <img src="{{ asset('img/0profile.png') }}" alt=""
+                    <img src="{{ asset('img/profile.png') }}" alt=""
                         class=" object-cover rounded-full content_pict">
                 @else
                     <img src="{{ asset('/storage/' . Auth::user()->avatar) }}" alt=""
