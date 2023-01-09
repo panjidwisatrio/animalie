@@ -137,12 +137,12 @@ class PostController extends Controller
             $post->tag()->sync($request->tags);
         }
 
-        return redirect()->route('profile.myProfile');
+        return redirect()->route('profile.show');
     }
 
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('profile.myProfile');
+        return redirect()->back();
     }
 }
