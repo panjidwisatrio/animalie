@@ -45,13 +45,13 @@ class DatabaseSeeder extends Seeder
         Tag::create([
             'name_tag' => 'Pakan Ternak',
             'slug' => 'pakan-ternak',
-            'color' => 'green',
+            'color' => 'blue',
             'tag_counter' => fake()->numberBetween(1, 100),
         ]);
         Tag::create([
             'name_tag' => 'Kesehatan',
             'slug' => 'kesehatan',
-            'color' => 'yellow',
+            'color' => 'blue',
             'tag_counter' => fake()->numberBetween(1, 100),
         ]);
         Tag::create([
