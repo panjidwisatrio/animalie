@@ -23,13 +23,13 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-slate-100">
+    <div class="min-h-screen bg-slate-100 md:bg-slate-100 lg:bg-slate-100">
         @include('layouts.navigation')
 
         <!-- Page Heading -->
         @if (isset($header))
-            <header class="bg-teal-100 shadow text-cyan-900">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <header class="bg-teal-100 shadow-sm-light md:shadow-md lg:shadow-md text-cyan-900">
+                <div class="max-w-7xl mx-auto py-4 lg:py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
             </header>
@@ -46,9 +46,10 @@
         // Get the button
         let backToTopBtn = document.getElementById("btn-back-to-top");
         let createButton = document.getElementById("btn-create");
+        let groupButton = document.getElementById("btn-interest-group");
 
         // When the user scrolls down 20px from the top of the document, show the button
-    window.onscroll = function() {
+        window.onscroll = function() {
             scrollFunction();
         };
 
@@ -59,9 +60,11 @@
             ) {
                 backToTopBtn.style.display = "block";
                 createButton.style.display = "block";
+                groupButton.style.display = "block";
             } else {
                 backToTopBtn.style.display = "none";
                 createButton.style.display = "none";
+                groupButton.style.display = "none";
             }
         }
         // When the user clicks on the button, scroll to the top of the document

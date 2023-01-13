@@ -38,8 +38,8 @@
 
     </x-slot>
 
-    <div class="flex justify-center mt-4">
-        <div class="py-2">
+    <div class="flex justify-center mt-0 md:mt-4 lg:mt-4">
+        <div class="md:py-2 lg:py-2">
             @include('layouts.myPostsNavgation')
 
             {{-- include mypost --}}
@@ -48,7 +48,7 @@
         </div>
 
         {{-- Certificate --}}
-        <div class="flex-col space-y-4 items-center mx-4 sm:mx-0 py-2">
+        <div class="flex-col space-y-4 items-center mx-4 sm:mx-0 py-2 hidden lg:block">
             <div
                 class="py-6 px-8 items-center rounded-lg shadow-lg overflow-hidden w-full sm:w-11/12 md:max-w-md hover:shadow-xl bg-white dark:bg-cyan-900">
                 <div class="flex flex-row justify-start items-center">
