@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\Tag;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TagController extends Controller
 {
@@ -12,7 +14,31 @@ class TagController extends Controller
     {
         $tags = Tag::all();
 
-        return view('tags.index', compact('tags'));
+        return response()->json([
+            'tags' => $tags,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $fill = $request->input('query');
+        if(empty($fill)) {
+            $tags = Tag::all();
+            return response()->json([
+                'success' => 'Tags Found Successfully.',
+                'message' => 'Tags Found Successfully.',
+                'tags' => $tags,
+            ]);
+        } else {
+            $query = strtolower($request->input('query'));
+            $tags = Tag::search($query)->get();
+
+            return response()->json([
+                'success' => 'Tags Found Successfully.',
+                'message' => 'Tags Found Successfully.',
+                'tags' => $tags,
+            ]);
+        }
     }
 
     public function create()
@@ -22,16 +48,23 @@ class TagController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate(['name' => 'required']);
+        $newTag = new Tag();
+        $newTag->name_tag = $request->input('name_tag');
+        $newTag->slug = SlugService::createSlug(Tag::class, 'slug', $request->input('name_tag'), ['unique' => true]);
+        $newTag->color = 'blue';
+        $newTag->save();
 
-        Tag::create(['name' => $request->name]);
-
-        return to_route('tags.index')->with('status', 'Tag created successfully.');
+        return response()->json([
+            'success' => 'New Tag Added Successfully.',
+            'message' => 'New Tag Added Successfully.',
+            'newTag' => $newTag,
+            'csrf' => $request->session()->token()
+        ]);
     }
 
     public function show(Tag $tag)
     {
-        $posts = Post::whereHas('tag', function($query) use ($tag) {
+        $posts = Post::whereHas('tag', function ($query) use ($tag) {
             $query->where('slug', $tag->slug);
         })->get();
 
@@ -43,7 +76,7 @@ class TagController extends Controller
         return view('tags.edit', compact('tag'));
     }
 
-    public function update(Request $request,  Tag $tag)
+    public function update(Request $request, Tag $tag)
     {
         $request->validate(['name' => 'required']);
         $tag->update(['name' => $request->name]);

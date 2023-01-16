@@ -53,7 +53,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/post/create/checkSlug', [PostController::class, 'checkSlug'])->name('post.checkSLug');
 
     // Tag
+    Route::post('/tag/store', [TagController::class, 'store'])->name('tag.store');
     Route::get('/tag/{slug}/edit', [TagController::class, 'edit'])->name('tag.edit');
+    Route::get('/post/create/tag', [TagController::class, 'search'])->name('tag.search');
+    Route::get('/tag', [TagController::class, 'index'])->name('tag.getall');
 
     // Category
     // TODO #12 : Create Category

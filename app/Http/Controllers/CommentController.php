@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
-use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -19,14 +18,9 @@ class CommentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Comment created successfully',
-            'comment' => $comment
+            'comment' => $comment,
+            'csrf' => $request->session()->token()
         ]);
-    }
-
-    public function reload(Request $request) {
-        $comments = Comment::all()->take(4)->reverse();
-
-        return view('components.more-comments', compact('comments'));
     }
 
     public function destroy(Request $request)
@@ -38,7 +32,8 @@ class CommentController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Comment deleted successfully',
-            'comment' => $comment
+            'comment' => $comment,
+            'csrf' => $request->session()->token()
         ]);
     }
 

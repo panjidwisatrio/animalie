@@ -20,12 +20,16 @@ class Tag extends Model
     {
         return [
             'slug' => [
-                'source' => 'title'
+                'source' => 'name_tag'
             ]
         ];
     }
 
     public function post() {
         return $this->belongsToMany(Post::class);
+    }
+
+    public function scopeSearch($query, $search) {
+        return $query->where('name_tag', 'LIKE', "%$search%");
     }
 }
