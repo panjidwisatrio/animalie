@@ -1,4 +1,3 @@
-{{-- TODO : Add Escape Blade --}}
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-cyan-900 leading-tight">
@@ -145,14 +144,10 @@
                                 {{-- Delete Comment --}}
                                 @if (Auth::check())
                                     @if (Auth::user()->id == $comment->user_id)
-                                        <form id="comment-delete">
-                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                            <input type="hidden" value="{{ $comment->id }}" id="comment_id">
-                                            <button type="submit" class="ml-2">
-                                                <i class="iconify" data-icon="ant-design:delete-outlined"
-                                                    style="color: #164e63;" data-width="24" data-height="24"></i>
-                                            </button>
-                                        </form>
+                                    <button type="button" class="ml-2 comment-delete" data-comment-id={{ $comment->id }}>
+                                        <i class="iconify" data-icon="ant-design:delete-outlined"
+                                            style="color: #164e63;" data-width="24" data-height="24"></i>
+                                    </button>
                                     @endif
                                 @endif
                             </div>
@@ -297,17 +292,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script type="text/javascript">
-        $('#comment-delete').submit(function(e) {
+        $(document).on('click', '.comment-delete', function(e) {
             e.preventDefault();
             $.ajax({
                 url: '/comment/delete',
                 type: 'DELETE',
                 data: {
                     _token: '{{ csrf_token() }}',
-                    comment_id: $('#comment_id').val(),
+                    comment_id: $(e.currentTarget).data('comment-id'),
                 },
                 success: function(response) {
-                    reloadComment();
+                    $('.comment-delete').off();
+                    $('#new-comments').load(' #new-comments');
                 },
                 error: function(error) {
                     console.log(error);
@@ -325,27 +321,19 @@
                     body: $('#body').val(),
                     post_id: $('#post_id').val(),
                 },
-                success: function(response) {
-                    reloadComment();
+                statusCode: {
+                    401: function() {
+                        location.href = '{{ route('login') }}';
+                    }
                 },
-                error: function(error, response) {
-                    console.log(error);
-                }
-            })
-        })
-
-        function reloadComment() {
-            $.ajax({
-                url: '/comment/reload',
                 success: function(response) {
-                    // BUG: CSRF token transfered to url
-                    $('#new-comments').html(response);
+                    $('#new-comments').load(' #new-comments');
                 },
                 error: function(error) {
                     console.log(error);
                 }
-            });
-        }
+            })
+        })
     </script>
 
     @push('script')
