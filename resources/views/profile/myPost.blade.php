@@ -1,7 +1,7 @@
 {{-- Post Discussion --}}
 @if ($posts->count())
     @foreach ($posts as $post)
-        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
+        <div class="container max-w-4xl mx-auto lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2">
                 {{-- User --}}
                 <div class="flex justify-between">
@@ -134,7 +134,7 @@
             <h2 class="text-lg font-medium text-gray-900">Are you sure your want to delete this post?</h2>
 
             <p class="mt-1 text-sm text-gray-600">
-                {{ __('Once your post is deleted, all of its resources and data will be permanently deleted. Please enter your password to confirm you would like to permanently delete your post.') }}
+                {{ __('Once your post is deleted, all of its resources and data will be permanently deleted.') }}
             </p>
 
             <div class="mt-6 flex justify-end">
