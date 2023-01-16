@@ -1,6 +1,6 @@
-<div class="flex-col space-y-4 items-center mx-4 sm:mx-0">
+<div class="flex-col hidden lg:block space-y-4 items-center mx-4 sm:mx-0">
     <div
-        class="py-6 px-8 items-center rounded-lg shadow-lg overflow-hidden w-full sm:w-11/12 md:max-w-md hover:shadow-xl bg-white dark:bg-cyan-900">
+        class=" py-6 px-8 items-center rounded-lg shadow-lg overflow-hidden w-full sm:w-11/12 md:max-w-md hover:shadow-xl bg-white dark:bg-cyan-900">
         <div class="flex flex-row justify-start items-center">
             <h1 class="text-md sm:text-xl font-bold text-gray-800 mr-2 dark:text-gray-100">Popular Tags</h1>
         </div>

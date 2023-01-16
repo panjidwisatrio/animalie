@@ -7,7 +7,7 @@
         </div>
     </x-slot>
 
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center mt-0 lg:mt-4">
         <div class="py-2">
             @include('layouts.postsNavgation')
 

@@ -6,8 +6,8 @@
     </x-slot>
 
     {{-- Post Discussion --}}
-    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 py-2">
-        <div class="bg-white overflow-hidden shadow-sm rounded-md p-10">
+    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-0 md:mt-4 lg:mt-4 py-4">
+        <div class="bg-white overflow-hidden shadow-sm md:shadow-md lg:shadow-md rounded-md px-10 py-4 md:p-10 lg:p-10">
             {{-- User --}}
             <div class="flex justify-between">
                 <div class="flex">
@@ -83,9 +83,9 @@
     </div>
 
     <!-- comment form -->
-    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 rounded-md py-2">
-        <form class="bg-white rounded-lg px-4 pt-2" id="form-comment">
-            <div class="flex flex-wrap mx-3 space-x-4">
+    <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-0 rounded-md py-0 md:pt-2 lg:pt-2 ">
+        <form class="bg-white rounded-t-lg px-4 pt-2" id="form-comment">
+            <div class="flex flex-wrap mx-3 space-x-4 border-b-2 md:border-b-1 lg:border-b-1 ">
                 <h2 class="px-4 pt-2 pb-2 text-cyan-900 text-md">Add a new comment</h2>
                 <div class="w-full md:w-full m-2">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -113,11 +113,12 @@
     </div>
 
     <!-- comment section -->
-    <div id="new-comments">
+    <div id="new-comments " class="">
         @if ($comments->count())
             @foreach ($comments as $comment)
-                <div class="comment max-w-4xl mx-auto sm:px-6 lg:px-8 mt-4 py-2">
-                    <div class="bg-white overflow-hidden shadow-sm rounded-md p-10">
+                <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 rounded-md">
+                    {{-- <div class="comment max-w-4xl mx-auto sm:px-6 lg:px-8 "> --}}
+                    <div class="bg-white overflow-hidden shadow-sm border-b-2 space-y-2 p-5">
                         {{-- User --}}
                         <div class="flex justify-between">
                             <div class="flex">
@@ -152,14 +153,13 @@
                             </div>
                         </div>
 
-                        {{-- Comment  --}}
-                        <div class="mt-4 text-cyan-900 text-sm text-justify">
+                        {{-- Comment list --}}
+                        <div class="text-cyan-900 text-sm text-justify">
                             <div class="p-4 bg-emerald-50 rounded-md text-md">
                                 {{ $comment->comment }}
                             </div>
 
-                            {{-- Like  --}}
-                            <div class="flex justify-end">
+                            <div class="flex justify-end mt-4">
                                 <div class="flex items-center">
                                     @if (Auth::check())
                                         <button class="like-button-comment flex items-center space-x-1"
@@ -168,7 +168,8 @@
                                             <i id="icon-{{ $comment->id }}" class="iconify"
                                                 data-icon="{{ $comment->liked(auth()->user()->id) ? 'ant-design:like-twotone' : 'ant-design:like-outlined' }}"
                                                 style="color: #164e63;" data-width="24" data-height="24"></i>
-                                            <small id="comment-count-{{ $comment->id }}" class="font-semibold">
+                                            <small id="comment-count-{{ $comment->id }}"
+                                                class="font-semibold text-xs md:text-sm lg:text-sm">
                                                 {{ $comment->likeCount }}
                                             </small>
                                         </button>
@@ -193,10 +194,10 @@
             @endforeach
         @else
             <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 py-2">
-                <div class="bg-white overflow-hidden shadow-sm rounded-md p-10">
+                <div class="bg-white overflow-hidden shadow-sm rounded-md py-2 md:py-6 lg:py-6 mb-6">
                     <div class="text-center items-center text-green-900">
-                        <svg class="mx-auto" width="300" height="256" viewBox="0 0 300 256" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg class="mx-auto w-1/2 lg:w-full" width="300" height="256" viewBox="0 0 300 256"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path opacity="0.1"
                                 d="M298.624 176.34C290.431 135.021 242.426 101.998 233.063 58.9405C216.046 4.16004 159.957 -4.50085 123.509 19.2903C65.7565 56.9876 127.366 66.3425 14.133 155.532C-13.8267 177.555 -4.91748 274.768 83.0423 252.458C130.378 240.452 144.768 238.767 166.06 236.79C219.728 231.807 312.379 245.699 298.624 176.34Z"
                                 fill="#55C595" />
