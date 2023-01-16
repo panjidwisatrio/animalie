@@ -28,6 +28,4 @@
             @include('layouts.tags', ['tags' => $tags])
         </div>
     </div>
-
-    
 </x-app-layout>
