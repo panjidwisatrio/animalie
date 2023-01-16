@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [PostController::class, 'index'])->name('dashboard');
+Route::get('/latest', [PostController::class, 'latest'])->name('latest');
+Route::get('/popular', [PostController::class, 'popular'])->name('popular');
+Route::get('/unanswerd', [PostController::class, 'unanswerd'])->name('unanswerd');
 Route::get('/interestGroup', [PostController::class, 'interestgroup_show'])->name('interestGroup');
 Route::get('/post-detail/{post:slug}', [PostController::class, 'show'])->name('post.show');
 

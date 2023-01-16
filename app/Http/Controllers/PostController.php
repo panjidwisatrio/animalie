@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\Tag;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -17,6 +18,53 @@ class PostController extends Controller
         $tags = Tag::all();
 
         return view('dashboard', compact('posts', 'tags'));
+    }
+
+    public function latest()
+    {
+        $posts = Post::with(['user', 'category', 'comment'])->latest()->get();
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered
+        ]);
+    }
+
+    public function popular()
+    {
+        $posts = Post::with(['user', 'category', 'comment'])
+            ->select('posts.*')
+            ->leftJoin('likeable_like_counters', 'posts.id', '=', 'likeable_like_counters.post_id')
+            ->orderBy('likeable_like_counters.count', 'desc')
+            ->get();
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered
+        ]);
+    }
+
+    public function unanswerd()
+    {
+        $posts = Post::with(['user', 'category', 'comment'])
+            ->select('posts.*')
+            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
+            ->whereNull('comments.post_id')
+            ->get();
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered
+        ]);
     }
 
     public function show(Post $post)

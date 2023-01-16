@@ -113,7 +113,7 @@
     </div>
 
     <!-- comment section -->
-    <div id="new-comments " class="">
+    <div id="new-comments">
         @if ($comments->count())
             @foreach ($comments as $comment)
                 <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 rounded-md">
@@ -327,6 +327,7 @@
                     }
                 },
                 success: function(response) {
+                    $('#body').val('');
                     $('#new-comments').load(' #new-comments');
                 },
                 error: function(error) {
