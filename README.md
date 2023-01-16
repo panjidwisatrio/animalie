@@ -1,4 +1,4 @@
-<span class="iconify" data-icon="healthicons:animal-chicken-outline" style="color: #25522f;" data-width="250" data-flip="horizontal"></span>
+<iconify-icon icon="healthicons:animal-chicken-outline" style="color: #25522f;" width="250" flip="horizontal"></iconify-icon>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
