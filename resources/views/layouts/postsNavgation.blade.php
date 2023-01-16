@@ -25,26 +25,30 @@
 
                         <x-slot name="content">
                             <x-dropdown-link>
-                                {{ __('Profile') }}
+                                {{ __('Latest') }}
                             </x-dropdown-link>
-
+                            <x-dropdown-link>
+                                {{ __('Popular') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link>
+                                {{ __('Unanswerd') }}
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
                 </div>
+                
                 <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex ">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link class="nav-link-post" data-type="latest">
                         {{ __('Latest') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex">
-                    {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
-                    <x-nav-link>
+                    <x-nav-link class="nav-link-post" data-type="popular">
                         {{ __('Popular') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex">
-                    {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
-                    <x-nav-link>
+                    <x-nav-link class="nav-link-post" data-type="unanswerd">
                         {{ __('Unanswerd') }}
                     </x-nav-link>
                 </div>
