@@ -2,8 +2,8 @@
 <div class="posts-target">
     @if ($posts->count())
         @foreach ($posts as $post)
-            <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
-                <div class="bg-white overflow-hidden shadow-lg px-12  lg:px-10 pt-6 pb-4 lg:py-4 border-b-2">
+            <div class="container max-w-4xl mx-auto lg:px-8 flex-col">
+                <div class="bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2">
                     {{-- User --}}
                     <a href="{{ route('user.showSpecific', $post->user->username) }}" class="flex justify-between">
                         <div class="flex">
