@@ -78,6 +78,6 @@
   bottom: 4px;
 }
 
-.nav-link-post {
+.nav-link-post, .nav-link-categories {
   cursor: pointer;
 }

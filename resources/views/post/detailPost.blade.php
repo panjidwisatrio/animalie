@@ -176,7 +176,7 @@
                                     @else
                                         <form method="POST" action="{{ route('like.comment', $comment->id) }}">
                                             @csrf
-                                            <button class="like-button flex items-center space-x-1">
+                                            <button class="like-button flex items-center space-x-1" id="like-button-unauthenticated">
                                                 <i id="icon-{{ $comment->id }}" class="iconify"
                                                     data-icon="ant-design:like-outlined" style="color: #164e63;"
                                                     data-width="24" data-height="24"></i>

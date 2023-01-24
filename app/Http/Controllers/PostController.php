@@ -8,21 +8,497 @@ use App\Models\Post;
 use App\Models\Tag;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::with(['user', 'category', 'comment'])->latest()->get();
+        $posts = Post::with(['user', 'category', 'comment'])
+            ->latest()
+            ->paginate(5);
+
         $tags = Tag::all();
 
         return view('dashboard', compact('posts', 'tags'));
     }
 
-    public function latest()
+    public function loadMore(Request $request)
     {
-        $posts = Post::with(['user', 'category', 'comment'])->latest()->get();
+        $page = $request->page;
+        $typeNavigation = $request->typeNavigation;
+
+        if ($typeNavigation == 'dashboard') {
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->more($page)
+                ->latest()
+                ->get();
+        } else if ($typeNavigation == 'interestGroup') {
+            $selectedCategory = $request->selectedCategory;
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->morecategory($page, $category)
+                ->latest()
+                ->get();
+        } else if ($typeNavigation == 'tag') {
+            $selectedTag = $request->selectedTag;
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->moretag($page, $selectedTag)
+                ->latest()
+                ->get();
+        } else if ($typeNavigation == 'unanswered') {
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->moreunanswered($page)
+                ->latest()
+                ->get();
+        }
+
+        $view = view('post.morePost', compact('posts'))->render();
+        return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+    }
+
+    public function loadMorePopular(Request $request)
+    {
+        if ($request->ajax()) {
+            $page = $request->page;
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->morepopular($page)
+                ->get();
+
+            $view = view('post.morePost', compact('posts'))->render();
+            return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        }
+    }
+
+    public function loadMoreUnanswerd(Request $request)
+    {
+        if ($request->ajax()) {
+            $page = $request->page;
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->moreunanswerd($page)
+                ->get();
+
+            $view = view('post.morePost', compact('posts'))->render();
+            return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        }
+    }
+
+    public function loadMoreInterestGroup(Request $request)
+    {
+        if ($request->ajax()) {
+            $page = $request->page;
+            $selectedCategory = $request->selectedCategory;
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->morecategory($page, $category)
+                ->get();
+
+            $view = view('post.morePost', compact('posts'))->render();
+            return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        }
+    }
+
+    public function loadMoreTag(Request $request)
+    {
+        if ($request->ajax()) {
+            $page = $request->page;
+            $selectedTag = $request->selectedTag;
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->moretag($page, $selectedTag)
+                ->get();
+
+            $view = view('post.morePost', compact('posts'))->render();
+            return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        }
+    }
+
+    public function loadMoreSearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $page = $request->page;
+            $search = $request->query('search');
+            $posts = Post::with(['user', 'category', 'comment'])
+                ->moresearch($page, $search)
+                ->get();
+
+            $view = view('post.morePost', compact('posts'))->render();
+            return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        }
+    }
+
+    public function latest(Request $request)
+    {
+        $typeNavigation = $request->input('type');
+
+        if ($typeNavigation == 'dashboard') {
+            $posts = Post::with(['user', 'category', 'comment'])->latest()->paginate(5);
+        } else if ($typeNavigation == 'interestGroup') {
+            $selectedCategory = $request->input('selectedCategory');
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            $posts = Post::with(['user', 'category', 'comment'])->latest()->where('category_id', $category)->paginate(5);
+        } else if ($typeNavigation == 'tag') {
+            $tag = $request->input('selectedTag');
+            $posts = Post::with(['user', 'category', 'comment'])->latest()->tag($tag)->paginate(5);
+        }
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered,
+            'type' => $typeNavigation
+        ]);
+    }
+
+    public function popular(Request $request)
+    {
+        $typeNavigation = $request->input('type');
+
+        if ($typeNavigation == 'dashboard') {
+            $posts = Post::with(['user', 'category', 'comment'])->popular()->paginate(5);
+        } else if ($typeNavigation == 'interestGroup') {
+            $selectedCategory = $request->input('selectedCategory');
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            $posts = Post::with(['user', 'category', 'comment'])->popular()->where('category_id', $category)->paginate(5);
+        } else if ($typeNavigation == 'tag') {
+            $tag = $request->input('selectedTag');
+            $posts = Post::with(['user', 'category', 'comment'])->popular()->tag($tag)->paginate(5);
+        }
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered,
+            'type' => $typeNavigation
+        ]);
+    }
+
+    public function unanswerd(Request $request)
+    {
+        $typeNavigation = $request->input('type');
+
+        if ($typeNavigation == 'dashboard') {
+            $posts = Post::with(['user', 'category', 'comment'])->unanswerd()->paginate(5);
+        } else if ($typeNavigation == 'interestGroup') {
+            $selectedCategory = $request->input('selectedCategory');
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            $posts = Post::with(['user', 'category', 'comment'])->unanswerd()->where('category_id', $category)->paginate(5);
+        } else if ($typeNavigation == 'tag') {
+            $tag = $request->input('selectedTag');
+            $posts = Post::with(['user', 'category', 'comment'])->unanswerd()->tag($tag)->paginate(5);
+        }
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered,
+            'type' => $typeNavigation
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $search = request()->query('search');
+        $typeNavigation = $request->input('type');
+
+        if ($typeNavigation == 'dashboard') {
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->latest()->search($search)->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->latest()->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        } else if ($typeNavigation == 'interestGroup') {
+            $selectedCategory = $request->input('selectedCategory');
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->latest()->searchcategory($search, $category)->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->latest()->category($category)->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        } else if ($typeNavigation == 'tag') {
+            $tag = $request->input('selectedTag');
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->latest()->searchtag($search, $tag)->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->latest()->tag($tag)->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        }
+
+    }
+
+    public function searchPopular(Request $request)
+    {
+        $search = request()->query('search');
+        $typeNavigation = $request->input('type');
+
+        if ($typeNavigation == 'dashboard') {
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->search($search)->popular()->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->popular()->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        } else if ($typeNavigation == 'interestGroup') {
+            $selectedCategory = $request->input('selectedCategory');
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->searchcategory($search, $category)->popular()->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->category($category)->popular()->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        } else if ($typeNavigation == 'tag') {
+            $tag = $request->input('selectedTag');
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->searchtag($search, $tag)->popular()->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->tag($tag)->popular()->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        }
+    }
+
+    public function searchUnanswerd(Request $request)
+    {
+        $search = request()->query('search');
+        $typeNavigation = $request->input('type');
+
+        if ($typeNavigation == 'dashboard') {
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->search($search)->unanswerd()->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->unanswerd()->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        } else if ($typeNavigation == 'interestGroup') {
+            $selectedCategory = $request->input('selectedCategory');
+            switch ($selectedCategory) {
+                case 'cow':
+                    $category = 1;
+                    break;
+                case 'poultry':
+                    $category = 2;
+                    break;
+                case 'goat':
+                    $category = 3;
+                    break;
+                case 'sheep':
+                    $category = 4;
+                    break;
+                case 'fish':
+                    $category = 5;
+                    break;
+                case 'other':
+                    $category = 6;
+                    break;
+            }
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->searchcategory($search, $category)->unanswerd()->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->category($category)->unanswerd()->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        } else if ($typeNavigation == 'tag') {
+            $tag = $request->input('selectedTag');
+            if ($search) {
+                $posts = Post::with(['user', 'category', 'comment'])->searchtag($search, $tag)->unanswerd()->paginate(5);
+            } else {
+                $posts = Post::with(['user', 'category', 'comment'])->tag($tag)->unanswerd()->paginate(5);
+            }
+            $viewRendered = view('post.posts', compact('posts'))->render();
+            return response()->json([
+                'success' => true,
+                'message' => 'Post sorted',
+                'posts' => $viewRendered
+            ]);
+        }
+    }
+
+    public function show_cow(Request $request)
+    {
+        $posts = Post::with(['user', 'category', 'comment'])
+            ->showcow()
+            ->paginate(5);
 
         $viewRendered = view('post.posts', compact('posts'))->render();
 
@@ -33,13 +509,11 @@ class PostController extends Controller
         ]);
     }
 
-    public function popular()
+    public function show_poultry(Request $request)
     {
         $posts = Post::with(['user', 'category', 'comment'])
-            ->select('posts.*')
-            ->leftJoin('likeable_like_counters', 'posts.id', '=', 'likeable_like_counters.post_id')
-            ->orderBy('likeable_like_counters.count', 'desc')
-            ->get();
+            ->showpoultry()
+            ->paginate(5);
 
         $viewRendered = view('post.posts', compact('posts'))->render();
 
@@ -50,13 +524,56 @@ class PostController extends Controller
         ]);
     }
 
-    public function unanswerd()
+    public function show_sheep(Request $request)
     {
         $posts = Post::with(['user', 'category', 'comment'])
-            ->select('posts.*')
-            ->leftJoin('comments', 'posts.id', '=', 'comments.post_id')
-            ->whereNull('comments.post_id')
-            ->get();
+            ->showsheep()
+            ->paginate(5);
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered
+        ]);
+    }
+
+    public function show_goat(Request $request)
+    {
+        $posts = Post::with(['user', 'category', 'comment'])
+            ->showgoat()
+            ->paginate(5);
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered
+        ]);
+    }
+
+    public function show_fish(Request $request)
+    {
+        $posts = Post::with(['user', 'category', 'comment'])
+            ->showfish()
+            ->paginate(5);
+
+        $viewRendered = view('post.posts', compact('posts'))->render();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Post sorted',
+            'posts' => $viewRendered
+        ]);
+    }
+
+    public function show_other(Request $request)
+    {
+        $posts = Post::with(['user', 'category', 'comment'])
+            ->showother()
+            ->paginate(5);
 
         $viewRendered = view('post.posts', compact('posts'))->render();
 
@@ -70,15 +587,18 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $post = Post::with(['user', 'category', 'tag'])->where('id', $post->id)->first();
-        $comments = Comment::with(['user'])->where('post_id', $post->id)->latest()->limit(4)->get();
+        $comments = Comment::with(['user'])->where('post_id', $post->id)->latest()->get();
 
         return view('post.detailpost', compact('post', 'comments'));
     }
 
     public function interestgroup_show()
     {
+        $posts = Post::with(['user', 'category'])
+            ->showcow()
+            ->paginate(5);
+
         $tags = Tag::all();
-        $posts = Post::with(['user', 'category'])->latest()->get();
         return view('interestGroup', compact('tags', 'posts'));
     }
 
@@ -112,8 +632,6 @@ class PostController extends Controller
 
         return redirect()->route('dashboard');
     }
-
-
 
     public function upload(Request $request)
     {

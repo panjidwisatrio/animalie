@@ -60,6 +60,18 @@ class DatabaseSeeder extends Seeder
             'color' => 'blue',
             'tag_counter' => fake()->numberBetween(1, 100),
         ]);
+        Tag::create([
+            'name_tag' => 'Bisnis Plan',
+            'slug' => 'bisnis-plan',
+            'color' => 'blue',
+            'tag_counter' => fake()->numberBetween(1, 100),
+        ]);
+        Tag::create([
+            'name_tag' => 'Big Farm',
+            'slug' => 'big-farm',
+            'color' => 'blue',
+            'tag_counter' => fake()->numberBetween(1, 100),
+        ]);
 
         // CATEGORY
         Category::create(
@@ -78,6 +90,24 @@ class DatabaseSeeder extends Seeder
             [
                 'category' => 'Kambing',
                 'slug' => 'kambing',
+            ]
+        );
+        Category::create(
+            [
+                'category' => 'Domba',
+                'slug' => 'domba',
+            ]
+        );
+        Category::create(
+            [
+                'category' => 'Ikan',
+                'slug' => 'ikan',
+            ]
+        );
+        Category::create(
+            [
+                'category' => 'Lainnya',
+                'slug' => 'lainnya',
             ]
         );
 

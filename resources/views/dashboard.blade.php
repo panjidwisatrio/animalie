@@ -15,7 +15,7 @@
                 </div>
             </div>
 
-            @include('layouts.postsNavgation')
+            @include('layouts.postsNavgation', ['type' => 'dashboard'])
 
             @include('post.posts', ['posts' => $posts])
 
