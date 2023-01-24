@@ -1,5 +1,5 @@
 <div class="max-w-4xl lg:mx-auto sm:text-sm py-0 px-0 md:py-0 lg:py-0 lg:px-8 relative">
-    <div class="bg-white overflow-hidden lg:shadow-lg lg:rounded-t-xl static">
+    <div class="bg-white overflow-hidden lg:shadow-md lg:rounded-t-xl static">
         <div
             class="px-1 py-4 lg:p-6 lg:text-mf text-cyan-900 flex justify-between lg:justify-between border-b-2 sm:border-gray-200">
             {{-- Sub Navigation --}}
@@ -35,22 +35,25 @@
                     </x-slot>
                 </x-dropdown>
             </div>
-            <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex ">
-                <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                    {{ __('My Post') }}
-                </x-nav-link>
-            </div>
-            <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex">
-                {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
-                <x-nav-link>
-                    {{ __('Discussion') }}
-                </x-nav-link>
-            </div>
-            <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex">
-                {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
-                <x-nav-link>
-                    {{ __('Saved Post') }}
-                </x-nav-link>
+
+            <div class="flex">
+                <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex ">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        {{ __('My Post') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex">
+                    {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
+                    <x-nav-link>
+                        {{ __('Discussion') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 lg:-my-px lg:ml-4 lg:flex">
+                    {{-- :href="route('dashboard')" :active="request()->routeIs('dashboard')" --}}
+                    <x-nav-link>
+                        {{ __('Saved Post') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             {{-- Search bar --}}

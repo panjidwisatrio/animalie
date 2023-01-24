@@ -3,6 +3,7 @@
         <div
             class="w-full px-1 py-4 lg:p-6 lg:text-mf text-cyan-900 flex justify-between lg:justify-between border-b-2 sm:border-gray-200">
             {{-- Sub Navigation --}}
+            <input id="type-navigation" type="hidden" value="{{ $type }}">
             <div class="space-x-8 lg:hidden sm:visible flex items-center absolute">
                 <x-dropdown align="top" width="48" class="ml-3" class="">
                     <x-slot name="trigger" class="">
@@ -21,13 +22,13 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <x-dropdown-link>
+                        <x-dropdown-link class="nav-link-post-dropdown" data-type="latest">
                             {{ __('Latest') }}
                         </x-dropdown-link>
-                        <x-dropdown-link>
+                        <x-dropdown-link class="nav-link-post-dropdown" data-type="popular">
                             {{ __('Popular') }}
                         </x-dropdown-link>
-                        <x-dropdown-link>
+                        <x-dropdown-link class="nav-link-post-dropdown" data-type="unanswerd">
                             {{ __('Unanswerd') }}
                         </x-dropdown-link>
                     </x-slot>
@@ -55,11 +56,11 @@
 
             {{-- Search bar --}}
             <div class="sm:mr-4 space-x-8 lg:-my-px lg:flex ml-24 md:ml-24 lg:ml-10">
-                <form class="flex items-center">
+                <form class="flex items-center" id="search-post">
                     <label for="simple-search" class="sr-only">Search</label>
                     <div class="flex justify-start">
                         <input type="text" id="simple-search"
-                            class="bg-emerald-100 border-emerald-100 text-cyan-900 text-sm rounded-l-lg  dark:placeholder-gray-400 dark:text-green dark:focus:ring-emerald-100 dark:focus:border-emering-emerald-100 focus:ring-emerald-100 focus:border-emering-emerald-100 block w-full pl-10 p-2"
+                            class="bg-emerald-100 border-emerald-100 text-cyan-900 text-sm rounded-l-lg dark:placeholder-gray-400 dark:text-green dark:focus:ring-emerald-100 dark:focus:border-emering-emerald-100 focus:ring-emerald-100 focus:border-emering-emerald-100 block w-full pl-5 p-2"
                             placeholder="Search..." required>
                         <button type="submit"
                             class="p-2 text-sm font-medium text-cyan-900 bg-emerald-100 rounded-r-lg border-emerald-100 ">

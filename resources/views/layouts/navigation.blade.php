@@ -15,14 +15,14 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Home -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-4 sm:flex justify-end">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="nav-link-dashboard">
                         {{ __('Home') }}
                     </x-nav-link>
                 </div>
 
                 <!-- Interest -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-4 sm:flex justify-end">
-                    <x-nav-link :href="route('interestGroup')" :active="request()->routeIs('interestGroup')">
+                    <x-nav-link :href="route('interestGroup')" :active="request()->routeIs('interestGroup')" class="nav-link-interest">
                         {{ __('Interest Group') }}
                     </x-nav-link>
                 </div>
@@ -44,11 +44,10 @@
                                     @endif
                                 </div>
                             </button>
-
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.show')">
+                            <x-dropdown-link :href="route('profile.show')" class="nav-link-user">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
@@ -65,7 +64,7 @@
                         </x-slot>
                     </x-dropdown>
                 @else
-                    <a href="{{ route('login') }}">
+                    <a href="{{ route('login') }}" class="nav-link-login">
                         <div
                             class="inline-flex items-center px-6 py-2 ml-4 bg-cyan-900 border border-transparent rounded-lg font-semibold text-xs text-white uppercase tracking-widest hover:bg-cyan-700 focus:bg-cyan-700 active:bg-cyan-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">
                             Login

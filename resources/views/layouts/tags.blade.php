@@ -8,7 +8,7 @@
         <div class='my-3 flex flex-wrap -m-1'>
             @if ($tags->count())
                 @foreach ($tags as $tag)
-                    <a href="{{ route('post.tag', $tag->slug) }}">
+                    <a href="{{ route('post.tag', $tag->slug) }}" class="nav-link-tag">
                         <span
                             class="m-1 flex flex-wrap justify-between items-center text-xs sm:text-sm bg-{{ $tag->color }}-100  text-{{ $tag->color }}-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-{{ $tag->color }}-100 dark:text-{{ $tag->color }}-800 rounded-md py-1 px-2 font-semibold leading-loose cursor-pointer dark:text-{{ $tag->color }}-100">
                             {{ $tag->name_tag }}
