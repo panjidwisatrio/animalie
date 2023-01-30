@@ -28,21 +28,16 @@
                     </h3>
                 </div>
             </div>
-            {{-- <a href="{{ route('profile.edit') }}">
-                <div class="rounded-full shadow-md bg-white p-4 text-cyan-900">
-                    <i data-feather="edit"></i>
-                </div>
-            </a> --}}
         </div>
 
     </x-slot>
 
     <div class="flex justify-center mt-4">
         <div class="py-2">
-            @include('layouts.myPostsNavgation')
+            @include('layouts.myPostsNavgation', ['userId' => $user->id, 'type' => 'otherprofile'])
 
-            {{-- include mypost --}}
-            @include('profile.otherPost', ['posts' => $posts])
+            {{-- include other post --}}
+            @include('post.posts', ['posts' => $posts])
 
         </div>
 

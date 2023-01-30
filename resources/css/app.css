@@ -78,6 +78,11 @@
   bottom: 4px;
 }
 
-.nav-link-post, .nav-link-categories {
+.nav-link-post, 
+.nav-link-categories, 
+.nav-link-post-dropdown, 
+.my-nav-link-dropdown, 
+.my-nav-link-post,
+.delete-button {
   cursor: pointer;
 }

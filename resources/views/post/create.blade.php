@@ -211,14 +211,23 @@
 
     @section('scripts')
         <script>
-            const title = document.querySelector('#title');
-            const slug = document.querySelector('#slug');
+            $('#title').on('keyup', function() {
+                $('#slug').val($('#title').val().toLowerCase().split(',').join('').replace(/\s/g, "-"));
 
-            title.addEventListener('change', function() {
-                fetch('/post/create/checkSlug?title=' + title.value, {})
-                    .then(response => response.json())
-                    .then(data => slug.value = data.slug)
-            })
+                $.ajax({
+                    type: 'get',
+                    url: "{{ route('post.checkSLug') }}",
+                    data: {
+                        'title': $(this).val(),
+                    },
+                    success: function(data) {
+                        $('#slug').val(data.slug);
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
+            });
 
             // tambah route baru untuk ke method baru untuk updload image
             ClassicEditor

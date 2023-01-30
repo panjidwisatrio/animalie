@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "684e3653d1dfcbfe10590fede8ce053b",
+    "content-hash": "bbf7e3745040c17179ffdea8f76dd841",
     "packages": [
         {
             "name": "brick/math",
@@ -1195,6 +1195,125 @@
                 }
             ],
             "time": "2022-12-13T00:04:12+00:00"
+        },
+        {
+            "name": "laravel-interaction/bookmark",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-interaction/bookmark.git",
+                "reference": "29bb506829da33dfb00f189e6022ff4fb553ee7a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-interaction/bookmark/zipball/29bb506829da33dfb00f189e6022ff4fb553ee7a",
+                "reference": "29bb506829da33dfb00f189e6022ff4fb553ee7a",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.13 || ^9.0",
+                "illuminate/support": "^8.0 || ^9.0",
+                "laravel-interaction/support": "^1.0 || ^2.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.3.3 || ^1.4.2",
+                "orchestra/testbench": "^6.0 || ^7.0",
+                "phpunit/phpunit": "^9.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "LaravelInteraction\\Bookmark\\BookmarkServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelInteraction\\Bookmark\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zingimmick",
+                    "email": "zingimmick@outlook.com"
+                }
+            ],
+            "description": "User bookmark/unbookmark behaviour for Laravel.",
+            "homepage": "https://github.com/laravel-interaction/bookmark",
+            "keywords": [
+                "bookmark",
+                "bookmarks",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-interaction/bookmark/issues",
+                "source": "https://github.com/laravel-interaction/bookmark"
+            },
+            "time": "2022-11-27T13:49:35+00:00"
+        },
+        {
+            "name": "laravel-interaction/support",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-interaction/support.git",
+                "reference": "200839b1e09889bb514e78ee50d00ba3999277c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-interaction/support/zipball/200839b1e09889bb514e78ee50d00ba3999277c3",
+                "reference": "200839b1e09889bb514e78ee50d00ba3999277c3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0 || ^9.0",
+                "php": "^7.3 || ^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelInteraction\\Support\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "zingimmick",
+                    "email": "zingimmick@outlook.com"
+                }
+            ],
+            "description": "The Laravel Interaction Support package",
+            "homepage": "https://github.com/laravel-interaction/support",
+            "keywords": [
+                "interaction",
+                "laravel",
+                "support"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-interaction/support/issues",
+                "source": "https://github.com/laravel-interaction/support"
+            },
+            "time": "2022-04-06T12:16:14+00:00"
         },
         {
             "name": "laravel/framework",

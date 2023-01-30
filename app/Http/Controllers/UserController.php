@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function show()
     {
-        $posts = Post::with(['user', 'category'])->where('user_id', auth()->user()->id)->latest()->get();
+        $posts = Post::with(['user', 'category'])->where('user_id', auth()->user()->id)->latest()->paginate(5);
 
         return view('profile.myProfile', [
             'user' => Auth::user(),
@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function showSpecific(User $user)
     {
-        $posts = Post::with(['user', 'category'])->where('user_id', $user->id)->latest()->get();
+        $posts = Post::with(['user', 'category'])->where('user_id', $user->id)->latest()->paginate(5);
 
         return view('profile.profile', [
             'user' => $user,

@@ -4,6 +4,7 @@
             class="w-full px-1 py-4 lg:p-6 lg:text-mf text-cyan-900 flex justify-between lg:justify-between border-b-2 sm:border-gray-200">
             {{-- Sub Navigation --}}
             <input id="type-navigation" type="hidden" value="{{ $type }}">
+            <input id="active-search" type="hidden" value="false">
             <div class="space-x-8 lg:hidden sm:visible flex items-center absolute">
                 <x-dropdown align="top" width="48" class="ml-3" class="">
                     <x-slot name="trigger" class="">
