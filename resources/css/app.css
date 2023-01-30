@@ -86,3 +86,29 @@
 .delete-button {
   cursor: pointer;
 }
+
+.skeleton{
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading{
+  0%{
+    background-color: hsl(200, 20%, 70%);
+  }
+  100%{
+    background-color: hsl(200, 20%, 95%);
+  }
+}
+
+.skeleton-text{
+  width: 100%;
+  min-height: .75rem;
+  max-height: fit-content;
+  margin-bottom: .25rem;
+  border-radius: .125rem;
+}
+
+.skeleton-text:last-child{
+  margin-bottom: 0;
+  width: 80%;
+}

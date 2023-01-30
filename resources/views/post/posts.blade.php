@@ -191,15 +191,27 @@
             @endforeach
         </div>
 
-        <div class="ajax-load text-center" style="display:none">
-            <p>Loading More post</p>
+        <div class="ajax-load lg:px-8">
+            <div class="bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2">
+                <div class="flex justify-start items-center max-w-sm">
+                    <img class="w-12 h-12 rounded-full shadow mr-4 skeleton">
+                    <p class="skeleton skeleton-text"></p>
+                </div>
+                <div class="mt-4">
+                    <p class="skeleton skeleton-text"></p>
+                    <div class="px-4 bg-gray-100 rounded-md py-2 my-4">
+                        <p class="skeleton skeleton-text"></p>
+                        <p class="skeleton skeleton-text"></p>
+                        <p class="skeleton skeleton-text"></p>
+                    </div>
+                </div>
+            </div>
         </div>
     @else
-        <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
-            <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2 rounded-b-xl">
+        <div class="container max-w-4xl mx-auto lg:px-8 flex-col">
+            <div class="bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2 rounded-b-xl">
                 <div class="py-6 w-full text-center text-cyan-900 mt-4">
-                    <svg class="mx-auto" width="300" height="256" viewBox="0 0 300 256" fill="none"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg class="w-2/3 mx-auto" viewBox="0 0 300 256" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path opacity="0.1"
                             d="M298.624 176.34C290.431 135.021 242.426 101.998 233.063 58.9405C216.046 4.16004 159.957 -4.50085 123.509 19.2903C65.7565 56.9876 127.366 66.3425 14.133 155.532C-13.8267 177.555 -4.91748 274.768 83.0423 252.458C130.378 240.452 144.768 238.767 166.06 236.79C219.728 231.807 312.379 245.699 298.624 176.34Z"
                             fill="#55C595" />
@@ -279,12 +291,12 @@
                             fill="#292A2E" />
                     </svg>
 
-                    <h1 class="text-xl font-bold">
+                    <h1 class="text-md lg:text-xl font-bold">
                         No Post yet
                     </h1>
-                    <h1 class=" font-medium">
+                    <p class="text-sm lg:text-base font-medium">
                         No post in this page yet, create one by click that pencil icon
-                    </h1>
+                    </p>
                 </div>
             </div>
         </div>
