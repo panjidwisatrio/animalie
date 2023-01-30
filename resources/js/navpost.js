@@ -9,7 +9,7 @@ $('.nav-link-post').on('click', function () {
     var selectedCategory = $('#category-selected').val();
     var selectedTag = $('#tag-selected').val();
 
-    if(selectedTag != null) {
+    if (selectedTag != null) {
         selectedTag = selectedTag.toLowerCase().split(',').join('').replace(/\s/g, '-');
     }
 
@@ -24,17 +24,22 @@ $('.nav-link-post').on('click', function () {
                 selectedCategory: selectedCategory,
                 selectedTag: selectedTag
             },
-            success: function (data) {
-                $('.posts-target').html('');
+            beforeSend: function () {
                 activePopular.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeUnanswerd.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeLatest.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                $('.posts-target').html(data.posts);
+                $('.posts-target').html('');
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (response) {
+        })
+            .done(function (data) {
+                $('.ajax-load').hide();
+                $('.posts-target').html(data.posts);
+            })
+            .fail(function (response) {
                 console.log(response);
-            }
-        });
+            });
     } else if (type == 'popular') {
         $.ajax({
             url: "/popular",
@@ -44,16 +49,21 @@ $('.nav-link-post').on('click', function () {
                 selectedCategory: selectedCategory,
                 selectedTag: selectedTag
             },
-            success: function (data) {
-                $('.posts-target').html('');
+            beforeSend: function () {
                 activeLatest.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeUnanswerd.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activePopular.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                $('.posts-target').html(data.posts);
+                $('.posts-target').html('');
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (response) {
-                console.log(response);
-            }
+        })
+        .done(function (data) {
+            $('.ajax-load').hide();
+            $('.posts-target').html(data.posts);
+        })
+        .fail(function (response) {
+            console.log(response);
         });
     } else if (type == 'unanswerd') {
         $.ajax({
@@ -64,16 +74,21 @@ $('.nav-link-post').on('click', function () {
                 selectedCategory: selectedCategory,
                 selectedTag: selectedTag
             },
-            success: function (data) {
-                $('.posts-target').html('');
+            beforeSend: function () {
                 activeLatest.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activePopular.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeUnanswerd.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                $('.posts-target').html(data.posts);
+                $('.posts-target').html('');
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (response) {
-                console.log(response);
-            }
+        })
+        .done(function (data) {
+            $('.ajax-load').hide();
+            $('.posts-target').html(data.posts);
+        })
+        .fail(function (response) {
+            console.log(response);
         });
     }
 });
@@ -92,16 +107,21 @@ $('.nav-link-post-dropdown').on('click', function () {
                 selectedCategory: selectedCategory,
                 selectedTag: selectedTag
             },
-            success: function (data) {
+            beforeSend: function () {
                 $('.posts-target').html('');
                 activePopular.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeUnanswerd.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
-                activeLatest.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out');
-                $('.posts-target').html(data.posts);
+                activeLatest.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (response) {
-                console.log(response);
-            }
+        })
+        .done(function (data) {
+            $('.ajax-load').hide();
+            $('.posts-target').html(data.posts);
+        })
+        .fail(function (response) {
+            console.log(response);
         });
     } else if (type == 'popular') {
         $.ajax({
@@ -112,16 +132,21 @@ $('.nav-link-post-dropdown').on('click', function () {
                 selectedCategory: selectedCategory,
                 selectedTag: selectedTag
             },
-            success: function (data) {
+            beforeSend: function () {
                 $('.posts-target').html('');
                 activeLatest.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeUnanswerd.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
-                activePopular.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out');
-                $('.posts-target').html(data.posts);
+                activePopular.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (response) {
-                console.log(response);
-            }
+        })
+        .done(function (data) {
+            $('.ajax-load').hide();
+            $('.posts-target').html(data.posts);
+        })
+        .fail(function (response) {
+            console.log(response);
         });
     } else if (type == 'unanswerd') {
         $.ajax({
@@ -132,11 +157,16 @@ $('.nav-link-post-dropdown').on('click', function () {
                 selectedCategory: selectedCategory,
                 selectedTag: selectedTag
             },
-            success: function (data) {
+            beforeSend: function () {
                 $('.posts-target').html('');
                 activeLatest.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activePopular.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
-                activeUnanswerd.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out');
+                activeUnanswerd.attr('class', 'nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
+            },
+            success: function (data) {
+                $('.ajax-load').hide();
                 $('.posts-target').html(data.posts);
             },
             error: function (response) {
@@ -150,14 +180,14 @@ $('#search-post').on('keyup', function () {
     var search = $('#simple-search').val();
     var selectedCategory = $('#category-selected').val();
     var selectedTag = $('#tag-selected').val();
-    
-    if(selectedTag != null) {
+
+    if (selectedTag != null) {
         selectedTag = selectedTag.toLowerCase().split(',').join('').replace(/\s/g, '-');
     }
 
     var type = $('.nav-link-post.active').attr('data-type');
 
-    if(type == 'latest') {
+    if (type == 'latest') {
         $.ajax({
             url: "/search",
             type: 'GET',
@@ -171,7 +201,7 @@ $('#search-post').on('keyup', function () {
                 $('.posts-target').html('');
                 $('.posts-target').html(data.posts);
 
-                if(search == '') {
+                if (search == '') {
                     $('#active-search').attr('value', 'false');
                 } else {
                     $('#active-search').attr('value', 'true');
@@ -181,7 +211,7 @@ $('#search-post').on('keyup', function () {
                 console.log(response);
             }
         });
-    } else if(type == 'popular') {
+    } else if (type == 'popular') {
         $.ajax({
             url: "/search-popular",
             type: 'GET',
@@ -195,7 +225,7 @@ $('#search-post').on('keyup', function () {
                 $('.posts-target').html('');
                 $('.posts-target').html(data.posts);
 
-                if(search == '') {
+                if (search == '') {
                     $('#active-search').attr('value', 'false');
                 } else {
                     $('#active-search').attr('value', 'true');
@@ -205,7 +235,7 @@ $('#search-post').on('keyup', function () {
                 console.log(response);
             }
         });
-    } else if(type == 'unanswerd') {
+    } else if (type == 'unanswerd') {
         $.ajax({
             url: "/search-unanswerd",
             type: 'GET',
@@ -219,7 +249,7 @@ $('#search-post').on('keyup', function () {
                 $('.posts-target').html('');
                 $('.posts-target').html(data.posts);
 
-                if(search == '') {
+                if (search == '') {
                     $('#active-search').attr('value', 'false');
                 } else {
                     $('#active-search').attr('value', 'true');

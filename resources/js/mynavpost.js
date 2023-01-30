@@ -16,21 +16,28 @@ $('.my-nav-link-post').on('click', function () {
                 type: typeNavigation,
                 userId: userId
             },
-            success: function (data) {
+            beforeSend: function () {
+                if (typeNavigation == 'myprofile') {
+                    $('.my-post-target').html('');
+                } else if (typeNavigation == 'otherprofile') {
+                    $('.posts-target').html('');
+                }
                 activeDiscussion.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeSavedPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeMyPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                if (typeNavigation == 'myprofile') {
-                    $('.my-post-target').html('');
-                    $('.my-post-target').html(data.posts);
-                } else if (typeNavigation == 'otherprofile') {
-                    $('.posts-target').html('');
-                    $('.posts-target').html(data.posts);
-                }
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (error) {
-                console.log(error.responseJSON);
+        })
+        .done(function (data) {
+            if (typeNavigation == 'myprofile') {
+                $('.my-post-target').html(data.posts);
+            } else if (typeNavigation == 'otherprofile') {
+                $('.posts-target').html(data.posts);
             }
+        })
+        .fail(function (error) {
+            console.log(error.responseJSON);
         });
     } else if (type == 'discussion') {
         $.ajax({
@@ -40,21 +47,28 @@ $('.my-nav-link-post').on('click', function () {
                 type: typeNavigation,
                 userId: userId,
             },
-            success: function (data) {
+            beforeSend: function () {
+                if (typeNavigation == 'myprofile') {
+                    $('.my-post-target').html('');
+                } else if (typeNavigation == 'otherprofile') {
+                    $('.posts-target').html('');
+                }
                 activeMyPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeSavedPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeDiscussion.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                if (typeNavigation == 'myprofile') {
-                    $('.my-post-target').html('');
-                    $('.my-post-target').html(data.posts);
-                } else if (typeNavigation == 'otherprofile') {
-                    $('.posts-target').html('');
-                    $('.posts-target').html(data.posts);
-                }
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (error) {
-                console.log(error.responseJSON);
+        })
+        .done(function (data) {
+            if (typeNavigation == 'myprofile') {
+                $('.my-post-target').html(data.posts);
+            } else if (typeNavigation == 'otherprofile') {
+                $('.posts-target').html(data.posts);
             }
+        })
+        .fail(function (error) {
+            console.log(error.responseJSON);
         });
     } else if (type == 'savedpost') {
         $.ajax({
@@ -64,21 +78,28 @@ $('.my-nav-link-post').on('click', function () {
                 type: typeNavigation,
                 userId: userId
             },
-            success: function (data) {
+            beforeSend: function () {
+                if (typeNavigation == 'myprofile') {
+                    $('.my-post-target').html('');
+                } else if (typeNavigation == 'otherprofile') {
+                    $('.posts-target').html('');
+                }
                 activeMyPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeDiscussion.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeSavedPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                if (typeNavigation == 'myprofile') {
-                    $('.my-post-target').html('');
-                    $('.my-post-target').html(data.posts);
-                } else if (typeNavigation == 'otherprofile') {
-                    $('.posts-target').html('');
-                    $('.posts-target').html(data.posts);
-                }
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (error) {
-                console.log(error.responseJSON);
+        })
+        .done(function (data) {
+            if (typeNavigation == 'myprofile') {
+                $('.my-post-target').html(data.posts);
+            } else if (typeNavigation == 'otherprofile') {
+                $('.posts-target').html(data.posts);
             }
+        })
+        .fail(function (error) {
+            console.log(error.responseJSON);
         });
     }
 });
@@ -95,16 +116,28 @@ $('.my-nav-link-post-dropdown').on('click', function () {
                 type: typeNavigation,
                 userId: userId
             },
-            success: function (data) {
-                $('.post-target').html('');
+            beforeSend: function () {
+                if (typeNavigation == 'myprofile') {
+                    $('.my-post-target').html('');
+                } else if (typeNavigation == 'otherprofile') {
+                    $('.posts-target').html('');
+                }
                 activeDiscussion.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeSavedPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeMyPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                $('.post-target').html(data.posts);
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (error) {
-                console.log(error.responseJSON);
+        })
+        .done(function (data) {
+            if (typeNavigation == 'myprofile') {
+                $('.my-post-target').html(data.posts);
+            } else if (typeNavigation == 'otherprofile') {
+                $('.posts-target').html(data.posts);
             }
+        })
+        .fail(function (error) {
+            console.log(error.responseJSON);
         });
     } else if (type == 'discussion') {
         $.ajax({
@@ -114,16 +147,28 @@ $('.my-nav-link-post-dropdown').on('click', function () {
                 type: typeNavigation,
                 userId: userId
             },
-            success: function (data) {
-                $('.post-target').html('');
+            beforeSend: function () {
+                if (typeNavigation == 'myprofile') {
+                    $('.my-post-target').html('');
+                } else if (typeNavigation == 'otherprofile') {
+                    $('.posts-target').html('');
+                }
                 activeMyPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeSavedPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeDiscussion.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                $('.post-target').html(data.posts);
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (error) {
-                console.log(error.responseJSON);
+        })
+        .done(function (data) {
+            if (typeNavigation == 'myprofile') {
+                $('.my-post-target').html(data.posts);
+            } else if (typeNavigation == 'otherprofile') {
+                $('.posts-target').html(data.posts);
             }
+        })
+        .fail(function (error) {
+            console.log(error.responseJSON);
         });
     } else if (type == 'savedpost') {
         $.ajax({
@@ -133,16 +178,28 @@ $('.my-nav-link-post-dropdown').on('click', function () {
                 type: typeNavigation,
                 userId: userId
             },
-            success: function (data) {
-                $('.post-target').html('');
+            beforeSend: function () {
+                if (typeNavigation == 'myprofile') {
+                    $('.my-post-target').html('');
+                } else if (typeNavigation == 'otherprofile') {
+                    $('.posts-target').html('');
+                }
                 activeMyPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeDiscussion.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-transparent lg:text-md font-medium leading-5 text-cyan-900 hover:text-cyan-700 hover:border-cyan-700 focus:outline-none focus:text-cyan-700 focus:border-cyan-300 transition duration-150 ease-in-out');
                 activeSavedPost.attr('class', 'my-nav-link-post inline-flex items-center px-1 pt-1 border-b-2 border-cyan-900 lg:text-md font-medium leading-5 text-cyan-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out active');
-                $('.post-target').html(data.posts);
+                $('.ajax-load').html("<div class=\"bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2\"><div class=\"flex justify-start items-center max-w-sm\"><img class=\"w-12 h-12 rounded-full shadow mr-4 skeleton\"><p class=\"skeleton skeleton-text\"></p></div><div class=\"mt-4\"><p class=\"skeleton skeleton-text\"></p><div class=\"px-4 bg-gray-100 rounded-md py-2 my-4\"><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p><p class=\"skeleton skeleton-text\"></p></div></div></div>");
+                $('.ajax-load').show();
             },
-            error: function (error) {
-                console.log(error.responseJSON);
+        })
+        .done(function (data) {
+            if (typeNavigation == 'myprofile') {
+                $('.my-post-target').html(data.posts);
+            } else if (typeNavigation == 'otherprofile') {
+                $('.posts-target').html(data.posts);
             }
+        })
+        .fail(function (error) {
+            console.log(error.responseJSON);
         });
     }
 });

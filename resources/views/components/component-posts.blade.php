@@ -186,10 +186,6 @@
             </div>
         @endforeach
     </div>
-
-    <div class="ajax-load text-center" style="display:none">
-        <p>Loading More post</p>
-    </div>
 @else
     <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
         <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2 rounded-b-xl">

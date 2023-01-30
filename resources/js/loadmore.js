@@ -72,7 +72,7 @@ function loadMoreData(page) {
         })
             .done(function (data) {
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 
@@ -99,7 +99,7 @@ function loadMoreData(page) {
         })
             .done(function (data) {
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 
@@ -132,7 +132,7 @@ function loadMoreDataUser(page) {
         })
             .done(function (data) {
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 
@@ -158,7 +158,7 @@ function loadMoreDataUser(page) {
         })
             .done(function (data) {
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 
@@ -184,7 +184,7 @@ function loadMoreDataUser(page) {
         })
             .done(function (data) {
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 
@@ -315,7 +315,7 @@ function loadMoreDataUserSearch(page) {
             .done(function (data) {
                 console.log(data)
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 
@@ -341,7 +341,7 @@ function loadMoreDataUserSearch(page) {
         })
             .done(function (data) {
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 
@@ -367,7 +367,7 @@ function loadMoreDataUserSearch(page) {
         })
             .done(function (data) {
                 if (data.html == "") {
-                    $('.ajax-load').html("No more records found");
+                    $('.ajax-load').html("<div class=\"py-6 w-full text-center text-cyan-900 bg-white mb-4 shadow-md rounded-b-xl\"><h1 class=\"text-xl font-semibold text-center\">No more posts found</h1><p class=\"font-medium\">It seems that the post is up, let's go back to the top!</p></div>");
                     return;
                 }
 

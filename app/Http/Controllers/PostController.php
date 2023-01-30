@@ -984,7 +984,7 @@ class PostController extends Controller
             ->showcow()
             ->paginate(5);
 
-        $viewRendered = view('post.posts', compact('posts'))->render();
+        $viewRendered = view('components.component-posts', compact('posts'))->render();
 
         return response()->json([
             'success' => true,
@@ -999,7 +999,7 @@ class PostController extends Controller
             ->showpoultry()
             ->paginate(5);
 
-        $viewRendered = view('post.posts', compact('posts'))->render();
+        $viewRendered = view('components.component-posts', compact('posts'))->render();
 
         return response()->json([
             'success' => true,
@@ -1014,7 +1014,7 @@ class PostController extends Controller
             ->showsheep()
             ->paginate(5);
 
-        $viewRendered = view('post.posts', compact('posts'))->render();
+        $viewRendered = view('components.component-posts', compact('posts'))->render();
 
         return response()->json([
             'success' => true,
@@ -1029,7 +1029,7 @@ class PostController extends Controller
             ->showgoat()
             ->paginate(5);
 
-        $viewRendered = view('post.posts', compact('posts'))->render();
+        $viewRendered = view('components.component-posts', compact('posts'))->render();
 
         return response()->json([
             'success' => true,
@@ -1044,7 +1044,7 @@ class PostController extends Controller
             ->showfish()
             ->paginate(5);
 
-        $viewRendered = view('post.posts', compact('posts'))->render();
+        $viewRendered = view('components.component-posts', compact('posts'))->render();
 
         return response()->json([
             'success' => true,
@@ -1059,7 +1059,7 @@ class PostController extends Controller
             ->showother()
             ->paginate(5);
 
-        $viewRendered = view('post.posts', compact('posts'))->render();
+        $viewRendered = view('components.component-posts', compact('posts'))->render();
 
         return response()->json([
             'success' => true,

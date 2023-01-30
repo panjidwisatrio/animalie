@@ -152,9 +152,6 @@
             </div>
         </x-modal>
 
-        <div class="ajax-load text-center" style="display:none">
-            <p>Loading More post</p>
-        </div>
     @else
         <div class="container max-w-4xl mx-auto sm:px-6 lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-10 py-4 border-b-2 rounded-b-xl">
@@ -250,4 +247,21 @@
             </div>
         </div>
     @endif
+</div>
+
+<div class="ajax-load lg:px-8">
+    <div class="bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2">
+        <div class="flex justify-start items-center max-w-sm">
+            <img class="w-12 h-12 rounded-full shadow mr-4 skeleton">
+            <p class="skeleton skeleton-text"></p>
+        </div>
+        <div class="mt-4">
+            <p class="skeleton skeleton-text"></p>
+            <div class="px-4 bg-gray-100 rounded-md py-2 my-4">
+                <p class="skeleton skeleton-text"></p>
+                <p class="skeleton skeleton-text"></p>
+                <p class="skeleton skeleton-text"></p>
+            </div>
+        </div>
+    </div>
 </div>
