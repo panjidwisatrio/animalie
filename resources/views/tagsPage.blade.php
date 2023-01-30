@@ -1,5 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
+        <input type="hidden" id="tag-selected" value="{{ $tag->name_tag }}">
         <div class="flex justify-between items-center">
             <h3 class="rounded-md bg-white p-2 font-semibold text-cyan-800 leading-tight ml-2 flex justify-start">
                 # {{ $tag->name_tag }}

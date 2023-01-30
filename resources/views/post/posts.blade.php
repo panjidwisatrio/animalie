@@ -1,34 +1,90 @@
 {{-- Post Discussion --}}
 <div class="posts-target">
     @if ($posts->count())
-        <div id="post-data">
+        <div class="post-data">
             @foreach ($posts as $post)
                 <div class="container max-w-4xl mx-auto lg:px-8 flex-col">
                     <div class="bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2">
                         {{-- User --}}
-                        <a href="{{ route('user.showSpecific', $post->user->username) }}"
-                            class="nav-link-user flex justify-between">
-                            <div class="flex">
-                                <div>
-                                    @if ($post->user->avatar == null)
-                                        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow skeleton"
-                                            src="{{ asset('/img/profile.png') }}" alt="avatar">
-                                    @else
-                                        <img class="w-12 h-12 rounded-full object-cover mr-4 shadow skeleton"
-                                            src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
-                                    @endif
+                        @if (Auth::user())
+                            @if ($post->user->username == Auth::user()->username)
+                                <a href="{{ route('profile.show') }}" class="nav-link-user flex justify-between">
+                                    <div class="flex">
+                                        <div>
+                                            @if ($post->user->avatar == null)
+                                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                                    src="{{ asset('/img/profile.png') }}" alt="avatar">
+                                            @else
+                                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                                    src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <h2
+                                                class="text-sm sm:text-sm md:text-lg lg:text-lg font-semibold text-cyan-900">
+                                                {{ $post->user->name }} </h2>
+                                            <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <small
+                                            class="text-xs lg:text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+                                    </div>
+                                </a>
+                            @else
+                                <a href="{{ route('user.showSpecific', $post->user->username) }}"
+                                    class="nav-link-user flex justify-between">
+                                    <div class="flex">
+                                        <div>
+                                            @if ($post->user->avatar == null)
+                                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                                    src="{{ asset('/img/profile.png') }}" alt="avatar">
+                                            @else
+                                                <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                                    src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <h2
+                                                class="text-sm sm:text-sm md:text-lg lg:text-lg font-semibold text-cyan-900">
+                                                {{ $post->user->name }} </h2>
+                                            <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <small
+                                            class="text-xs lg:text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
+                                    </div>
+                                </a>
+                            @endif
+                        @else
+                            <a href="{{ route('user.showSpecific', $post->user->username) }}"
+                                class="nav-link-user flex justify-between">
+                                <div class="flex">
+                                    <div>
+                                        @if ($post->user->avatar == null)
+                                            <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                                src="{{ asset('/img/profile.png') }}" alt="avatar">
+                                        @else
+                                            <img class="w-12 h-12 rounded-full object-cover mr-4 shadow"
+                                                src="{{ asset('/storage/' . $post->user->avatar) }}" alt="avatar">
+                                        @endif
+                                    </div>
+                                    <div>
+                                        <h2
+                                            class="text-sm sm:text-sm md:text-lg lg:text-lg font-semibold text-cyan-900">
+                                            {{ $post->user->name }} </h2>
+                                        <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h2 class="text-sm sm:text-sm md:text-lg lg:text-lg font-semibold text-cyan-900">
-                                        {{ $post->user->name }} </h2>
-                                    <small class="text-sm text-cyan-900">{{ $post->user->username }}</small>
+                                <div class="">
+                                    <small
+                                        class="text-xs lg:text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
                                 </div>
-                            </div>
-                            <div class="">
-                                <small
-                                    class="text-xs lg:text-sm text-cyan-900">{{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}</small>
-                            </div>
-                        </a>
+                            </a>
+                        @endif
+
+
 
                         {{-- Post Body  --}}
                         <a href="{{ route('post.show', $post->slug) }}" class="mt-4 text-cyan-900 text-justify">
@@ -69,11 +125,24 @@
                         <div class="mt-4 text-cyan-900 flex space-x-2">
                             {{-- Save post  --}}
                             <div class="flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" class="feather feather-bookmark">
-                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                                </svg>
+                                @if (Auth::check())
+                                    <button class="save-button flex items-center space-x-1"
+                                        data-id="{{ $post->id }}"
+                                        data-saved="{{ auth()->user()->hasBookmarked($post->find($post->id))? 'true': 'false' }}">
+                                        <i id="icon-save-{{ $post->id }}" class="iconify"
+                                            data-icon="{{ auth()->user()->hasBookmarked($post->find($post->id))? 'ic:twotone-bookmark': 'ic:twotone-bookmark-border' }}"
+                                            style="color: #164e63;" data-width="24" data-height="24"></i>
+                                    </button>
+                                @else
+                                    <form method="POST" action="{{ route('savedPost', $post->id) }}">
+                                        @csrf
+                                        <button class="save-button flex items-center space-x-1">
+                                            <i id="icon-save-{{ $post->id }}" class="iconify"
+                                                data-icon="ic:twotone-bookmark-border" style="color: #164e63;"
+                                                data-width="24" data-height="24"></i>
+                                        </button>
+                                    </form>
+                                @endif
                             </div>
                             <div class="flex justify-end w-full">
                                 {{-- Like  --}}
@@ -138,37 +207,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Like Script --}}
-        @push('script')
-            <script type="text/javascript">
-                const button = document.querySelectorAll('.like-button');
-
-                button.forEach(function(button) {
-                    button.addEventListener('click', function() {
-                        const id = this.dataset.id;
-                        const likeCount = document.getElementById('like-count-' + id);
-
-                        axios.post('/like-post/' + id).then(function(response) {
-                            if (response.data.liked == true) {
-                                document.getElementById("icon-" + id).dataset.icon =
-                                    "ant-design:like-twotone";
-                                button.setAttribute('data-liked', 'true');
-                            } else {
-                                document.getElementById("icon-" + id).dataset.icon =
-                                    "ant-design:like-outlined";
-                            }
-
-                            button.setAttribute('data-liked', response.data.liked);
-
-                            likeCount.innerHTML = response.data.likeCount;
-                        }).catch(function(error) {
-                            console.log(error.response.data);
-                        });
-                    });
-                })
-            </script>
-        @endpush
     @else
         <div class="container max-w-4xl mx-auto lg:px-8 flex-col">
             <div class="bg-white overflow-hidden shadow-lg px-12 lg:px-10 pt-6 pb-4 lg:py-4 border-b-2 rounded-b-xl">

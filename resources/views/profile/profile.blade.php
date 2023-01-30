@@ -29,39 +29,16 @@
                     </h3>
                 </div>
             </div>
-            {{-- <a href="{{ route('profile.edit') }}">
-                <div class="rounded-full shadow-md bg-white p-4 text-cyan-900">
-                    <i data-feather="edit"></i>
-                </div>
-            </a> --}}
         </div>
 
     </x-slot>
 
     <div class="flex justify-center mt-4">
-        <div class=" md:py-2 lg:py-2">
-            <div class="space-y-4 items-center p-4 bg-white border-b-2 visible lg:hidden">
-                <h1 class="text-md sm:text-xl font-bold text-cyan-800 mr-2 dark:text-cyan-100">
-                    My Certificate</h1>
+        <div class="py-2">
+            @include('layouts.myPostsNavgation', ['userId' => $user->id, 'type' => 'otherprofile'])
 
-                {{-- certificate img --}}
-                <div class='my-3 flex flex-wrap -m-1'>
-                    {{-- @foreach ($users as $user) --}}
-                    <span class="m-1 flex flex-wrap justify-between items-center text-xs  leading-loose cursor-pointer">
-                        <img class="rounded-md aspect-square object-cover content_pict border-2 border-gray-200 my-2"
-                            src="https://source.unsplash.com/1200x400/?printed-certificate" alt="certificate">
-                    </span>
-                </div>
-
-                {{-- input certificate --}}
-                <input type="file"
-                    class="bottom-0 right-0 rounded-md w-full h-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
-            </div>
-            @include('layouts.myPostsNavgation')
-
-            {{-- include mypost --}}
-            @include('profile.otherPost', ['posts' => $posts])
-
+            {{-- include other post --}}
+            @include('post.posts', ['posts' => $posts])
         </div>
 
         {{-- Certificate --}}

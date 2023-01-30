@@ -64,11 +64,20 @@
             <div class="mt-4 text-cyan-900 flex space-x-2">
                 {{-- Save post  --}}
                 <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="feather feather-bookmark">
-                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
-                    </svg>
+                    @if (Auth::check())
+                        <button class="save-button flex items-center space-x-1" data-id="{{ $post->id }}"
+                            data-saved="{{ $post->saved(auth()->user()->id) ? 'true' : 'false' }}">
+                            <i id="icon-save-{{ $post->id }}" class="iconify"
+                                data-icon="{{ $post->saved(auth()->user()->id) ? 'ic:twotone-bookmark' : 'ic:twotone-bookmark-border' }}"
+                                style="color: #164e63;" data-width="24" data-height="24"></i>
+                        </button>
+                    @else
+                        <button class="save-button flex items-center space-x-1">
+                            <i id="icon-save-{{ $post->id }}" class="iconify"
+                                data-icon="ic:twotone-bookmark-border" style="color: #164e63;" data-width="24"
+                                data-height="24"></i>
+                        </button>
+                    @endif
                 </div>
                 <div class="flex justify-end w-full">
                     {{-- Like  --}}
@@ -86,7 +95,8 @@
                         @else
                             <form method="POST" action="{{ route('like.post', $post->id) }}">
                                 @csrf
-                                <button class="like-button flex items-center space-x-1" id="like-button-unauthenticated">
+                                <button class="like-button flex items-center space-x-1"
+                                    id="like-button-unauthenticated">
                                     <i id="icon-{{ $post->id }}" class="iconify"
                                         data-icon="ant-design:like-outlined" style="color: #164e63;" data-width="24"
                                         data-height="24"></i>
@@ -112,34 +122,3 @@
         </div>
     </div>
 @endforeach
-
-{{-- Like Script --}}
-@push('script')
-<script type="text/javascript">
-    const button = document.querySelectorAll('.like-button');
-
-    button.forEach(function(button) {
-        button.addEventListener('click', function() {
-            const id = this.dataset.id;
-            const likeCount = document.getElementById('like-count-' + id);
-
-            axios.post('/like-post/' + id).then(function(response) {
-                if (response.data.liked == true) {
-                    document.getElementById("icon-" + id).dataset.icon =
-                        "ant-design:like-twotone";
-                    button.setAttribute('data-liked', 'true');
-                } else {
-                    document.getElementById("icon-" + id).dataset.icon =
-                        "ant-design:like-outlined";
-                }
-
-                button.setAttribute('data-liked', response.data.liked);
-
-                likeCount.innerHTML = response.data.likeCount;
-            }).catch(function(error) {
-                console.log(error.response.data);
-            });
-        });
-    })
-</script>
-@endpush

@@ -63,9 +63,7 @@ class TagController extends Controller
 
     public function show(Tag $tag)
     {
-        $posts = Post::whereHas('tag', function ($query) use ($tag) {
-            $query->where('slug', $tag->slug);
-        })->get();
+        $posts = Post::with(['user', 'category', 'comment'])->latest()->tag($tag->slug)->get();
 
         return view('tagsPage', compact('tag', 'posts'));
     }

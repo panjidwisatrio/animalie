@@ -1,6 +1,5 @@
 <x-app-layout>
     <x-slot name="header">
-
         {{-- Profile --}}
         <div class="flex justify-between items-center">
 
@@ -58,7 +57,7 @@
                 <input type="file"
                     class="bottom-0 right-0 rounded-md w-full h-full focus:border-green-400 focus:ring-green-400 bg-emerald-100 shadow-md">
             </div>
-            @include('layouts.myPostsNavgation')
+            @include('layouts.myPostsNavgation', ['userId' => auth()->user()->id, 'type' => 'myprofile'])
 
             {{-- include mypost --}}
             @include('profile.myPost', ['posts' => $posts])

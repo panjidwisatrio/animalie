@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SavedPostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
@@ -48,10 +49,37 @@ Route::get('/profile/{user:username}', [UserController::class, 'showSpecific'])-
 // Tag
 Route::get('/tag/{tag:slug}', [TagController::class, 'show'])->name('post.tag');
 
+Route::prefix('/myProfile')->group(function () {
+    // My Post
+    Route::get('/mypost', [PostController::class, 'myPost'])->name('myPost');
+    // Saved Post
+    Route::get('/savedpost', [PostController::class, 'savedPost_show'])->name('savedPost.show');
+    // Discussion
+    Route::get('/discussion', [PostController::class, 'discussion'])->name('discussion');
+    // Load More
+    Route::get('/load-more-mypost', [PostController::class, 'loadMoreMyPost'])->name('myPost.loadMore');
+    Route::get('/load-more-savedpost', [PostController::class, 'loadMoreSavedPost'])->name('savedPost.loadMore');
+    Route::get('/load-more-discussion', [PostController::class, 'loadMoreDiscussion'])->name('discussion.loadMore');
+    // Search
+    Route::get('/search-mypost', [PostController::class, 'search_mypost'])->name('searchMyPost');
+    Route::get('/search-discussion', [PostController::class, 'search_discussion'])->name('searchDiscussion');
+    Route::get('/search-savedpost', [PostController::class, 'search_savedpost'])->name('searchSavedPost');
+    // Load More Search
+    Route::get('/load-more-search-mypost', [PostController::class, 'load_more_search_mypost'])->name('loadMoreSearchMyPost');
+    Route::get('/load-more-search-discussion', [PostController::class, 'load_more_search_discussion'])->name('loadMoreSearchDiscussion');
+    Route::get('/load-more-search-savedpost', [PostController::class, 'load_more_search_savedpost'])->name('loadMoreSearchSavedPost');
+
+});
+
 // Load More
 Route::get('/load-more', [PostController::class, 'loadMore'])->name('loadMore');
 Route::get('/load-more-popular', [PostController::class, 'loadMorePopular'])->name('loadMorePopular');
 Route::get('/load-more-unanswerd', [PostController::class, 'loadMoreUnanswerd'])->name('loadMoreUnanswerd');
+
+// Load More Search
+Route::get('/load-more-search', [PostController::class, 'loadMoreSearchLatest'])->name('loadMoreSearch');
+Route::get('/load-more-search-popular', [PostController::class, 'loadMoreSearchPopular'])->name('loadMoreSearchPopular');
+Route::get('/load-more-search-unanswerd', [PostController::class, 'loadMoreSearchUnanswerd'])->name('loadMoreSearchUnanswerd');
 
 Route::middleware('auth')->group(function () {
     // Profile
@@ -60,6 +88,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [UserController::class, 'update'])->name('profile.update');
     Route::patch('/password', [UserController::class, 'updatePassword'])->name('password.update');
     Route::delete('/profile', [UserController::class, 'destroy'])->name('profile.destroy');
+
+    // Saved Post
+    Route::post('/saved-post/{id}', [PostController::class, 'savedPost'])->name('savedPost');
 
     // Post
     Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
@@ -89,6 +120,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/comment/reload', [CommentController::class, 'reload'])->name('comment.reload');
     Route::get('/comments', [CommentController::class, 'getMore'])->name('comment.more');
     Route::delete('/comment/delete', [CommentController::class, 'destroy'])->name('comment.destroy');
+
+    // Saved Post
 });
 
 require __DIR__ . '/auth.php';
