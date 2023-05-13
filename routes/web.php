@@ -121,7 +121,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/comments', [CommentController::class, 'getMore'])->name('comment.more');
     Route::delete('/comment/delete', [CommentController::class, 'destroy'])->name('comment.destroy');
 
-    // Saved Post
 });
 
 require __DIR__ . '/auth.php';

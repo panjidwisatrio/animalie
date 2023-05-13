@@ -292,7 +292,6 @@ function loadMoreDataSearch(page) {
                 alert('server not responding...');
             });
     }
-
 }
 
 function loadMoreDataUserSearch(page) {
