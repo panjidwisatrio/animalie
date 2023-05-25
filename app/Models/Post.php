@@ -46,6 +46,11 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function like_count_api()
+    {
+        return $this->likeCounter();
+    }
+
     public function tag()
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();

@@ -9,6 +9,7 @@ use App\Models\Tag;
 use App\Models\User;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApiPostController extends Controller
 {
@@ -33,7 +34,7 @@ class ApiPostController extends Controller
         $typeNavigation = $request->typeNavigation;
 
         if ($typeNavigation == 'dashboard') {
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->more($page)
                 ->latest()
                 ->get();
@@ -59,20 +60,19 @@ class ApiPostController extends Controller
                     $category = 6;
                     break;
             }
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->morecategory($page, $category)
                 ->latest()
                 ->get();
         } else if ($typeNavigation == 'tag') {
             $selectedTag = $request->selectedTag;
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->moretag($page, $selectedTag)
                 ->latest()
                 ->get();
         }
 
-        $view = view('post.morePost', compact('posts'))->render();
-        return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        return response()->json(['success' => true, 'page' => $page, 'message' => "load more", 'posts' => $posts, 'type' => $typeNavigation]);
     }
 
     public function loadMorePopular(Request $request)
@@ -81,7 +81,7 @@ class ApiPostController extends Controller
         $typeNavigation = $request->typeNavigation;
 
         if ($typeNavigation == 'dashboard') {
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->morepopular($page)
                 ->get();
         } else if ($typeNavigation == 'interestGroup') {
@@ -106,18 +106,17 @@ class ApiPostController extends Controller
                     $category = 6;
                     break;
             }
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->morecategorypopular($page, $category)
                 ->get();
         } else if ($typeNavigation == 'tag') {
             $selectedTag = $request->selectedTag;
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->moretagpopular($page, $selectedTag)
                 ->get();
         }
 
-        $view = view('post.morePost', compact('posts'))->render();
-        return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        return response()->json(['success' => true, 'page' => $page, 'message' => "load more", 'posts' => $posts, 'type' => $typeNavigation]);
     }
 
     public function loadMoreUnanswerd(Request $request)
@@ -126,7 +125,7 @@ class ApiPostController extends Controller
         $typeNavigation = $request->typeNavigation;
 
         if ($typeNavigation == 'dashboard') {
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->moreunanswerd($page)
                 ->get();
         } else if ($typeNavigation == 'interestGroup') {
@@ -151,18 +150,17 @@ class ApiPostController extends Controller
                     $category = 6;
                     break;
             }
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->morecategoryunanswerd($page, $category)
                 ->get();
         } else if ($typeNavigation == 'tag') {
             $selectedTag = $request->selectedTag;
-            $posts = Post::with(['user', 'category', 'comment'])
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])
                 ->moretagunanswerd($page, $selectedTag)
                 ->get();
         }
 
-        $view = view('post.morePost', compact('posts'))->render();
-        return response()->json(['html' => $view, 'page' => $page, 'posts' => $posts]);
+        return response()->json(['success' => true, 'page' => $page, 'message' => "load more", 'posts' => $posts, 'type' => $typeNavigation]);
     }
 
     public function loadMoreInterestGroup(Request $request)
@@ -510,7 +508,7 @@ class ApiPostController extends Controller
         ]);
 
         if ($request->type == 'dashboard') {
-            $posts = Post::with(['user', 'category', 'comment'])->latest()->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->latest()->paginate(5);
         } else if ($request->type == 'interestGroup') {
             $request->validate([
                 'selectedCategory' => 'required',
@@ -537,14 +535,14 @@ class ApiPostController extends Controller
                     $category = 6;
                     break;
             }
-            $posts = Post::with(['user', 'category', 'comment'])->latest()->where('category_id', $category)->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->latest()->where('category_id', $category)->paginate(5);
         } else if ($request->type == 'tag') {
             $request->validate([
                 'selectedTag' => 'required',
             ]);
 
             $tag = $request->selectedTag;
-            $posts = Post::with(['user', 'category', 'comment'])->latest()->tag($tag)->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->latest()->tag($tag)->paginate(5);
         }
 
         return response()->json([
@@ -564,7 +562,7 @@ class ApiPostController extends Controller
         $typeNavigation = $request->type;
 
         if ($typeNavigation == 'dashboard') {
-            $posts = Post::with(['user', 'category', 'comment'])->popular()->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->popular()->paginate(5);
         } else if ($typeNavigation == 'interestGroup') {
             $request->validate([
                 'selectedCategory' => 'required',
@@ -591,14 +589,14 @@ class ApiPostController extends Controller
                     $category = 6;
                     break;
             }
-            $posts = Post::with(['user', 'category', 'comment'])->popular()->where('category_id', $category)->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->popular()->where('category_id', $category)->paginate(5);
         } else if ($typeNavigation == 'tag') {
             $request->validate([
                 'selectedTag' => 'required',
             ]);
 
             $tag = $request->selectedTag;
-            $posts = Post::with(['user', 'category', 'comment'])->popular()->tag($tag)->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->popular()->tag($tag)->paginate(5);
         }
 
         return response()->json([
@@ -618,7 +616,7 @@ class ApiPostController extends Controller
         $typeNavigation = $request->type;
 
         if ($typeNavigation == 'dashboard') {
-            $posts = Post::with(['user', 'category', 'comment'])->unanswerd()->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->unanswerd()->paginate(5);
         } else if ($typeNavigation == 'interestGroup') {
             $request->validate([
                 'selectedCategory' => 'required',
@@ -645,14 +643,14 @@ class ApiPostController extends Controller
                     $category = 6;
                     break;
             }
-            $posts = Post::with(['user', 'category', 'comment'])->unanswerd()->where('category_id', $category)->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->unanswerd()->where('category_id', $category)->paginate(5);
         } else if ($typeNavigation == 'tag') {
             $request->validate([
                 'selectedTag' => 'required',
             ]);
 
             $tag = $request->selectedTag;
-            $posts = Post::with(['user', 'category', 'comment'])->unanswerd()->tag($tag)->paginate(5);
+            $posts = Post::with(['user', 'category', 'comment', 'tag', 'like_count_api'])->unanswerd()->tag($tag)->paginate(5);
         }
 
         return response()->json([
@@ -672,6 +670,7 @@ class ApiPostController extends Controller
             'success' => true,
             'message' => 'Post sorted',
             'posts' => $posts,
+            'type' => 'profile'
         ]);
     }
 
@@ -684,6 +683,7 @@ class ApiPostController extends Controller
             'success' => true,
             'message' => 'Post sorted',
             'posts' => $posts,
+            'type' => 'profile'
         ]);
     }
 
@@ -774,16 +774,16 @@ class ApiPostController extends Controller
         }
     }
 
-    public function savedPost_show(Request $request)
+    public function savedPost_show()
     {
-        $id = $request->input('userId');
-        $user = User::find($id);
+        $user = Auth::user();
         $posts = Post::with(['user', 'category', 'comment'])->mysavedpost($user)->paginate(5);
 
         return response()->json([
             'success' => true,
             'message' => 'Post sorted',
             'posts' => $posts,
+            'type' => 'profile'
         ]);
     }
 

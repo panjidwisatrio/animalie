@@ -1158,7 +1158,8 @@ class PostController extends Controller
 
         return response()->json([
             'likeCount' => $post->likeCount,
-            'liked' => $liked
+            'liked' => $liked,
+            'post' => $post,
         ]);
     }
 

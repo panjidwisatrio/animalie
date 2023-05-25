@@ -54,13 +54,10 @@ Route::get('/tag/{tag:slug}', [ApiTagController::class, 'show']); //! V
 Route::prefix('/myProfile')->group(function () {
     // My Post
     Route::get('/mypost', [ApiPostController::class, 'myPost']); //! V
-    // Saved Post
-    Route::get('/savedpost', [ApiPostController::class, 'savedPost_show']); //! V
     // Discussion
     Route::get('/discussion', [ApiPostController::class, 'discussion']); //! V
     // Load More
     Route::get('/load-more-mypost', [ApiPostController::class, 'loadMoreMyPost']);
-    Route::get('/load-more-savedpost', [ApiPostController::class, 'loadMoreSavedPost']);
     Route::get('/load-more-discussion', [ApiPostController::class, 'loadMoreDiscussion']);
     // Search
     Route::get('/search-mypost', [ApiPostController::class, 'search_mypost']);
@@ -85,15 +82,19 @@ Route::get('/load-more-search-unanswerd', [ApiPostController::class, 'loadMoreSe
 
 Route::middleware('auth:sanctum')->group(function () {
     // Profile
-    Route::get('/profile', [UserController::class, 'edit']);
-    Route::get('/myProfile', [UserController::class, 'show']);
-    Route::patch('/profile', [UserController::class, 'update']);
-    Route::patch('/password', [UserController::class, 'updatePassword']);
-    Route::delete('/profile', [UserController::class, 'destroy']);
+    Route::get('/profile', [ApiUserController::class, 'edit']);
+    Route::get('/myProfile', [ApiUserController::class, 'show']);
+    Route::patch('/profile', [ApiUserController::class, 'update']);
+    Route::patch('/password', [ApiUserController::class, 'updatePassword']);
+    Route::delete('/profile', [ApiUserController::class, 'destroy']);
     Route::post('/logout', [AuthController::class, 'logout']);
 
     // Saved Post
     Route::post('/saved-post/{id}', [ApiPostController::class, 'savedPost']);
+
+    // Saved Post Show
+    Route::get('/savedpost', [ApiPostController::class, 'savedPost_show']); //! V
+    Route::get('/load-more-savedpost', [ApiPostController::class, 'loadMoreSavedPost']); //! V
 
     // Post
     Route::get('/post/create', [ApiPostController::class, 'create']);

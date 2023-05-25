@@ -10,6 +10,7 @@ $('.posts-target').on('click', '.like-button', function () {
             id: id
         },
         success: function (response) {
+            console.log(response);
             if (response.liked == true) {
                 $('#icon-' + id).attr('data-icon', 'ant-design:like-twotone');
                 $(this).attr('data-liked', 'true');
