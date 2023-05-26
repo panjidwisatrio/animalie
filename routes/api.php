@@ -83,7 +83,7 @@ Route::get('/load-more-search-unanswerd', [ApiPostController::class, 'loadMoreSe
 Route::middleware('auth:sanctum')->group(function () {
     // Profile
     Route::get('/profile', [ApiUserController::class, 'edit']);
-    Route::get('/myProfile', [ApiUserController::class, 'show']);
+    Route::get('/myProfile', [ApiUserController::class, 'show']); //! V
     Route::patch('/profile', [ApiUserController::class, 'update']);
     Route::patch('/password', [ApiUserController::class, 'updatePassword']);
     Route::delete('/profile', [ApiUserController::class, 'destroy']);
